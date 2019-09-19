@@ -10,5 +10,9 @@
             <alternative-name internal-name="test.AntiHungarianDemoCheck" />
             <description>%AntiHungarianDemoCheck.desc</description>
         </rule-metadata>
+        <rule-metadata name="CyclomaticComplexityTest" internal-name="CyclomaticComplexity" parent="TreeWalker">
+            <alternative-name internal-name="test.CyclomaticComplexity" />
+            <description>%ACyclomaticComplexity.desc</description>
+        </rule-metadata>
     </rule-group-metadata>
 </checkstyle-metadata>
