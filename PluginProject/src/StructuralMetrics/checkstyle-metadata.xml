@@ -10,5 +10,10 @@
             <alternative-name internal-name="test.AntiHungarianDemoCheck" />
             <description>%AntiHungarianDemoCheck.desc</description>
         </rule-metadata>
+        
+        <rule-metadata name="VariableDef" internal-name="VariableDef" parent="TreeWalker">
+            <alternative-name internal-name="testPlugin.VariableDef" />
+            <description>%VariableDef.desc</description>
+        </rule-metadata>
     </rule-group-metadata>
 </checkstyle-metadata>
