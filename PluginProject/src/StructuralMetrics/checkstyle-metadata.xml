@@ -7,19 +7,23 @@
         <description>%test.desc</description>
 
         <rule-metadata name="AntiHungarianDemoCheck" internal-name="AntiHungarianDemoCheck" parent="TreeWalker">
-            <alternative-name internal-name="test.AntiHungarianDemoCheck" />
+            <alternative-name internal-name="StructuralMetrics.AntiHungarianDemoCheck" />
             <description>%AntiHungarianDemoCheck.desc</description>
         </rule-metadata>
 
-        <rule-metadata name="CyclomaticComplexityTest" internal-name="CyclomaticComplexity" parent="TreeWalker">
-            <alternative-name internal-name="test.CyclomaticComplexity" />
+        <rule-metadata name="CyclomaticComplexity" internal-name="CyclomaticComplexity" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.CyclomaticComplexity" />
             <description>%ACyclomaticComplexity.desc</description>
-
+        </rule-metadata>
         
         <rule-metadata name="VariableDef" internal-name="VariableDef" parent="TreeWalker">
-            <alternative-name internal-name="testPlugin.VariableDef" />
+            <alternative-name internal-name="StructuralMetrics.VariableDef" />
             <description>%VariableDef.desc</description>
-
+        </rule-metadata>
+        
+        <rule-metadata name="NumberOfCasts" internal-name="NumberOfCasts" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.NumberOfCasts" />
+            <description>%NumberOfCasts.desc</description>
         </rule-metadata>
     </rule-group-metadata>
 </checkstyle-metadata>
