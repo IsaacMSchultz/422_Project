@@ -56,6 +56,7 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
     public void beginTree(DetailAST rootAST)
     {
     	currentValue = INITIAL_VALUE; //Make sure to restart the cound each time the check is run.
+    	System.out.println("begin cyclomatic");
     }
     
     @Override
@@ -171,6 +172,8 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
         final BigInteger bigIntegerMax = BigInteger.valueOf(max);
         if (currentValue.compareTo(bigIntegerMax) > 0) {
             log(ast, MSG_KEY, currentValue, bigIntegerMax); //leaving the log in for now to see if it works
+            System.out.println(currentValue.toString());
+            System.out.println("HKSDHIUGHLKDSJHFLKJDSHFLKSDHFK:USDHLFIUHDSLKF?KAJ:IYAEIHLEAUFGKEGFOUESLUKHFK	LEJGFEKFGU");
         	// This is when the original would report the cyclomatic complexity.
         }
         popValue();

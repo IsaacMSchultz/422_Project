@@ -11,8 +11,8 @@
             <description>%AntiHungarianDemoCheck.desc</description>
         </rule-metadata>
 
-        <rule-metadata name="CyclomaticComplexity" internal-name="CyclomaticComplexity" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.CyclomaticComplexity" />
+        <rule-metadata name="CyclomaticComplexityCounter" internal-name="CyclomaticComplexityCounter" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.CyclomaticComplexityCounter" />
             <description>%ACyclomaticComplexity.desc</description>
         </rule-metadata>
         
@@ -21,8 +21,8 @@
             <description>%VariableDef.desc</description>
         </rule-metadata>
         
-        <rule-metadata name="NumberOfCasts" internal-name="NumberOfCasts" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.NumberOfCasts" />
+        <rule-metadata name="NumberOfCastsCheck" internal-name="NumberOfCastsCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.NumberOfCastsCheck" />
             <description>%NumberOfCasts.desc</description>
         </rule-metadata>
     </rule-group-metadata>

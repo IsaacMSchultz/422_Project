@@ -34,7 +34,7 @@ public class NumberOfCastsCheck extends AbstractCheck{
 	@Override
 	public void finishTree(DetailAST rootAST)
 	{
-		log(rootAST, "Number of casts: {0}. Also, the Cyclomatic Complexity is: ", casts, test.getCycles());
+		log(rootAST, "Number of casts: {0}. Also, the Cyclomatic Complexity is: {1}", casts, test.getCycles());
 	}
 	
 	@Override
@@ -42,6 +42,8 @@ public class NumberOfCastsCheck extends AbstractCheck{
 	{
 		casts = 0;
 		test = new CyclomaticComplexityCounter();
+		test.init();
+		System.out.println("begin cast");
 	}
 	
 	public int getCasts()
