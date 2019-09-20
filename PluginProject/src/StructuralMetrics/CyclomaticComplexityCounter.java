@@ -29,7 +29,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  *
  */
 @FileStatefulCheck
-public class CyclomaticComplexity extends AbstractCheck {
+public class CyclomaticComplexityCounter extends AbstractCheck {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"
@@ -46,31 +46,27 @@ public class CyclomaticComplexity extends AbstractCheck {
     /** Stack of values - all but the current value. */
     private final Deque<BigInteger> valueStack = new ArrayDeque<>();
 
-    /** Whether to treat the whole switch block as a single decision point.*/
-    private boolean switchBlockAsSingleDecisionPoint;
-
     /** The current value. */
     private BigInteger currentValue = INITIAL_VALUE;
 
     /** Threshold to report violation for. */
     private int max = DEFAULT_COMPLEXITY_VALUE;
-
-    /**
-     * Sets whether to treat the whole switch block as a single decision point.
-     * @param switchBlockAsSingleDecisionPoint whether to treat the whole switch
-     *                                          block as a single decision point.
-     */
-    public void setSwitchBlockAsSingleDecisionPoint(boolean switchBlockAsSingleDecisionPoint) {
-        this.switchBlockAsSingleDecisionPoint = switchBlockAsSingleDecisionPoint;
+    
+    @Override
+    public void beginTree(DetailAST rootAST)
+    {
+    	currentValue = INITIAL_VALUE; //Make sure to restart the cound each time the check is run.
     }
-
-    /**
-     * Set the maximum threshold allowed.
-     *
-     * @param max the maximum threshold
-     */
-    public final void setMax(int max) {
-        this.max = max;
+    
+    @Override
+    public void finishTree(DetailAST rootAST)
+    {
+    	
+    }
+    
+    public int getCycles()
+    {
+    	return currentValue.intValueExact();
     }
 
     @Override
@@ -161,12 +157,7 @@ public class CyclomaticComplexity extends AbstractCheck {
      * @param ast the token being visited
      */
     private void visitTokenHook(DetailAST ast) {
-        if (switchBlockAsSingleDecisionPoint) {
-            if (ast.getType() != TokenTypes.LITERAL_CASE) {
-                incrementCurrentValue(BigInteger.ONE);
-            }
-        }
-        else if (ast.getType() != TokenTypes.LITERAL_SWITCH) {
+        if (ast.getType() != TokenTypes.LITERAL_SWITCH) {
             incrementCurrentValue(BigInteger.ONE);
         }
     }
@@ -179,7 +170,8 @@ public class CyclomaticComplexity extends AbstractCheck {
     private void leaveMethodDef(DetailAST ast) {
         final BigInteger bigIntegerMax = BigInteger.valueOf(max);
         if (currentValue.compareTo(bigIntegerMax) > 0) {
-            log(ast, MSG_KEY, currentValue, bigIntegerMax);
+            log(ast, MSG_KEY, currentValue, bigIntegerMax); //leaving the log in for now to see if it works
+        	// This is when the original would report the cyclomatic complexity.
         }
         popValue();
     }
