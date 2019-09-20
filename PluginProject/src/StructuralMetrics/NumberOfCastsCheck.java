@@ -1,6 +1,7 @@
 package StructuralMetrics;
 
 
+import com.puppycrawl.tools.checkstyle.TreeWalker;
 import com.puppycrawl.tools.checkstyle.api.*;
 import java.util.HashMap;
 
@@ -41,8 +42,16 @@ public class NumberOfCastsCheck extends AbstractCheck{
 	public void beginTree(DetailAST rootAST)
 	{
 		casts = 0;
+		TreeWalker walker = new TreeWalker();
+		//walker.
+//		this.
+		
+		//Trying to run the whole CyclomaticComplexityCounter to get the number as a test. 
+		// I think the treewalker is what needs to be used???
 		test = new CyclomaticComplexityCounter();
+		test.setFileContents(this.getFileContents());
 		test.init();
+		
 		System.out.println("begin cast");
 	}
 	
