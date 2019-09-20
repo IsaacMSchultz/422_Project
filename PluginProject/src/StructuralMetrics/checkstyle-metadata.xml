@@ -5,10 +5,23 @@
 <checkstyle-metadata>
     <rule-group-metadata name="PluginProject"  priority="1600">
         <description>%test.desc</description>
-
-        <rule-metadata name="AntiHungarianDemoCheck" internal-name="AntiHungarianDemoCheck" parent="TreeWalker">
-            <alternative-name internal-name="test.AntiHungarianDemoCheck" />
+        <rule-metadata name="AntiHungarianDemo" internal-name="AntiHungarianDemo" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.AntiHungarianDemoCheck" />
             <description>%AntiHungarianDemoCheck.desc</description>
+        </rule-metadata>
+        <rule-metadata name="Comments" internal-name="Comments" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.CommentsCheck" />
+            <description>%Comments.desc</description>
+             <property-metadata name="max" datatype="Integer" default-value="30">
+                <description>The maximum number of allowed comments.</description>
+            </property-metadata>
+        </rule-metadata>
+        <rule-metadata name="Bullshit" internal-name="Bullshit" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.BullshitCheck" />
+            <description>%Bullshit.desc</description>
+             <property-metadata name="max" datatype="Integer" default-value="30">
+                <description>The maximum number of allowed comments.</description>
+            </property-metadata>
         </rule-metadata>
     </rule-group-metadata>
 </checkstyle-metadata>
