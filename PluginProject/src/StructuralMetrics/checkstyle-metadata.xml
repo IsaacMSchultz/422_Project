@@ -3,17 +3,27 @@
 "-//eclipse-cs//DTD Check Metadata 1.1//EN"
 "http://eclipse-cs.sourceforge.net/dtds/checkstyle-metadata_1_1.dtd">
 <checkstyle-metadata>
-    <rule-group-metadata name="PluginProject"  priority="1600">
-        <description>%test.desc</description>
+    <rule-group-metadata name="My custom checks"  priority="1600">
+       <description>%test.desc</description>
 
         <rule-metadata name="AntiHungarianDemoCheck" internal-name="AntiHungarianDemoCheck" parent="TreeWalker">
-            <alternative-name internal-name="test.AntiHungarianDemoCheck" />
+            <alternative-name internal-name="testPlugin.AntiHungarianDemoCheck" />
             <description>%AntiHungarianDemoCheck.desc</description>
         </rule-metadata>
         
-        <rule-metadata name="VariableDef" internal-name="VariableDef" parent="TreeWalker">
-            <alternative-name internal-name="testPlugin.VariableDef" />
-            <description>%VariableDef.desc</description>
+        <rule-metadata name="VariableCountCheck" internal-name="VariableCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="testPlugin.VariableCountCheck" />
+            <description>%VariableCountCheck.desc</description>
+        </rule-metadata>
+        
+        <rule-metadata name="ExpressionCountCheck" internal-name="ExpressionCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="testPlugin.ExpressionCountCheck" />
+            <description>%ExpressionCountCheck.desc</description>
+        </rule-metadata>
+        
+        <rule-metadata name="LocalMethodCheck" internal-name="LocalMethodCheck" parent="TreeWalker">
+            <alternative-name internal-name="testPlugin.LocalMethodCheck" />
+            <description>%LocalMethodCheck.desc</description>
         </rule-metadata>
     </rule-group-metadata>
 </checkstyle-metadata>
