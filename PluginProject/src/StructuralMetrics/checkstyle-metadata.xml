@@ -4,7 +4,7 @@
 "http://eclipse-cs.sourceforge.net/dtds/checkstyle-metadata_1_1.dtd">
 <checkstyle-metadata>
     <rule-group-metadata name="Plugin Project"  priority="1600">
-       <description>%test.desc</description>
+       <description>%testPlugin.desc</description>
 
         <rule-metadata name="CyclomaticComplexityCounter" internal-name="CyclomaticComplexityCounter" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.CyclomaticComplexityCounter" />
@@ -19,11 +19,6 @@
         <rule-metadata name="ExpressionCountCheck" internal-name="ExpressionCountCheck" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.ExpressionCountCheck" />
             <description>%ExpressionCountCheck.desc</description>
-        </rule-metadata>
-        
-        <rule-metadata name="LocalMethodCheck" internal-name="LocalMethodCheck" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.LocalMethodCheck" />
-            <description>%LocalMethodCheck.desc</description>
         </rule-metadata>
         
         <rule-metadata name="NumberOfCastsCheck" internal-name="NumberOfCastsCheck" parent="TreeWalker">
