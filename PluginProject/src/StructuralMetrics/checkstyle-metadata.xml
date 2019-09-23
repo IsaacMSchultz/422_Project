@@ -25,5 +25,14 @@
             <alternative-name internal-name="StructuralMetrics.NumberOfCastsCheck" />
             <description>%NumberOfCasts.desc</description>
         </rule-metadata>
+
+        <rule-metadata name="Comments" internal-name="Comments" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.CommentsCheck" />
+            <description>%Comments.desc</description>
+             <property-metadata name="max" datatype="Integer" default-value="30">
+                <description>The maximum number of allowed comments.</description>
+            </property-metadata>
+        </rule-metadata>
+        
     </rule-group-metadata>
 </checkstyle-metadata>
