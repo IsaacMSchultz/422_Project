@@ -25,6 +25,11 @@
             <alternative-name internal-name="StructuralMetrics.NumberOfCastsCheck" />
             <description>%NumberOfCasts.desc</description>
         </rule-metadata>
+        
+        <rule-metadata name="MaintainabilityIndex" internal-name="MaintainabilityIndex" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.MaintainabilityIndex" />
+            <description>Displays the maintainability index of a YEET</description>
+        </rule-metadata>
 
         <rule-metadata name="Comments" internal-name="Comments" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.CommentsCheck" />
