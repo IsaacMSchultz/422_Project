@@ -23,5 +23,12 @@
                 <description>The maximum number of comment lines.</description>
             </property-metadata>
         </rule-metadata>
+        <rule-metadata name="MaxNumLoops" internal-name="MaxNumLoops" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.MaxNumLoopsCheck" />
+            <description>%MaxNumLoopsCheck.desc</description>
+             <property-metadata name="max" datatype="Integer" default-value="1">
+                <description>The maximum number of loop statements.</description>
+            </property-metadata>
+        </rule-metadata>
     </rule-group-metadata>
 </checkstyle-metadata>
