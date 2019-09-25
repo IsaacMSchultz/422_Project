@@ -12,15 +12,15 @@
         <rule-metadata name="Comments" internal-name="Comments" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.CommentsCheck" />
             <description>%Comments.desc</description>
-             <property-metadata name="max" datatype="Integer" default-value="30">
+             <property-metadata name="max" datatype="Integer" default-value="5">
                 <description>The maximum number of allowed comments.</description>
             </property-metadata>
         </rule-metadata>
-        <rule-metadata name="Bullshit" internal-name="Bullshit" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.BullshitCheck" />
-            <description>%Bullshit.desc</description>
-             <property-metadata name="max" datatype="Integer" default-value="30">
-                <description>The maximum number of allowed comments.</description>
+        <rule-metadata name="LinesOfComments" internal-name="LinesOfComments" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.LinesOfCommentsCheck" />
+            <description>%LinesOfCommentsCheck.desc</description>
+             <property-metadata name="max" datatype="Integer" default-value="5">
+                <description>The maximum number of comment lines.</description>
             </property-metadata>
         </rule-metadata>
     </rule-group-metadata>
