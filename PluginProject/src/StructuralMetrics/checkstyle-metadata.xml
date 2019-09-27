@@ -30,21 +30,7 @@
             <alternative-name internal-name="StructuralMetrics.MaintainabilityIndex" />
             <description>Displays the maintainability index of a YEET</description>
         </rule-metadata>
-        
-        <rule-metadata name="OperandCountCheck" internal-name="OperandCountCheck" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.OperandCountCheck" />
-            <description>Counts the number of operands</description>
-        </rule-metadata>
-        
-        <rule-metadata name="OperatorCountCheck" internal-name="OperatorCountCheck" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.OperatorCountCheck" />
-            <description>Counts the number of operators</description>
-        </rule-metadata>
-        
-        <rule-metadata name="HalsteadLengthCheck" internal-name="HalsteadLengthCheck" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.HalsteadLengthCheck" />
-            <description>Calculates the Halstead length</description>
-        </rule-metadata>
+
 
         <rule-metadata name="Comments" internal-name="Comments" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.CommentsCheck" />
