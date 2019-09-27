@@ -28,5 +28,11 @@ public class OperatorCountCheck extends AbstractCheck{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+    @Override
+    public void beginTree(DetailAST rootAST)
+    {
+    	operatorCount = 0; //Reset to 0 when we start a new tree.
+    }
 
 }
