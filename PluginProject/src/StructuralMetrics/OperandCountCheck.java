@@ -1,4 +1,4 @@
-package HalsteadCheckPackage;
+package StructuralMetrics;
 
 import com.puppycrawl.tools.checkstyle.api.*;
 
