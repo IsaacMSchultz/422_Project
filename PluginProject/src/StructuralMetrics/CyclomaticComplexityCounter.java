@@ -31,6 +31,8 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 @FileStatefulCheck
 public class CyclomaticComplexityCounter extends AbstractCheck {
 
+	int cyclomaticComplexity = 0 ;
+	
     /**
      * A key is pointing to the warning message text in "messages.properties"
      * file.
@@ -56,6 +58,7 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
     public void beginTree(DetailAST rootAST)
     {
     	currentValue = INITIAL_VALUE; //Make sure to restart the cound each time the check is run.
+    	cyclomaticComplexity = 0;
     	System.out.println("begin cyclomatic");
     }
     
@@ -67,13 +70,11 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
     
     public int getCycles()
     {
-    	return currentValue.intValueExact();
+    	return cyclomaticComplexity;
     }
 
     @Override
     public int[] getDefaultTokens() {
-    	System.out.println("TESTSTART");
-    	
         return new int[] {
             TokenTypes.CTOR_DEF,
             TokenTypes.METHOD_DEF,
@@ -134,7 +135,6 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
             default:
                 visitTokenHook(ast);
         }
-        System.out.println("TEST");
     }
 
     @Override
@@ -171,9 +171,8 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
     private void leaveMethodDef(DetailAST ast) {
         final BigInteger bigIntegerMax = BigInteger.valueOf(max);
         if (currentValue.compareTo(bigIntegerMax) > 0) {
-            log(ast, MSG_KEY, currentValue, bigIntegerMax); //leaving the log in for now to see if it works
-            System.out.println(currentValue.toString());
-            System.out.println("HKSDHIUGHLKDSJHFLKJDSHFLKSDHFK:USDHLFIUHDSLKF?KAJ:IYAEIHLEAUFGKEGFOUESLUKHFK	LEJGFEKFGU");
+            System.out.println("Cyclomatic complexity: " + currentValue.toString());
+            cyclomaticComplexity = currentValue.intValue();
         	// This is when the original would report the cyclomatic complexity.
         }
         popValue();
