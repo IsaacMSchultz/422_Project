@@ -30,6 +30,21 @@
             <alternative-name internal-name="StructuralMetrics.MaintainabilityIndex" />
             <description>Displays the maintainability index of a YEET</description>
         </rule-metadata>
+        
+        <rule-metadata name="OperandCountCheck" internal-name="OperandCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperandCountCheck" />
+            <description>Counts the number of operands</description>
+        </rule-metadata>
+        
+        <rule-metadata name="OperatorCountCheck" internal-name="OperatorCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperatorCountCheck" />
+            <description>Counts the number of operators</description>
+        </rule-metadata>
+        
+        <rule-metadata name="HalsteadLengthCheck" internal-name="HalsteadLengthCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.HalsteadLengthCheck" />
+            <description>Calculates the Halstead length</description>
+        </rule-metadata>
 
         <rule-metadata name="Comments" internal-name="Comments" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.CommentsCheck" />
@@ -38,6 +53,7 @@
                 <description>The maximum number of allowed comments.</description>
             </property-metadata>
         </rule-metadata>
+        
         <rule-metadata name="LinesOfComments" internal-name="LinesOfComments" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.LinesOfCommentsCheck" />
             <description>%LinesOfCommentsCheck.desc</description>
@@ -45,6 +61,7 @@
                 <description>The maximum number of comment lines.</description>
             </property-metadata>
         </rule-metadata>
+        
         <rule-metadata name="MaxNumLoops" internal-name="MaxNumLoops" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.MaxNumLoopsCheck" />
             <description>%MaxNumLoopsCheck.desc</description>
