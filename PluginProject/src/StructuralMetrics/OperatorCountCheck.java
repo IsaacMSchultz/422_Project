@@ -16,6 +16,10 @@ public class OperatorCountCheck extends AbstractCheck{
 		
 		operatorCount++;
 	}
+	
+	public int getCount() {
+		return operatorCount;
+	}
 
 	@Override
 	public int[] getAcceptableTokens() {
