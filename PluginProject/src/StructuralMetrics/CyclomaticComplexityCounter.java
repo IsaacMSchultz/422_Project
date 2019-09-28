@@ -1,9 +1,5 @@
 package StructuralMetrics;
  
-import com.puppycrawl.tools.checkstyle.api.*;
-import com.puppycrawl.tools.checkstyle.checks.metrics.*;
-import java.util.regex.Pattern;
- 
 import java.math.BigInteger;
 import java.util.ArrayDeque;
 import java.util.Deque;
