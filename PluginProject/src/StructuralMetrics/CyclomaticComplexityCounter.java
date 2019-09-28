@@ -58,12 +58,6 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
     	System.out.println("begin cyclomatic");
     }
     
-    @Override
-    public void finishTree(DetailAST rootAST)
-    {
-    	
-    }
-    
     public int getCycles()
     {
     	return cyclomaticComplexity;

@@ -2,41 +2,37 @@ package StructuralMetrics;
 
 import com.puppycrawl.tools.checkstyle.api.*;
 
-public class NumberOfCastsCheck extends AbstractCheck{
-	
+public class NumberOfCastsCheck extends AbstractCheck {
+
 	int casts;
 
 	@Override
-	public void beginTree(DetailAST rootAST)
-	{
+	public void beginTree(DetailAST rootAST) {
 		casts = 0;
 	}
-	
+
 	@Override
-    public void visitToken(DetailAST aAST) {		
+	public void visitToken(DetailAST aAST) {
 		casts++;
-    }
-	
+	}
+
 	@Override
-	public void finishTree(DetailAST rootAST)
-	{
+	public void finishTree(DetailAST rootAST) {
 		log(rootAST, "Number of casts: {0}.", casts);
 	}
-	
-	public int getCasts()
-	{
+
+	public int getCasts() {
 		return casts;
 	}
-	
+
 	@Override
-	public int[] getDefaultTokens() {		
-		//test.beginTree(rootAST);
-		return new int[] {TokenTypes.TYPECAST}; 
+	public int[] getDefaultTokens() {
+		return new int[] { TokenTypes.TYPECAST };
 	}
 
 	@Override
 	public int[] getAcceptableTokens() {
-		return new int[] {TokenTypes.TYPECAST}; 
+		return new int[] { TokenTypes.TYPECAST };
 	}
 
 	@Override
