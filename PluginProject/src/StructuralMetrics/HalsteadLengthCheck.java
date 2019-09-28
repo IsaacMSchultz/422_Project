@@ -7,7 +7,7 @@ import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import java.util.ArrayList;
 
 public class HalsteadLengthCheck extends AbstractCheck {
-	
+
 	private int halsteadLength;
 
 	private OperandCountCheck operandCount = new OperandCountCheck();
@@ -26,25 +26,27 @@ public class HalsteadLengthCheck extends AbstractCheck {
 
 	@Override
 	public void visitToken(DetailAST ast) {
-		if (operandTokens.contains(ast.getType()))
+		if (operandTokens.contains(ast.getType())) {
 			operandCount.visitToken(ast);
-		if (operatorTokens.contains(ast.getType()))
+		}
+		if (operatorTokens.contains(ast.getType())) {
 			operatorCount.visitToken(ast);
+		}
 	}
-	
+
 	// This is the function where the halstead volume gets calculated.
 	@Override
 	public void finishTree(DetailAST rootAST) {
 		// Call the begin tree function of each check we depend on.
 		operandCount.finishTree(rootAST);
 		operatorCount.finishTree(rootAST);
-		
+
 		int operands = operandCount.getCount();
 		int operators = operatorCount.getCount();
-		
-		halsteadLength = operands + operators; 
+
+		halsteadLength = operands + operators;
 	}
-	
+
 	// Public getter for the halstead length.
 	public int getHalsteadLength() {
 		return halsteadLength;
@@ -61,10 +63,10 @@ public class HalsteadLengthCheck extends AbstractCheck {
 	}
 
 	@Override
-    public final int[] getRequiredTokens() {
-    	return ArrayConcatenator.concatArray(operandCount.getRequiredTokens(), operatorCount.getRequiredTokens());
-    }
-	
+	public final int[] getRequiredTokens() {
+		return ArrayConcatenator.concatArray(operandCount.getRequiredTokens(), operatorCount.getRequiredTokens());
+	}
+
 	// Simple function to create an ArrayList from an integer array
 	private ArrayList<Integer> arrayToList(int[] array) {
 		ArrayList<Integer> returnList = new ArrayList<Integer>();
