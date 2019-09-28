@@ -1,47 +1,76 @@
 package StructuralMetrics;
 
-import com.puppycrawl.tools.checkstyle.api.*;
+import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
+import com.puppycrawl.tools.checkstyle.api.DetailAST;
+
+//Use these to keep track of the tokens required for children.
+import java.util.ArrayList;
 
 public class HalsteadLengthCheck extends AbstractCheck {
+	
+	private int halsteadLength;
 
-	//private int[] operators = {TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC, TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS,TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN, TokenTypes.BNOT, TokenTypes.BOR, TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN, TokenTypes.BXOR, TokenTypes.BXOR_ASSIGN, TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DIV, TokenTypes.DIV_ASSIGN, TokenTypes.DOT, TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.LAND, TokenTypes.LE, TokenTypes.LOR, TokenTypes.LT, TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD, TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.SL,TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR,TokenTypes.QUESTION};
-	//private int[] operands = {TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG};
-	private static final String CATCH_MSG = "HALSTEAD CHECK: ";
+	private OperandCountCheck operandCount = new OperandCountCheck();
+	private OperatorCountCheck operatorCount = new OperatorCountCheck();
+
+	// Store the tokens they accept in a list so that they can be easily searched.
+	private ArrayList<Integer> operandTokens = arrayToList(operandCount.getDefaultTokens());
+	private ArrayList<Integer> operatorTokens = arrayToList(operatorCount.getDefaultTokens());
+
+	@Override
+	public void beginTree(DetailAST rootAST) {
+		// Call the begin tree function of each check we depend on.
+		operandCount.beginTree(rootAST);
+		operatorCount.beginTree(rootAST);
+	}
+
+	@Override
+	public void visitToken(DetailAST ast) {
+		if (operandTokens.contains(ast.getType()))
+			operandCount.visitToken(ast);
+		if (operatorTokens.contains(ast.getType()))
+			operatorCount.visitToken(ast);
+	}
 	
-	//Halstead Length is the total number of operators and operands
-	int halsteadLength = 0;
+	// This is the function where the halstead volume gets calculated.
+	@Override
+	public void finishTree(DetailAST rootAST) {
+		// Call the begin tree function of each check we depend on.
+		operandCount.finishTree(rootAST);
+		operatorCount.finishTree(rootAST);
+		
+		int operands = operandCount.getCount();
+		int operators = operatorCount.getCount();
+		
+		halsteadLength = operands + operators; 
+	}
 	
+	// Public getter for the halstead length.
+	public int getHalsteadLength() {
+		return halsteadLength;
+	}
+
 	@Override
 	public int[] getDefaultTokens() {
-		return new int[] {TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC, TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS,TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN, TokenTypes.BNOT, TokenTypes.BOR, TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN, TokenTypes.BXOR, TokenTypes.BXOR_ASSIGN, TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DIV, TokenTypes.DIV_ASSIGN, TokenTypes.DOT, TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.LAND, TokenTypes.LE, TokenTypes.LOR, TokenTypes.LT, TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD, TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.SL,TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR,TokenTypes.QUESTION, TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG};
+		return ArrayConcatenator.concatArray(operandCount.getDefaultTokens(), operatorCount.getDefaultTokens());
 	}
 
-	@Override
-	public void visitToken(DetailAST aAST) {
-		//String operatorName = findVariableOperator(aAST);
-		//reportStyleError(aAST, operatorName);
-		halsteadLength++;
-	}
-	
-	private String findVariableOperator(DetailAST aAST) {
-		DetailAST identifier = aAST.findFirstToken(TokenTypes.IDENT);
-		return identifier.toString();
-		}
-	
 	@Override
 	public int[] getAcceptableTokens() {
-		// TODO Auto-generated method stub
-		return null;
+		return ArrayConcatenator.concatArray(operandCount.getAcceptableTokens(), operatorCount.getAcceptableTokens());
 	}
 
 	@Override
-	public int[] getRequiredTokens() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public final int[] getRequiredTokens() {
+    	return ArrayConcatenator.concatArray(operandCount.getRequiredTokens(), operatorCount.getRequiredTokens());
+    }
 	
-	private void reportStyleError(DetailAST aAST, String operatorName) {
-		log(aAST.getLineNo(), CATCH_MSG + operatorName);
+	// Simple function to create an ArrayList from an integer array
+	private ArrayList<Integer> arrayToList(int[] array) {
+		ArrayList<Integer> returnList = new ArrayList<Integer>();
+		for (int i : array) {
+			returnList.add(i);
 		}
-
+		return returnList;
+	}
 }
