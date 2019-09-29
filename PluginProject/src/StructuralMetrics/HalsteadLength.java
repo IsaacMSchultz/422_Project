@@ -41,6 +41,13 @@ public class HalsteadLength extends AbstractCheck {
 		int operators = operatorCount.getCount();
 
 		halsteadLength = operands + operators;
+		
+		try {
+			log(0, "Halstead Length: " + halsteadLength);
+		}
+		catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	// Public getter for the halstead length.

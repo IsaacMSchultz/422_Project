@@ -42,6 +42,13 @@ public class HalsteadDifficulty extends AbstractCheck {
 		int operands = operandCount.getCount();
 
 		halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands);
+		
+		try {
+			log(0, "Halstead Difficulty: " + halsteadDifficulty);
+		}
+		catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	// Public getter for the halstead length.

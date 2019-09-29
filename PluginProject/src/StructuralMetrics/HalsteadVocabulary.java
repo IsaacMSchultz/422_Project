@@ -41,6 +41,13 @@ public class HalsteadVocabulary extends AbstractCheck {
 		int uniqueOperators = operatorCount.getUniqueCount();
 
 		halsteadVocabulary = uniqueOperands + uniqueOperators;
+		
+		try {
+			log(0, "Halstead Vocabulary: " + halsteadVocabulary);
+		}
+		catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	// Public getter for the halstead length.

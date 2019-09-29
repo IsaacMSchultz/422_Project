@@ -44,9 +44,14 @@ public class HalsteadEffort extends AbstractCheck {
 		int difficulty = halsteadDifficulty.getHalsteadDifficulty();
 		double volume = halsteadVolume.getHalsteadVolume();
 
-		// TODO: Implement function that calcuates the halstead volume.
-		// This also needs the total lines of code for the file.
 		halsteadEffort = difficulty * volume;
+		
+		try {
+			log(0, "Halstead Effort: " + halsteadEffort);
+		}
+		catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	// Public getter for the halstead volume.

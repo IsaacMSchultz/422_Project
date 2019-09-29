@@ -40,6 +40,9 @@ public class MaintainabilityIndex extends AbstractCheck {
 
 	@Override
 	public void finishTree(DetailAST rootAST) {
+		// Call the finish tree function on the checks we depend on
+		halsteadVolume.finishTree(rootAST); 
+		
 		int G = cyclomaticComplexity.getCycles();
 		double V = halsteadVolume.getHalsteadVolume();
 		int LOC = this.getFileContents().getText().size();

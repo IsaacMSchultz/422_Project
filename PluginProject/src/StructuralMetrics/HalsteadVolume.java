@@ -46,6 +46,13 @@ public class HalsteadVolume extends AbstractCheck {
 
 		System.out.println("length: " + length + " vocab: " + vocabulary);
 		halsteadVolume = length * log2(vocabulary);
+		
+		try {
+			log(0, "Halstead Volume: " + halsteadVolume);
+		}
+		catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	// Public getter for the halstead volume.
