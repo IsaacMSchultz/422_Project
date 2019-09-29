@@ -8,8 +8,10 @@ import java.util.ArrayList;
 public class HalsteadVolume extends AbstractCheck {
 
 	private int halsteadVolume;
+	
+	// I AM IN THE PROCESS OF TURNING OPERAND INTO HALSTEAD VOLUME AND OPERATOR INTO HALSTEAD VOCABULARY!!!!!!
 
-	private OperandCountCheck operandCount = new OperandCountCheck();
+	private HalsteadLength halsteadLength = new HalsteadLength();
 	private OperatorCountCheck operatorCount = new OperatorCountCheck();
 
 	// Store the tokens they accept in a list so that they can be easily searched.
