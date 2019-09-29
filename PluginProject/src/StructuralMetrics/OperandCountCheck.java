@@ -9,11 +9,16 @@ public class OperandCountCheck extends AbstractCheck {
 	private static final String UNIQUE = "Unique Operands: ";
 	
 	private int operandCount;
+	private int nonVariableOperandCount;
 	
-	private Hashtable uniqueOperands;
+	private Hashtable variableOperands;
 	
 	public int getOperandCount() {
 		return this.operandCount;
+	}
+	
+	public int getUniqueOperandCount() {
+		return this.variableOperands.size()+nonVariableOperandCount;
 	}
 	
 	
@@ -22,25 +27,16 @@ public class OperandCountCheck extends AbstractCheck {
 		return new int[] {TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG};	
 	}
 
-public void visitToken(DetailAST aAST) {
+	public void visitToken(DetailAST aAST) {
 		if(inExpression(aAST)) {
 			operandCount++;
-		}
-		boolean endFound = false;				
-		while(!endFound) {
-			DetailAST currentToken = aAST.getNextSibling();
-			if(currentToken==null) {
-				endFound = true;
-			}
-			else {
-				if(currentToken.getType()==TokenTypes.IDENT) {
-					if(!uniqueOperands.containsKey(currentToken.toString())){
-						uniqueOperands.put(currentToken.toString(),1);
-					}
+			if(aAST.getType()==TokenTypes.IDENT) {
+				if(!variableOperands.containsKey(aAST.toString())){
+					variableOperands.put(aAST.toString(),1);
 				}
+				else nonVariableOperandCount++;		
 			}
-		}
-		
+		}		
 	}
 
 	@Override
@@ -60,13 +56,13 @@ public void visitToken(DetailAST aAST) {
 	@Override
 	public void beginTree(DetailAST rootAST) {
 		operandCount = 0;
-		this.uniqueOperands = new Hashtable();
+		this.variableOperands = new Hashtable();
 	}
 	
 	@Override
 	public void finishTree(DetailAST rootAST) {
 		log(rootAST, CATCH_MSG + operandCount);
-		log(rootAST, UNIQUE, + uniqueOperands.size());
+		log(rootAST, UNIQUE, + this.getUniqueOperandCount());
 	}
 
 }

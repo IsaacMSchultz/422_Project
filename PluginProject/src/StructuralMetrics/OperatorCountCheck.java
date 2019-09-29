@@ -28,15 +28,8 @@ public class OperatorCountCheck extends AbstractCheck{
 	public void visitToken(DetailAST aAST) {
 		if(inExpression(aAST)) {
 			operatorCount++;
-		}
-		boolean endFound = false;				
-		while(!endFound) {
-			DetailAST currentToken = aAST.getNextSibling();
-			if(currentToken==null) {
-				endFound = true;
-			}
-			else if(!uniqueOperators.containsKey(currentToken.toString())){
-				uniqueOperators.put(currentToken.toString(),1);
+			if(!uniqueOperators.containsKey(aAST.toString())){
+				uniqueOperators.put(aAST.toString(),1);
 			}
 		}
 	}
