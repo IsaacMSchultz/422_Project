@@ -4,8 +4,8 @@
     <rule-group-metadata name="Plugin Project" priority="1600">
         <description>%StructuralMetrics.desc</description>
 
-        <rule-metadata name="Comments" internal-name="Comments" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.CommentsCheck" />
+        <rule-metadata name="Comment Count" internal-name="CommentCount" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.CommentCount" />
             <description>%Comments.desc</description>
             <property-metadata name="max" datatype="Integer" default-value="5">
                 <description>The maximum number of allowed comments.</description>
