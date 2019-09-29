@@ -16,6 +16,16 @@
             <description>%VariableCountCheck.desc</description>
         </rule-metadata>
         
+        <rule-metadata name="OperandCounter" internal-name="OperandCounter" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperandCounter" />
+            <description>TEST</description>
+        </rule-metadata>
+        
+        <rule-metadata name="OperatorCounter" internal-name="OperatorCounter" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperatorCounter" />
+            <description>TEST2</description>
+        </rule-metadata>
+        
         <rule-metadata name="ExpressionCountCheck" internal-name="ExpressionCountCheck" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.ExpressionCountCheck" />
             <description>%ExpressionCountCheck.desc</description>
