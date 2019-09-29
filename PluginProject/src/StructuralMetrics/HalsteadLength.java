@@ -6,7 +6,7 @@ import com.puppycrawl.tools.checkstyle.api.DetailAST;
 //Use these to keep track of the tokens required for children.
 import java.util.ArrayList;
 
-public class HalsteadLengthCheck extends AbstractCheck {
+public class HalsteadLength extends AbstractCheck {
 
 	private int halsteadLength;
 
