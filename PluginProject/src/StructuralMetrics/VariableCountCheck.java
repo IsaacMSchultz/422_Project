@@ -1,4 +1,4 @@
-package testPlugin;
+package StructuralMetrics;
 
 
 import com.puppycrawl.tools.checkstyle.api.*;

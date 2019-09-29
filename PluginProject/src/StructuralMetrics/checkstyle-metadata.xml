@@ -7,23 +7,30 @@
        <description>%test.desc</description>
 
         <rule-metadata name="AntiHungarianDemoCheck" internal-name="AntiHungarianDemoCheck" parent="TreeWalker">
-            <alternative-name internal-name="testPlugin.AntiHungarianDemoCheck" />
+            <alternative-name internal-name="StructuralMetrics.AntiHungarianDemoCheck" />
             <description>%AntiHungarianDemoCheck.desc</description>
         </rule-metadata>
         
         <rule-metadata name="VariableCountCheck" internal-name="VariableCountCheck" parent="TreeWalker">
-            <alternative-name internal-name="testPlugin.VariableCountCheck" />
+            <alternative-name internal-name="StructuralMetrics.VariableCountCheck" />
             <description>%VariableCountCheck.desc</description>
         </rule-metadata>
         
         <rule-metadata name="ExpressionCountCheck" internal-name="ExpressionCountCheck" parent="TreeWalker">
-            <alternative-name internal-name="testPlugin.ExpressionCountCheck" />
+            <alternative-name internal-name="StructuralMetrics.ExpressionCountCheck" />
             <description>%ExpressionCountCheck.desc</description>
         </rule-metadata>
         
         <rule-metadata name="LocalMethodCheck" internal-name="LocalMethodCheck" parent="TreeWalker">
-            <alternative-name internal-name="testPlugin.LocalMethodCheck" />
+            <alternative-name internal-name="StructuralMetrics.LocalMethodCheck" />
             <description>%LocalMethodCheck.desc</description>
         </rule-metadata>
+        
+        <rule-metadata name="ExternalMethodCheck" internal-name="ExternalMethodCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.ExternalMethodCheck" />
+            <description>%ExternalMethodCheck.desc</description>
+        </rule-metadata>
+        
+        
     </rule-group-metadata>
 </checkstyle-metadata>
