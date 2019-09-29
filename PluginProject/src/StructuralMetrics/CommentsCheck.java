@@ -18,7 +18,7 @@ public class CommentsCheck extends AbstractCheck {
 
   @Override
   public int[] getAcceptableTokens() {
-    return new int[] { TokenTypes.COMMENT_CONTENT  };
+    return new int[] { TokenTypes.COMMENT_CONTENT };
   }
   @Override
   public boolean isCommentNodesRequired() {
@@ -44,7 +44,7 @@ public class CommentsCheck extends AbstractCheck {
 	  
 	countComments++;
     if (countComments > max) {
-    	 log(ast.getLineNo(), "Max num of comments exceeded", max);
+    	 log(ast.getLineNo(), "commentlimit", max);
     }
   }
 }

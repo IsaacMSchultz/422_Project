@@ -25,49 +25,29 @@
             <alternative-name internal-name="StructuralMetrics.NumberOfCastsCheck" />
             <description>%NumberOfCasts.desc</description>
         </rule-metadata>
-        
-        <rule-metadata name="MaintainabilityIndex" internal-name="MaintainabilityIndex" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.MaintainabilityIndex" />
-            <description>Displays the maintainability index of a YEET</description>
-        </rule-metadata>
-        
-        <rule-metadata name="OperandCountCheck" internal-name="OperandCountCheck" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.OperandCountCheck" />
-            <description>Counts the number of operands</description>
-        </rule-metadata>
-        
-        <rule-metadata name="OperatorCountCheck" internal-name="OperatorCountCheck" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.OperatorCountCheck" />
-            <description>Counts the number of operators</description>
-        </rule-metadata>
-        
-        <rule-metadata name="HalsteadLengthCheck" internal-name="HalsteadLengthCheck" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.HalsteadLengthCheck" />
-            <description>Calculates the Halstead length</description>
-        </rule-metadata>
 
         <rule-metadata name="Comments" internal-name="Comments" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.CommentsCheck" />
             <description>%Comments.desc</description>
-             <property-metadata name="max" datatype="Integer" default-value="5">
+             <property-metadata name="max" datatype="Integer" default-value="30">
                 <description>The maximum number of allowed comments.</description>
             </property-metadata>
         </rule-metadata>
         
-        <rule-metadata name="LinesOfComments" internal-name="LinesOfComments" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.LinesOfCommentsCheck" />
-            <description>%LinesOfCommentsCheck.desc</description>
-             <property-metadata name="max" datatype="Integer" default-value="5">
-                <description>The maximum number of comment lines.</description>
-            </property-metadata>
+        <rule-metadata name="OperandCountCheck" internal-name="OperandCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperandCountCheck" />
+            <description>%OperandCountCheck.desc</description>
         </rule-metadata>
         
-        <rule-metadata name="MaxNumLoops" internal-name="MaxNumLoops" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.MaxNumLoopsCheck" />
-            <description>%MaxNumLoopsCheck.desc</description>
-             <property-metadata name="max" datatype="Integer" default-value="1">
-                <description>The maximum number of loop statements.</description>
-            </property-metadata>
-        </rule-metadata>    
+        <rule-metadata name="OperatorCountCheck" internal-name="OperatorCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperatorCountCheck" />
+            <description>%OperatorCountCheck.desc</description>
+        </rule-metadata>
+        
+        <rule-metadata name="HalsteadLengthCheck" internal-name="HalsteadLengthCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.HalsteadLengthCheck" />
+            <description>%HalsteadLengthCheck.desc</description>
+        </rule-metadata>
+        
     </rule-group-metadata>
 </checkstyle-metadata>
