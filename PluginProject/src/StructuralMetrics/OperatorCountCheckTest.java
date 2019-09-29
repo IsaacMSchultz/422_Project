@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -23,28 +22,28 @@ class OperatorCountCheckTest {
 	
 	@Test
 	void testGetDefaultTokens() {
-		Assert.assertArrayEquals(expectedArray, occ.getDefaultTokens() );
+		assertArrayEquals(expectedArray, occ.getDefaultTokens() );
 	}
 
 	@Test
 	void testGetAcceptableTokens() {
-		Assert.assertArrayEquals(expectedArray, occ.getAcceptableTokens());
+		assertArrayEquals(expectedArray, occ.getAcceptableTokens());
 	}
 
 	@Test
 	void testGetRequiredTokens() {
 		int[] emptyArray = new int[0]; 
-		Assert.assertArrayEquals(emptyArray, occ.getRequiredTokens());
+		assertArrayEquals(emptyArray, occ.getRequiredTokens());
 	}
 
 	@Test
 	void testGetOperatorCount() {
-		Assert.assertEquals(0, occ.getOperatorCount());
+		assertEquals(0, occ.getOperatorCount());
 	}
 
 	@Test
 	void testGetUniqueOperatorCount() {
-		Assert.assertEquals(0, occ.getUniqueOperatorCount());
+		assertEquals(0, occ.getUniqueOperatorCount());
 	}
 
 	@Test
@@ -54,21 +53,20 @@ class OperatorCountCheckTest {
 		when(detailASTMock.getType()).thenReturn(TokenTypes.ASSIGN);
 		occMock.visitToken(detailASTMock);
 		verify(occMock).visitToken(detailASTMock);
-		Assert.assertEquals(1, occ.getOperatorCount());
-		Assert.assertEquals(1, occ.getUniqueOperatorCount());
+		assertEquals(1, occ.getOperatorCount());
+		assertEquals(1, occ.getUniqueOperatorCount());
 	}
 
 	@Test
 	void testBeginTreeDetailAST() {
-		Assert.assertEquals(0, occ.getOperatorCount());
-		Assert.assertEquals(0, occ.getUniqueOperatorCount());
+		assertEquals(0, occ.getOperatorCount());
+		assertEquals(0, occ.getUniqueOperatorCount());
 	}
 
 	@Test
 	void testFinishTreeDetailAST() {
-
-		Assert.assertEquals(0, occ.getOperatorCount());
-		Assert.assertEquals(0, occ.getUniqueOperatorCount());
+		assertEquals(0, occ.getOperatorCount());
+		assertEquals(0, occ.getUniqueOperatorCount());
 	}
 
 }

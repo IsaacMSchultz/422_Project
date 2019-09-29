@@ -2,7 +2,6 @@ package StructuralMetrics;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
@@ -25,25 +24,25 @@ class OperandCountCheckTest {
 	@Test
 	void testGetDefaultTokens() {
 
-		Assert.assertArrayEquals(expectedArray, occ.getDefaultTokens() );
+		assertArrayEquals(expectedArray, occ.getDefaultTokens() );
 	}
 
 	@Test
 	void testGetAcceptableTokens() {
 
-		Assert.assertArrayEquals(expectedArray, occ.getAcceptableTokens());
+		assertArrayEquals(expectedArray, occ.getAcceptableTokens());
 	}
 
 	@Test
 	void testGetRequiredTokens() {
 		int[] emptyArray = new int[0]; 
-		Assert.assertArrayEquals(emptyArray, occ.getRequiredTokens());
+		assertArrayEquals(emptyArray, occ.getRequiredTokens());
 	}
 
 	@Test
 	void testGetOperandCount() {
 
-		Assert.assertEquals(0, occ.getOperandCount());
+		assertEquals(0, occ.getOperandCount());
 	}
 
 	@Test
@@ -53,20 +52,20 @@ class OperandCountCheckTest {
 		when(detailASTMock.getType()).thenReturn(TokenTypes.NUM_INT);
 		occMock.visitToken(detailASTMock);
 		verify(occMock).visitToken(detailASTMock);
-		Assert.assertEquals(1, occ.getOperandCount());
-		Assert.assertEquals(1, occ.getUniqueOperandCount());
+		assertEquals(1, occ.getOperandCount());
+		assertEquals(1, occ.getUniqueOperandCount());
 	}
 
 	@Test
 	void testBeginTreeDetailAST() {
-		Assert.assertEquals(0, occ.getOperandCount());
-		Assert.assertEquals(0, occ.getUniqueOperandCount());
+		assertEquals(0, occ.getOperandCount());
+		assertEquals(0, occ.getUniqueOperandCount());
 	}
 
 	@Test
 	void testFinishTreeDetailAST() {
-		Assert.assertEquals(0, occ.getOperandCount());
-		Assert.assertEquals(0, occ.getUniqueOperandCount());
+		assertEquals(0, occ.getOperandCount());
+		assertEquals(0, occ.getUniqueOperandCount());
 	}
 
 }
