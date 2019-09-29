@@ -19,7 +19,7 @@ public class CommentsCheck extends AbstractCheck {
 
   @Override
   public int[] getAcceptableTokens() {
-    return new int[] { TokenTypes.COMMENT_CONTENT  };
+    return new int[] { TokenTypes.COMMENT_CONTENT };
   }
   @Override
   public boolean isCommentNodesRequired() {
