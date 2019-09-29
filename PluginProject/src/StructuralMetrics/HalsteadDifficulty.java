@@ -49,7 +49,7 @@ public class HalsteadDifficulty extends AbstractCheck {
 	}
 
 	// Public getter for the halstead length.
-	public int getHalsteadLength() {
+	public int getHalsteadDifficulty() {
 		return halsteadDifficulty;
 	}
 
