@@ -6,9 +6,9 @@ import com.puppycrawl.tools.checkstyle.api.DetailAST;
 //Use these to keep track of the tokens required for children.
 import java.util.ArrayList;
 
-public class HalsteadLength extends AbstractCheck {
+public class HalsteadVocabulary extends AbstractCheck {
 
-	private int halsteadLength;
+	private int halsteadVocabulary;
 
 	private OperandCounter operandCount = new OperandCounter();
 	private OperatorCounter operatorCount = new OperatorCounter();
@@ -41,15 +41,15 @@ public class HalsteadLength extends AbstractCheck {
 		operandCount.finishTree(rootAST);
 		operatorCount.finishTree(rootAST);
 
-		int operands = operandCount.getCount();
-		int operators = operatorCount.getCount();
+		int uniqueOperands = operandCount.getUniqueCount();
+		int uniqueOperators = operatorCount.getUniqueCount();
 
-		halsteadLength = operands + operators;
+		halsteadVocabulary = uniqueOperands + uniqueOperators;
 	}
 
 	// Public getter for the halstead length.
-	public int getHalsteadLength() {
-		return halsteadLength;
+	public int getHalsteadVocabulary() {
+		return halsteadVocabulary;
 	}
 
 	@Override

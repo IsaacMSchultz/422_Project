@@ -41,7 +41,7 @@ public class MaintainabilityIndex extends AbstractCheck {
 	@Override
 	public void finishTree(DetailAST rootAST) {
 		int G = cyclomaticComplexity.getCycles();
-		int V = halsteadVolume.getHalsteadVolume();
+		double V = halsteadVolume.getHalsteadVolume();
 		int LOC = this.getFileContents().getText().size();
 		System.out.println(G); // debug
 		double MI = 171 - 5.2 * log2(V) - 0.23 * G - 16.2 * log2(LOC) + 50;
@@ -67,6 +67,10 @@ public class MaintainabilityIndex extends AbstractCheck {
 	}
 
 	public static double log2(int x) {
+		return (Math.log(x) / Math.log(2));
+	}
+	
+	public static double log2(double x) {
 		return (Math.log(x) / Math.log(2));
 	}
 
