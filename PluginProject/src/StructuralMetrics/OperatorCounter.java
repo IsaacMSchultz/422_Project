@@ -1,21 +1,30 @@
 package StructuralMetrics;
 
+import java.util.HashSet;
+
 import com.puppycrawl.tools.checkstyle.api.*;
 
-public class OperatorCountCheck extends AbstractCheck {
+public class OperatorCounter extends AbstractCheck {
 	int operatorCount = 0;
+	HashSet<String> uniqueOperators = new HashSet<String>(); // Keep a hashset of each operator
 
 	@Override
 	public void beginTree(DetailAST rootAST) {
 		operatorCount = 0; // Reset to 0 when we start a new tree.
+		uniqueOperators = new HashSet<String>();
 	}
 
 	public void visitToken(DetailAST aAST) {
 		operatorCount++;
+		uniqueOperators.add(aAST.getText()); // Assuming the text of the operand is what makes it unique!
 	}
 
 	public int getCount() {
 		return operatorCount;
+	}
+	
+	public int getUniqueCount() {
+		return uniqueOperators.size();
 	}
 
 	@Override
@@ -34,12 +43,12 @@ public class OperatorCountCheck extends AbstractCheck {
 	@Override
 	public int[] getAcceptableTokens() {
 		// TODO Auto-generated method stub
-		return null;
+		return getDefaultTokens();
 	}
 
 	@Override
 	public int[] getRequiredTokens() {
 		// TODO Auto-generated method stub
-		return null;
+		return new int[0];
 	}
 }
