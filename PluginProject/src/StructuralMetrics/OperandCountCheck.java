@@ -8,17 +8,20 @@ public class OperandCountCheck extends AbstractCheck {
 	private static final String CATCH_MSG = "Operand Count: ";
 	private static final String UNIQUE = "Unique Operands: ";
 	
-	private int operandCount;
-	private int nonVariableOperandCount;
+	private int operandCount = 0;
+	private int nonVariableOperandCount = 0 ;
 	
-	private Hashtable variableOperands;
+	private HashSet variableOperands = new HashSet();
 	
 	public int getOperandCount() {
 		return this.operandCount;
 	}
 	
 	public int getUniqueOperandCount() {
-		return this.variableOperands.size()+nonVariableOperandCount;
+		if(this.variableOperands.isEmpty()) {
+			return nonVariableOperandCount;
+		}
+		else return this.variableOperands.size()+nonVariableOperandCount;
 	}
 	
 	
@@ -31,8 +34,8 @@ public class OperandCountCheck extends AbstractCheck {
 		if(inExpression(aAST)) {
 			operandCount++;
 			if(aAST.getType()==TokenTypes.IDENT) {
-				if(!variableOperands.containsKey(aAST.toString())){
-					variableOperands.put(aAST.toString(),1);
+				if(!variableOperands.contains(aAST.toString())){
+					variableOperands.add(aAST.toString());
 				}
 				else nonVariableOperandCount++;		
 			}
@@ -56,7 +59,7 @@ public class OperandCountCheck extends AbstractCheck {
 	@Override
 	public void beginTree(DetailAST rootAST) {
 		operandCount = 0;
-		this.variableOperands = new Hashtable();
+		this.variableOperands = new HashSet();
 	}
 	
 	@Override

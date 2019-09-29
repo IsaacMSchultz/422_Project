@@ -8,15 +8,18 @@ public class OperatorCountCheck extends AbstractCheck{
 	private static final String CATCH_MSG = "Operator Count: ";
 	private static final String UNIQUE_COUNT = "Unique operators: ";
 	
-	private int operatorCount;
-	private Hashtable uniqueOperators;
+	private int operatorCount = 0;
+	private HashSet uniqueOperators = new HashSet();
 	
 	public int getOperatorCount() {
 		return this.operatorCount;
 	}
 	
 	public int getUniqueOperatorCount() {
-		return this.uniqueOperators.size();
+		if(!this.uniqueOperators.isEmpty()) {
+			return this.uniqueOperators.size();
+		}
+		else return 0;
 	}
 	
 	@Override
@@ -28,8 +31,8 @@ public class OperatorCountCheck extends AbstractCheck{
 	public void visitToken(DetailAST aAST) {
 		if(inExpression(aAST)) {
 			operatorCount++;
-			if(!uniqueOperators.containsKey(aAST.toString())){
-				uniqueOperators.put(aAST.toString(),1);
+			if(!uniqueOperators.contains(aAST.toString())){
+				uniqueOperators.add(aAST.toString());
 			}
 		}
 	}
@@ -51,6 +54,7 @@ public class OperatorCountCheck extends AbstractCheck{
 	@Override
 	public void beginTree(DetailAST rootAST) {
 		operatorCount = 0;
+		this.uniqueOperators = new HashSet();
 	}
 	
 	@Override
