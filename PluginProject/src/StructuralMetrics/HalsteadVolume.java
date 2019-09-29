@@ -44,8 +44,7 @@ public class HalsteadVolume extends AbstractCheck {
 		int length = halsteadLength.getHalsteadLength();
 		int vocabulary = halsteadVocabulary.getHalsteadVocabulary();
 
-		// TODO: Implement function that calcuates the halstead volume.
-		// This also needs the total lines of code for the file.
+		System.out.println("length: " + length + " vocab: " + vocabulary);
 		halsteadVolume = length * log2(vocabulary);
 	}
 

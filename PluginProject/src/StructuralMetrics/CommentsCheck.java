@@ -14,6 +14,7 @@ public class CommentsCheck extends AbstractCheck {
   }
   
   public void finishTree(DetailAST rootAST) {	 
+	    log(0, "Comments: {0}", countComments);
   }
 
   @Override
@@ -41,10 +42,6 @@ public class CommentsCheck extends AbstractCheck {
 
   @Override
   public void visitToken(DetailAST ast) {
-	  
 	countComments++;
-    if (countComments > max) {
-    	 log(ast.getLineNo(), "Max num of comments exceeded", max);
-    }
   }
 }

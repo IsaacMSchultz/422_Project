@@ -55,7 +55,6 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
     {
     	currentValue = INITIAL_VALUE; //Make sure to restart the cound each time the check is run.
     	cyclomaticComplexity = 0;
-    	System.out.println("begin cyclomatic");
     }
     
     public int getCycles()

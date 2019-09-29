@@ -43,7 +43,7 @@ public class MaintainabilityIndex extends AbstractCheck {
 		int G = cyclomaticComplexity.getCycles();
 		double V = halsteadVolume.getHalsteadVolume();
 		int LOC = this.getFileContents().getText().size();
-		System.out.println(G); // debug
+		System.out.println("cyclo: " + G + " volume: " + V + " LOC: " + LOC); // debug
 		double MI = 171 - 5.2 * log2(V) - 0.23 * G - 16.2 * log2(LOC) + 50;
 		log(0, "Maintainability index: " + Double.toString(MI));
 	}

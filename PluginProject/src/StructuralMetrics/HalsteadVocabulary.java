@@ -37,10 +37,6 @@ public class HalsteadVocabulary extends AbstractCheck {
 	// This is the function where the halstead volume gets calculated.
 	@Override
 	public void finishTree(DetailAST rootAST) {
-		// Call the begin tree function of each check we depend on.
-		operandCount.finishTree(rootAST);
-		operatorCount.finishTree(rootAST);
-
 		int uniqueOperands = operandCount.getUniqueCount();
 		int uniqueOperators = operatorCount.getUniqueCount();
 

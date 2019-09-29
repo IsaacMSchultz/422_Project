@@ -37,10 +37,6 @@ public class HalsteadLength extends AbstractCheck {
 	// This is the function where the halstead volume gets calculated.
 	@Override
 	public void finishTree(DetailAST rootAST) {
-		// Call the begin tree function of each check we depend on.
-		operandCount.finishTree(rootAST);
-		operatorCount.finishTree(rootAST);
-
 		int operands = operandCount.getCount();
 		int operators = operatorCount.getCount();
 
