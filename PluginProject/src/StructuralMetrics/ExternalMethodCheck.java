@@ -10,34 +10,41 @@ public class ExternalMethodCheck extends AbstractCheck{
 	
 	@Override
 	public int[] getDefaultTokens() {
-		// TODO Auto-generated method stub
 		return new int[] {TokenTypes.METHOD_CALL};
 	}
 
 	@Override
 	public int[] getAcceptableTokens() {
-		// TODO Auto-generated method stub
 		return new int[] {TokenTypes.METHOD_CALL};
 	}
 
 	@Override
 	public int[] getRequiredTokens() {
-		// TODO Auto-generated method stub
 		return new int[0];
 	}
 	
+	//When a method call is found
 	public void visitToken(DetailAST aAST) {
+		//check if the next token is a dot
 		if(aAST.findFirstToken(TokenTypes.DOT) != null) {
+			//the next token is a dot which means this is a external method call.
 			extMethodCount++;	
 		}
 	}
 	
+	//calls begin tree to initialize count variable
 	public void beginTree(DetailAST rootAST) {
 		extMethodCount = 0;
 	}
 	
+	//logs the external method count
 	public void finishTree(DetailAST rootAST) {
 		log(rootAST, CATCH_MSG + extMethodCount);
+	}  
+	
+	//returns the external method count
+	public int getCount() {
+		return extMethodCount;
 	}
 
 }
