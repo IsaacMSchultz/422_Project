@@ -14,7 +14,8 @@ public class MaxNumLoopsCheck extends AbstractCheck
 	  loopCount = 0;
   }
   
-  public void finishTree(DetailAST rootAST) {	  
+  public void finishTree(DetailAST rootAST) {
+	  log(0, "Number of loops: {0}. Max number of loops exceeded", loopCount);
   }
 
   @Override
@@ -30,13 +31,14 @@ public class MaxNumLoopsCheck extends AbstractCheck
   public int[] getRequiredTokens() {
       return new int[] {
           TokenTypes.LITERAL_FOR,
-          TokenTypes.LITERAL_WHILE,          
+          TokenTypes.LITERAL_WHILE,
+          TokenTypes.LITERAL_DO,
       };
   }
 
   @Override
   public int[] getDefaultTokens() {
-    return new int[] { TokenTypes.LITERAL_FOR, TokenTypes.LITERAL_WHILE };
+    return new int[] { TokenTypes.LITERAL_FOR, TokenTypes.LITERAL_WHILE, TokenTypes.LITERAL_DO };
   }
 
   public void setMax(int limit) {
@@ -50,19 +52,14 @@ public class MaxNumLoopsCheck extends AbstractCheck
 	{
 	case TokenTypes.LITERAL_FOR:
 		loopCount++;
-		if (loopCount > max) 
-		{
-	   	 log(ast.getLineNo(), "Max number of loops exceeded", max);
-		}
 		break;
 		
 	case TokenTypes.LITERAL_WHILE:
+		loopCount++;		
+		break;
+		
+	case TokenTypes.LITERAL_DO:
 		loopCount++;
-		loopCount += ast.getChildCount();
-		if (loopCount > max) 
-		{
-	   	 log(ast.getLineNo(), "Max number of loops exceeded", max);
-		}
 		break;
 	}
   }
