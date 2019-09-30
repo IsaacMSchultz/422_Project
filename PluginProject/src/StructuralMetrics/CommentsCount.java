@@ -4,7 +4,7 @@ import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 
-public class CommentsCheck extends AbstractCheck {
+public class CommentsCount extends AbstractCheck {
 
   private int max = 30; 
   int countComments;

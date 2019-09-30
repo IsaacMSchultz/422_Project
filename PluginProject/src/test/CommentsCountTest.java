@@ -18,14 +18,16 @@ import static org.mockito.Mockito.*;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
-import StructuralMetrics.CommentsCheck;
+import StructuralMetrics.CommentsCount;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(DetailAST.class)
 public class CommentsCountTest {
 	int[] expectedTokens = { TokenTypes.COMMENT_CONTENT };
 
 	@Test
 	public void testBeginTree() {
-		CommentsCheck test = new CommentsCheck();
+		CommentsCount test = new CommentsCount();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast);
@@ -34,21 +36,21 @@ public class CommentsCountTest {
 
 	@Test
 	public void testGetDefaultTokens() {
-		CommentsCheck test = new CommentsCheck();
+		CommentsCount test = new CommentsCount();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		CommentsCheck test = new CommentsCheck();
+		CommentsCount test = new CommentsCount();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		CommentsCheck test = new CommentsCheck();
+		CommentsCount test = new CommentsCount();
 
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
@@ -58,8 +60,8 @@ public class CommentsCountTest {
 	// do.
 	// AAA = Arrange, Act, Assert
 	@Test
-	public void testCountCommentsCheck() {
-		CommentsCheck test = new CommentsCheck();
+	public void testCountCommentsCount() {
+		CommentsCount test = new CommentsCount();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -69,8 +71,6 @@ public class CommentsCountTest {
 
 		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
 		test.visitToken(ast);
-
-		test.finishTree(ast);
 
 		assertEquals(2, test.getCountComments());
 	}

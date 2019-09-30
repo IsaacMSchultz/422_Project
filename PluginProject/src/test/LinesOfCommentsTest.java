@@ -20,52 +20,51 @@ import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import StructuralMetrics.LinesOfCommentsCheck;
 
-public class LinesOfCommentsTest 
-{
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(DetailAST.class)
+public class LinesOfCommentsTest {
 	int[] expectedTokens = { TokenTypes.SINGLE_LINE_COMMENT, TokenTypes.BLOCK_COMMENT_BEGIN };
-	
+
 	@Test
-    public void testGetDefaultTokens() {
-        LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+	public void testGetDefaultTokens() {
+		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
 
-        assertArrayEquals(expectedTokens, test.getDefaultTokens());
-    }
+		assertArrayEquals(expectedTokens, test.getDefaultTokens());
+	}
 
-    @Test
-    public void testGetAcceptableTokens() {
-    	LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+	@Test
+	public void testGetAcceptableTokens() {
+		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
 
-        assertArrayEquals(expectedTokens, test.getAcceptableTokens());
-    }
+		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
+	}
 
-    @Test
-    public void testGetRequiredTokens() {
-    	LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+	@Test
+	public void testGetRequiredTokens() {
+		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
 
-        assertArrayEquals(expectedTokens, test.getRequiredTokens());
-    }
-    
-    @Test
-    public void testCountCommentsCheck() {
-    	LinesOfCommentsCheck test = new LinesOfCommentsCheck();
-        DetailAST ast = PowerMockito.mock(DetailAST.class);
-        
-        test.beginTree(ast); //begin the tree
-        
-        assertEquals(0, test.getLines());
-        
-        doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType(); //operand        
-        test.visitToken(ast);
-        
-        assertEquals(1, test.getLines());
-        
-        doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType(); //operator    
-        test.visitToken(ast);
-        
-        assertEquals(2, test.getLines());
-        
-        test.finishTree(ast);
-        
-        
-    }
+		assertArrayEquals(expectedTokens, test.getRequiredTokens());
+	}
+
+	@Test
+	public void testCountCommentsCheck() {
+		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		test.beginTree(ast); // begin the tree
+
+		assertEquals(0, test.getLines());
+
+		doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType(); // operand
+		test.visitToken(ast);
+
+		assertEquals(1, test.getLines());
+
+		doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType(); // operator
+		test.visitToken(ast);
+
+		assertEquals(2, test.getLines());
+
+		test.finishTree(ast);
+	}
 }
