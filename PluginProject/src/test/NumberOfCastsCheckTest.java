@@ -70,12 +70,12 @@ public class NumberOfCastsCheckTest {
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.TYPECAST).when(ast).getType(); // operand
-		for (int i = 0; i > 20; i++) { // do 20 operators
+		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
 
 		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
-		for (int i = 0; i > 20; i++) { // do 20 operators
+		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
 
