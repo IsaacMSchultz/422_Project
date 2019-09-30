@@ -9,34 +9,38 @@ public class ExpressionCountCheck extends AbstractCheck {
 	
 	@Override
 	public int[] getDefaultTokens() {
-		// TODO Auto-generated method stub
 		return new int[] {TokenTypes.EXPR}; 
 	}
 
 	@Override
 	public int[] getAcceptableTokens() {
-		// TODO Auto-generated method stub
 		return new int[] {TokenTypes.EXPR}; 
 	}
-	
+  
+	//increments the expression count
 	@Override
 	public void visitToken(DetailAST aAST) {
 		++expressionCount;
-		
 	}
 
 	@Override
 	public int[] getRequiredTokens() {
-		// TODO Auto-generated method stub
 		return new int[0];
 	}
 	
+	//calls begin tree to initialize count variable
 	public void beginTree(DetailAST rootAST) {
 		expressionCount = 0;
 	}
 	
+	//logs the expression count
 	public void finishTree(DetailAST rootAST) {
 		log(rootAST, CATCH_MSG + expressionCount);
+	}
+	
+	//returns the expression count 
+	public int getCount() {
+		return expressionCount;
 	}
 
 }
