@@ -77,7 +77,7 @@ public class HalsteadLengthTest {
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
-		for (int i = 0; i > 20; i++) { // do 20 operands
+		for (int i = 0; i < 20; i++) { // do 20 operands
 			test.visitToken(ast);
 		}
 
@@ -101,7 +101,7 @@ public class HalsteadLengthTest {
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
-		for (int i = 0; i > 20; i++) { // do 20 operators
+		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
 
@@ -118,12 +118,12 @@ public class HalsteadLengthTest {
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand 1
-		for (int i = 0; i > 20; i++) { // do 20 operands
+		for (int i = 0; i < 20; i++) { // do 20 operands
 			test.visitToken(ast);
 		}
 
 		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator 1
-		for (int i = 0; i > 20; i++) { // do 20 operators
+		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
 
