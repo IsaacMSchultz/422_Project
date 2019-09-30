@@ -47,25 +47,109 @@ public class HalsteadEffortTest {
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
 
-	//This is the function that we will be doing all of our tests from, since all the others require mocking private fields thta we have not yet learned how to do.
+	// This is the function that we will be doing all of our tests from, since all
+	// the others require mocking private fields thta we have not yet learned how to
+	// do.
 	// AAA = Arrange, Act, Assert
 	@Test
-	public void testGetHalsteadEffort() {
+	public void testGetHalsteadEffort1() {
 		HalsteadEffort test = new HalsteadEffort();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		test.beginTree(ast); // begin the tree
+
+		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
+		test.visitToken(ast);
+
+		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
+		test.visitToken(ast);
+
+		test.finishTree(ast);
+
+		assertEquals(3, test.getHalsteadEffort(), 0.1);
+	}
+
+	@Test
+	public void testGetHalsteadEffort2() {
+		HalsteadEffort test = new HalsteadEffort();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		test.beginTree(ast); // begin the tree
+
+		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
+		for (int i = 0; i > 20; i++) { // do 20 operands
+			test.visitToken(ast);
+		}
+
+		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
+		test.visitToken(ast);
+
+		test.finishTree(ast);
+
+		assertEquals(430.5, test.getHalsteadEffort(), 0.1);
+	}
+
+	@Test
+	public void testGetHalsteadEffort3() {
+		HalsteadEffort test = new HalsteadEffort();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		test.beginTree(ast); // begin the tree
+
+		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
+
+		test.visitToken(ast);
+
+		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
+		for (int i = 0; i > 20; i++) { // do 20 operators
+			test.visitToken(ast);
+		}
+
+		test.finishTree(ast);
+
+		assertEquals(430.5, test.getHalsteadEffort(), 0.1);
+	}
+	
+	@Test
+	public void testGetHalsteadEffort4() {
+		HalsteadEffort test = new HalsteadEffort();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		test.beginTree(ast); // begin the tree
+
+		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand 1
+		for (int i = 0; i > 20; i++) { // do 20 operands
+			test.visitToken(ast);
+		}
+
+		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator 1
+		for (int i = 0; i > 20; i++) { // do 20 operators
+			test.visitToken(ast);
+		}
 		
-		test.beginTree(ast); //begin the tree
+		// Now lets get some more unique operators and operands in there.
 		
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); //operand		
+		doReturn(TokenTypes.IDENT).when(ast).getType(); // operand 2
 		test.visitToken(ast);
 		
-		doReturn(TokenTypes.LNOT).when(ast).getType(); //operator	
+		doReturn(TokenTypes.NUM_INT).when(ast).getType(); // operand 3
+		test.visitToken(ast);
+		
+		doReturn(TokenTypes.DEC).when(ast).getType(); // operator 2
+		test.visitToken(ast);
+		 
+		doReturn(TokenTypes.LOR).when(ast).getType(); // operator 3 
+		test.visitToken(ast);
+		
+		doReturn(TokenTypes.PLUS).when(ast).getType(); // operator 4
+		test.visitToken(ast);
+		
+		doReturn(TokenTypes.COMMA).when(ast).getType(); // operator 5
 		test.visitToken(ast);
 		
 		test.finishTree(ast);
-		
-		assertEquals(3, test.getHalsteadEffort(), 0.1);
-		
-	}
 
+		//https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
+		assertEquals(1357, test.getHalsteadEffort(), 0.1);
+	}
 }
