@@ -1,4 +1,4 @@
-package StructuralMetrics;
+package test;
 
 import org.junit.Assert;
 import org.junit.After;
@@ -18,6 +18,7 @@ import static org.mockito.Mockito.*;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
+import StructuralMetrics.LinesOfCommentsCheck;
 
 public class LinesOfCommentsTest 
 {

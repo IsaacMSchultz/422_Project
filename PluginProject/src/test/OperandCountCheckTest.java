@@ -1,4 +1,4 @@
-package StructuralMetrics;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,6 +8,7 @@ import static org.mockito.Mockito.*;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
+import StructuralMetrics.OperandCountCheck;
 
 class OperandCountCheckTest {
 
