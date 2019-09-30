@@ -66,6 +66,7 @@ public class HalsteadEffortTest {
 
 		test.finishTree(ast);
 
+		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
 		assertEquals(3, test.getHalsteadEffort(), 0.1);
 	}
 
@@ -86,6 +87,7 @@ public class HalsteadEffortTest {
 
 		test.finishTree(ast);
 
+		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
 		assertEquals(430.5, test.getHalsteadEffort(), 0.1);
 	}
 
@@ -107,9 +109,10 @@ public class HalsteadEffortTest {
 
 		test.finishTree(ast);
 
+		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
 		assertEquals(430.5, test.getHalsteadEffort(), 0.1);
 	}
-	
+
 	@Test
 	public void testGetHalsteadEffort4() {
 		HalsteadEffort test = new HalsteadEffort();
@@ -126,30 +129,30 @@ public class HalsteadEffortTest {
 		for (int i = 0; i > 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
-		
+
 		// Now lets get some more unique operators and operands in there.
-		
+
 		doReturn(TokenTypes.IDENT).when(ast).getType(); // operand 2
 		test.visitToken(ast);
-		
+
 		doReturn(TokenTypes.NUM_INT).when(ast).getType(); // operand 3
 		test.visitToken(ast);
-		
+
 		doReturn(TokenTypes.DEC).when(ast).getType(); // operator 2
 		test.visitToken(ast);
-		 
-		doReturn(TokenTypes.LOR).when(ast).getType(); // operator 3 
+
+		doReturn(TokenTypes.LOR).when(ast).getType(); // operator 3
 		test.visitToken(ast);
-		
+
 		doReturn(TokenTypes.PLUS).when(ast).getType(); // operator 4
 		test.visitToken(ast);
-		
+
 		doReturn(TokenTypes.COMMA).when(ast).getType(); // operator 5
 		test.visitToken(ast);
-		
+
 		test.finishTree(ast);
 
-		//https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
+		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
 		assertEquals(1357, test.getHalsteadEffort(), 0.1);
 	}
 }
