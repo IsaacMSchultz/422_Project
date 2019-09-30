@@ -56,8 +56,6 @@ public class NumberOfCastsCheckTest {
 		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
 		test.visitToken(ast);
 
-		test.finishTree(ast);
-
 		// (operators  +operands) * log2(unique operators + unique operands)
 		assertEquals(1, test.getCasts());
 	}
@@ -78,9 +76,7 @@ public class NumberOfCastsCheckTest {
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
-
-		test.finishTree(ast);
-
+		
 		// (operators  +operands) * log2(unique operators + unique operands)
 		assertEquals(20, test.getCasts());
 	}
