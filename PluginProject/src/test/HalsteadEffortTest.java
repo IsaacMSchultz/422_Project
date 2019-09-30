@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -27,11 +28,8 @@ import StructuralMetrics.HalsteadDifficulty;
 import StructuralMetrics.HalsteadVolume;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(HalsteadEffort.class)
+@PrepareForTest(DetailAST.class)
 public class HalsteadEffortTest {
-
-	int[] halfArray1 = { 0, 1 }, halfArray2 = { 2, 3 };
-	int[] fullArray = { 0, 1, 2, 3 };
 
 	int[] expectedTokens = { TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC,
 			TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS, TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN,
@@ -43,75 +41,46 @@ public class HalsteadEffortTest {
 			TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR, TokenTypes.QUESTION,
 			TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG };
 
-	// We want to mock the functions called on the classes that the tested class
-	// depends on.
-	private static final HalsteadVolume hv = mock(HalsteadVolume.class);
-	private static final HalsteadDifficulty hd = mock(HalsteadDifficulty.class);
+	@Test
+	public void testGetDefaultTokens() {
+		HalsteadEffort test = new HalsteadEffort();
 
-	// Set known output to simplify the results of the tests
-	@Before
-	public void setupTests() {
-		when(hv.getDefaultTokens()).thenReturn(halfArray1);
-		when(hv.getAcceptableTokens()).thenReturn(halfArray1);
-//		when(hv.getRequiredTokens()).thenReturn(halfArray1);
-
-		when(hd.getDefaultTokens()).thenReturn(halfArray2);
-		when(hd.getAcceptableTokens()).thenReturn(halfArray2);
-//		when(hd.getRequiredTokens()).thenReturn(halfArray2);
+		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
-	public void testGetDefaultTokens() {
-		HalsteadEffort spy = PowerMockito.spy(new HalsteadEffort());
-		
-		when(spy, 
+	public void testGetAcceptableTokens() {
+		HalsteadEffort test = new HalsteadEffort();
 
-		assertArrayEquals(fullArray, test.getDefaultTokens());
+		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
-//	@Test
-//	public void testGetAcceptableTokens() {
-//		//HalsteadEffort test = new HalsteadEffort();
-//
-//		doReturn(halfArray1).when(hdMock.getAcceptableTokens());
-//		doReturn(halfArray2).when(hvMock.getAcceptableTokens());
-//
-//		assertArrayEquals(injectedTest.getAcceptableTokens(), fullArray);
-//	}
-//
-//	@Test
-//	public void testGetRequiredTokens() {
-//		//HalsteadEffort test = new HalsteadEffort();
-//
-//		doReturn(halfArray1).when(hdMock.getRequiredTokens());
-//		doReturn(halfArray2).when(hvMock.getRequiredTokens());
-//
-//		assertArrayEquals(injectedTest.getRequiredTokens(), fullArray);
-//	}
-//
-//// Does this need to be tested? If so how will it be done since the only things that change are in the depended classes!
-////	@Test
-////	public void testBeginTreeDetailAST() {
-////		fail("Not yet implemented");
-////	}
-//
-////	@Test
-////	public void testVisitTokenDetailAST() {
-////		//HalsteadEffort testSpy = spy(new HalsteadEffort());
-////		
-////		doReturn(true).when(arrList.contains(ast)); //always return true when checking if something is contained within an arrayList
-////		
-////		injectedTest.visitToken(ast);
-////	}
-//
-//	@Test
-//	 public void testFinishTreeDetailAST() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetHalsteadEffort() {
-//		fail("Not yet implemented");
-//	}
+	@Test
+	public void testGetRequiredTokens() {
+		HalsteadEffort test = new HalsteadEffort();
+
+		assertArrayEquals(expectedTokens, test.getRequiredTokens());
+	}
+
+	//This is the function that we will be doing all of our tests from, since all the others require mocking private fields thta we have not yet learned how to do.
+	// AAA = Arrange, Act, Assert
+	@Test
+	public void testGetHalsteadEffort() {
+		HalsteadEffort test = new HalsteadEffort();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		
+		test.beginTree(ast); //begin the tree
+		
+		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); //operand		
+		test.visitToken(ast);
+		
+		doReturn(TokenTypes.LNOT).when(ast).getType(); //operator	
+		test.visitToken(ast);
+		
+		test.finishTree(ast);
+		
+		assertEquals(3, test.getHalsteadEffort(), 0.1);
+		
+	}
 
 }

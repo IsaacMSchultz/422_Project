@@ -23,7 +23,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-
+import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import StructuralMetrics.HalsteadLength;
 import StructuralMetrics.OperandCounter;
 import StructuralMetrics.OperatorCounter;
