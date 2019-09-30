@@ -52,17 +52,17 @@ public class LinesOfCommentsTest
         
         test.beginTree(ast); //begin the tree
         
-        assertEquals(0, test.getLineCount());
+        assertEquals(0, test.getLines());
         
         doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType(); //operand        
         test.visitToken(ast);
         
-        assertEquals(1, test.getLineCount());
+        assertEquals(1, test.getLines());
         
         doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType(); //operator    
         test.visitToken(ast);
         
-        assertEquals(2, test.getLineCount());
+        assertEquals(2, test.getLines());
         
         test.finishTree(ast);
         
