@@ -14,7 +14,8 @@ public class LinesOfCommentsCheck extends AbstractCheck
 	  lineCount = 0;
   }
   
-  public void finishTree(DetailAST rootAST) {	  
+  public void finishTree(DetailAST rootAST) {
+	  log(0, "Number of comment lines: {0}. Max number of comments lines exceeded", lineCount);
   }
 
   @Override
@@ -49,20 +50,12 @@ public class LinesOfCommentsCheck extends AbstractCheck
 	switch (ast.getType())
 	{
 	case TokenTypes.SINGLE_LINE_COMMENT:
-		lineCount++;
-		if (lineCount > max) 
-		{
-	   	 log(ast.getLineNo(), "Max line of comments exceeded", max);
-		}
+		lineCount++;		
 		break;
 		
 	case TokenTypes.BLOCK_COMMENT_BEGIN:
 		lineCount++;
-		lineCount += ast.getChildCount();
-		if (lineCount > max) 
-		{
-	   	 log(ast.getLineNo(), "Max line of comments exceeded", max);
-		}
+		lineCount += ast.getChildCount();		
 		break;
 	}
   }
