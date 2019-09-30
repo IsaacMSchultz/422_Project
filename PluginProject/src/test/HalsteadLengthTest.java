@@ -66,7 +66,6 @@ public class HalsteadLengthTest {
 
 		test.finishTree(ast);
 
-		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
 		assertEquals(2, test.getHalsteadLength());
 	}
 
@@ -87,7 +86,6 @@ public class HalsteadLengthTest {
 
 		test.finishTree(ast);
 
-		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
 		assertEquals(21, test.getHalsteadLength());
 	}
 
@@ -109,7 +107,6 @@ public class HalsteadLengthTest {
 
 		test.finishTree(ast);
 
-		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
 		assertEquals(21, test.getHalsteadLength());
 	}
 
@@ -152,7 +149,6 @@ public class HalsteadLengthTest {
 
 		test.finishTree(ast);
 
-		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
 		assertEquals(46, test.getHalsteadLength());
 	}
 }
