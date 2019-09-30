@@ -61,6 +61,7 @@ public class HalsteadEffort extends AbstractCheck {
 
 	@Override
 	public int[] getDefaultTokens() {
+		System.out.println("1: " + halsteadDifficulty.getDefaultTokens().length + ", 2: " + halsteadVolume.getDefaultTokens().length + ", 3: " + ArrayConcatenator.concatArray(halsteadDifficulty.getDefaultTokens(), halsteadVolume.getDefaultTokens()).length);
 		return ArrayConcatenator.concatArray(halsteadDifficulty.getDefaultTokens(), halsteadVolume.getDefaultTokens());
 	}
 
