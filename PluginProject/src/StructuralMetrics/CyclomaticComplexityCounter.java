@@ -1,5 +1,4 @@
 package StructuralMetrics;
-
 import java.math.BigInteger;
 import java.util.ArrayDeque;
 import java.util.Deque;
