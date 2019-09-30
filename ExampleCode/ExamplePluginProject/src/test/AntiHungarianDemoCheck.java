@@ -1,4 +1,4 @@
-package StructuralMetrics;
+package test;
  
 import com.puppycrawl.tools.checkstyle.api.*;
 import java.util.regex.Pattern;
@@ -61,7 +61,7 @@ public class AntiHungarianDemoCheck extends AbstractCheck {
 
 class HungarianNotationMemberDetector {
  
-    private Pattern pattern = Pattern.compile("m[A-Z0-9].*"); //Checks for anything that starts with m
+    private Pattern pattern = Pattern.compile("m[A-Z0-9].*");
  
     public boolean detectsNotation(String variableName) {
     	System.out.println("HungarianNotationMemberDetector");
