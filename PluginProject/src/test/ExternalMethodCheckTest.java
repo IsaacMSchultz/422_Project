@@ -1,4 +1,4 @@
-package StructuralMetrics;
+package test;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;
@@ -11,6 +11,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
+import StructuralMetrics.ExternalMethodCheck;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({DetailAST.class})

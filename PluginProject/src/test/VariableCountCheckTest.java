@@ -1,4 +1,4 @@
-package StructuralMetrics;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +10,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
+import StructuralMetrics.VariableCountCheck;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({DetailAST.class})
