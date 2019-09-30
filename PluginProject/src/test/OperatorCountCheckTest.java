@@ -19,7 +19,7 @@ class OperatorCountCheckTest {
 	DetailAST detailASTMock;
 	
 	@Mock
-	OperandCountCheck occMock;
+	OperatorCountCheck occMock;
 	
 	@Test
 	void testGetDefaultTokens() {
@@ -64,6 +64,7 @@ class OperatorCountCheckTest {
 		assertEquals(0, occ.getUniqueOperatorCount());
 	}
 
+	 
 	@Test
 	void testFinishTreeDetailAST() {
 		assertEquals(0, occ.getOperatorCount());
