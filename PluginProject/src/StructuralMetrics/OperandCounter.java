@@ -24,7 +24,7 @@ public class OperandCounter extends AbstractCheck {
 
 	@Override
 	public void finishTree(DetailAST rootAST) {
-		log(0, "There are {0} unique operators that appear {1} times.", uniqueOperands.size(), operandCount);
+		log(0, "There are {0} unique operands that appear {1} times.", uniqueOperands.size(), operandCount);
 	}
 
 	// Public getter for the operand count

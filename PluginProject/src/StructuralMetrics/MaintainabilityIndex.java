@@ -7,6 +7,8 @@ import java.lang.Math;
 import java.util.ArrayList;
 
 public class MaintainabilityIndex extends AbstractCheck {
+	
+	double MaintainabilityIndex = 0;
 
 	private CyclomaticComplexityCounter cyclomaticComplexity = new CyclomaticComplexityCounter();
 	private HalsteadVolume halsteadVolume = new HalsteadVolume();
@@ -19,6 +21,7 @@ public class MaintainabilityIndex extends AbstractCheck {
 	public void beginTree(DetailAST rootAST) {
 		cyclomaticComplexity.beginTree(rootAST);
 		halsteadVolume.beginTree(rootAST);
+		MaintainabilityIndex = 0;
 	}
 
 	@Override
@@ -43,12 +46,31 @@ public class MaintainabilityIndex extends AbstractCheck {
 		// Call the finish tree function on the checks we depend on
 		halsteadVolume.finishTree(rootAST); 
 		
-		int G = cyclomaticComplexity.getCycles();
+		int G = getCyclomaticComplexity();
 		double V = halsteadVolume.getHalsteadVolume();
-		int LOC = this.getFileContents().getText().size();
+		int LOC = getLOC();
 		System.out.println("cyclo: " + G + " volume: " + V + " LOC: " + LOC); // debug
-		double MI = 171 - 5.2 * log2(V) - 0.23 * G - 16.2 * log2(LOC) + 50;
-		log(0, "Maintainability index: " + Double.toString(MI));
+		MaintainabilityIndex = 171 - 5.2 * log2(V) - 0.23 * G - 16.2 * log2(LOC) + 50;
+		
+		try {
+			log(0, "Maintainability index: " + Double.toString(MaintainabilityIndex));
+		}
+		catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
+		
+	}
+	
+	private int getCyclomaticComplexity() { //Using this function since trying to mock private fields' functions is really difficult.
+		return cyclomaticComplexity.getCycles();
+	}
+	
+	private int getLOC() { //Using this function since trying to mock private fields' functions is really difficult.
+		return this.getFileContents().getText().size();
+	}
+	
+	public double getMaintainabilityIndex() {
+		return MaintainabilityIndex;
 	}
 
 	@Override

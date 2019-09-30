@@ -18,6 +18,11 @@ public class OperatorCounter extends AbstractCheck {
 		operatorCount++;
 		uniqueOperators.add(aAST.getText()); // Assuming the text of the operand is what makes it unique!
 	}
+	
+	@Override
+	public void finishTree(DetailAST rootAST) {
+		log(0, "There are {0} unique operators that appear {1} times.", uniqueOperators.size(), operatorCount);
+	}
 
 	public int getCount() {
 		return operatorCount;
