@@ -3,12 +3,18 @@
 "-//eclipse-cs//DTD Check Metadata 1.1//EN"
 "http://eclipse-cs.sourceforge.net/dtds/checkstyle-metadata_1_1.dtd">
 <checkstyle-metadata>
-    <rule-group-metadata name="My custom checks"  priority="1600">
-       <description>%test.desc</description>
+    <rule-group-metadata name="Plugin Project"  priority="1600">
+       <description>%testPlugin.desc</description>
+
 
         <rule-metadata name="AntiHungarianDemoCheck" internal-name="AntiHungarianDemoCheck" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.AntiHungarianDemoCheck" />
             <description>%AntiHungarianDemoCheck.desc</description>
+
+        <rule-metadata name="CyclomaticComplexityCounter" internal-name="CyclomaticComplexityCounter" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.CyclomaticComplexityCounter" />
+            <description>%ACyclomaticComplexity.desc</description>
+
         </rule-metadata>
         
         <rule-metadata name="VariableCountCheck" internal-name="VariableCountCheck" parent="TreeWalker">
@@ -21,6 +27,7 @@
             <description>%ExpressionCountCheck.desc</description>
         </rule-metadata>
         
+
         <rule-metadata name="LocalMethodCheck" internal-name="LocalMethodCheck" parent="TreeWalker">
             <alternative-name internal-name="StructuralMetrics.LocalMethodCheck" />
             <description>%LocalMethodCheck.desc</description>
@@ -32,5 +39,20 @@
         </rule-metadata>
         
         
+
+        <rule-metadata name="NumberOfCastsCheck" internal-name="NumberOfCastsCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.NumberOfCastsCheck" />
+            <description>%NumberOfCasts.desc</description>
+        </rule-metadata>
+
+        <rule-metadata name="Comments" internal-name="Comments" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.CommentsCheck" />
+            <description>%Comments.desc</description>
+             <property-metadata name="max" datatype="Integer" default-value="30">
+                <description>The maximum number of allowed comments.</description>
+            </property-metadata>
+        </rule-metadata>
+        
+
     </rule-group-metadata>
 </checkstyle-metadata>

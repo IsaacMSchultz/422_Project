@@ -1,5 +1,6 @@
 package StructuralMetrics;
 
+
 import com.puppycrawl.tools.checkstyle.api.*;
 
 public class VariableCountCheck extends AbstractCheck{
