@@ -1,3 +1,6 @@
+/*
+* Description: Counts the number of local methods in a given test file.
+*/
 package StructuralMetrics;
 
 
