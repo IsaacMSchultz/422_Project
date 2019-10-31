@@ -1,3 +1,7 @@
+/*
+* Description: This class tests if the external method check
+* accurately checks the number of external methods. 
+*/
 package test;
 
 import static org.junit.Assert.*;

@@ -1,3 +1,7 @@
+/*
+* Description: This class tests if the expression count check 
+* accurately checks the number of expressions.
+*/
 package test;
 
 import static org.junit.Assert.*;

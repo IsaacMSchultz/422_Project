@@ -1,3 +1,7 @@
+/* 
+* Description: This class tests if the variable count check
+* is accurately counting the variables in a file. 
+*/
 package test;
 
 import static org.junit.Assert.*;

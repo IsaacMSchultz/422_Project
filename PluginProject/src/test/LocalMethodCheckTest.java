@@ -1,3 +1,7 @@
+/*
+* Description: This class tests if the local method check
+* accurately counts the local methods
+*/
 package test;
 
 import static org.junit.Assert.*;
