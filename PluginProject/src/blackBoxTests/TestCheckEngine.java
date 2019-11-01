@@ -19,6 +19,7 @@ import com.puppycrawl.tools.checkstyle.api.FileText;
 import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 import com.puppycrawl.tools.checkstyle.DefaultContext;
 import com.puppycrawl.tools.checkstyle.JavaParser;
+import com.puppycrawl.tools.checkstyle.JavaParser.Options;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
@@ -62,9 +63,16 @@ public class TestCheckEngine {
 	// Using the base filePath, this function creates a detailASTree by parsing the file passed in fileName
 	public DetailAST buildAST(String fileName) throws IOException, CheckstyleException {
 		File f = new File(fileName);
-		FileText ft = new FileText(f, "UTF-8");
-		FileContents fc = new FileContents(ft);
-		return JavaParser.parse(fc);
+		DetailAST root;
+		
+		if (check.isCommentNodesRequired()) {
+			root = JavaParser.parseFile(f, Options.WITH_COMMENTS);
+		} else {
+			FileText ft = new FileText(f, "UTF-8");
+			FileContents fc = new FileContents(ft);
+			root = JavaParser.parse(fc);
+		}
+		return root;
 	}
 	
 	//Execute the check on the tree
