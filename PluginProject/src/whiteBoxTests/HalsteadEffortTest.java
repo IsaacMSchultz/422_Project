@@ -1,4 +1,4 @@
-package test;
+package whiteBoxTests;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -10,11 +10,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
-import StructuralMetrics.HalsteadLength;
+import StructuralMetrics.HalsteadEffort;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DetailAST.class)
-public class HalsteadLengthTest {
+public class HalsteadEffortTest {
 
 	int[] expectedTokens = { TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC,
 			TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS, TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN,
@@ -28,21 +28,21 @@ public class HalsteadLengthTest {
 
 	@Test
 	public void testGetDefaultTokens() {
-		HalsteadLength test = new HalsteadLength();
+		HalsteadEffort test = new HalsteadEffort();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		HalsteadLength test = new HalsteadLength();
+		HalsteadEffort test = new HalsteadEffort();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		HalsteadLength test = new HalsteadLength();
+		HalsteadEffort test = new HalsteadEffort();
 
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
@@ -52,8 +52,8 @@ public class HalsteadLengthTest {
 	// do.
 	// AAA = Arrange, Act, Assert
 	@Test
-	public void testGetHalsteadLength1() {
-		HalsteadLength test = new HalsteadLength();
+	public void testGetHalsteadEffort1() {
+		HalsteadEffort test = new HalsteadEffort();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -66,12 +66,13 @@ public class HalsteadLengthTest {
 
 		test.finishTree(ast);
 
-		assertEquals(2, test.getHalsteadLength());
+		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
+		assertEquals(3, test.getHalsteadEffort(), 0.1);
 	}
 
 	@Test
-	public void testGetHalsteadLength2() {
-		HalsteadLength test = new HalsteadLength();
+	public void testGetHalsteadEffort2() {
+		HalsteadEffort test = new HalsteadEffort();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -86,12 +87,13 @@ public class HalsteadLengthTest {
 
 		test.finishTree(ast);
 
-		assertEquals(21, test.getHalsteadLength());
+		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
+		assertEquals(430.5, test.getHalsteadEffort(), 0.1);
 	}
 
 	@Test
-	public void testGetHalsteadLength3() {
-		HalsteadLength test = new HalsteadLength();
+	public void testGetHalsteadEffort3() {
+		HalsteadEffort test = new HalsteadEffort();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -107,12 +109,13 @@ public class HalsteadLengthTest {
 
 		test.finishTree(ast);
 
-		assertEquals(21, test.getHalsteadLength());
+		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
+		assertEquals(430.5, test.getHalsteadEffort(), 0.1);
 	}
 
 	@Test
-	public void testGetHalsteadLength4() {
-		HalsteadLength test = new HalsteadLength();
+	public void testGetHalsteadEffort4() {
+		HalsteadEffort test = new HalsteadEffort();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -149,6 +152,7 @@ public class HalsteadLengthTest {
 
 		test.finishTree(ast);
 
-		assertEquals(46, test.getHalsteadLength());
+		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
+		assertEquals(1357, test.getHalsteadEffort(), 0.1);
 	}
 }

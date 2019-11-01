@@ -1,4 +1,4 @@
-package test;
+package whiteBoxTests;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -10,11 +10,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
-import StructuralMetrics.HalsteadVocabulary;
+import StructuralMetrics.HalsteadVolume;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DetailAST.class)
-public class HalsteadVocabularyTest {
+public class HalsteadVolumeTest {
 
 	int[] expectedTokens = { TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC,
 			TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS, TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN,
@@ -28,21 +28,21 @@ public class HalsteadVocabularyTest {
 
 	@Test
 	public void testGetDefaultTokens() {
-		HalsteadVocabulary test = new HalsteadVocabulary();
+		HalsteadVolume test = new HalsteadVolume();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		HalsteadVocabulary test = new HalsteadVocabulary();
+		HalsteadVolume test = new HalsteadVolume();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		HalsteadVocabulary test = new HalsteadVocabulary();
+		HalsteadVolume test = new HalsteadVolume();
 
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
@@ -52,8 +52,8 @@ public class HalsteadVocabularyTest {
 	// do.
 	// AAA = Arrange, Act, Assert
 	@Test
-	public void testGetHalsteadVocabulary1() {
-		HalsteadVocabulary test = new HalsteadVocabulary();
+	public void testGetHalsteadVolume1() {
+		HalsteadVolume test = new HalsteadVolume();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -66,13 +66,13 @@ public class HalsteadVocabularyTest {
 
 		test.finishTree(ast);
 
-		// unique operators + unique operands
-		assertEquals(2, test.getHalsteadVocabulary());
+		// (operators  +operands) * log2(unique operators + unique operands)
+		assertEquals(2, test.getHalsteadVolume(), 0.1);
 	}
 
 	@Test
-	public void testGetHalsteadVocabulary2() {
-		HalsteadVocabulary test = new HalsteadVocabulary();
+	public void testGetHalsteadVolume2() {
+		HalsteadVolume test = new HalsteadVolume();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -87,13 +87,13 @@ public class HalsteadVocabularyTest {
 
 		test.finishTree(ast);
 
-		// unique operators + unique operands
-		assertEquals(2, test.getHalsteadVocabulary());
+		// (operators  +operands) * log2(unique operators + unique operands)
+		assertEquals(21, test.getHalsteadVolume(), 0.1);
 	}
 
 	@Test
-	public void testGetHalsteadVocabulary3() {
-		HalsteadVocabulary test = new HalsteadVocabulary();
+	public void testGetHalsteadVolume3() {
+		HalsteadVolume test = new HalsteadVolume();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -109,13 +109,13 @@ public class HalsteadVocabularyTest {
 
 		test.finishTree(ast);
 
-		// unique operators + unique operands
-		assertEquals(2, test.getHalsteadVocabulary());
+		// (operators  +operands) * log2(unique operators + unique operands)
+		assertEquals(21, test.getHalsteadVolume(), 0.1);
 	}
 
 	@Test
-	public void testGetHalsteadVocabulary4() {
-		HalsteadVocabulary test = new HalsteadVocabulary();
+	public void testGetHalsteadVolume4() {
+		HalsteadVolume test = new HalsteadVolume();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -152,7 +152,7 @@ public class HalsteadVocabularyTest {
 
 		test.finishTree(ast);
 
-		// unique operators + unique operands
-		assertEquals(8, test.getHalsteadVocabulary());
+		// (operators  +operands) * log2(unique operators + unique operands)
+		assertEquals(138, test.getHalsteadVolume(), 0.2);
 	}
 }

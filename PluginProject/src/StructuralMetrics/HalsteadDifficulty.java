@@ -55,6 +55,20 @@ public class HalsteadDifficulty extends AbstractCheck {
 	public int getHalsteadDifficulty() {
 		return halsteadDifficulty;
 	}
+	
+	//Private getters for whitebox testing
+	private int getUniqueOperators() {
+		return operatorCount.getUniqueCount();
+	}
+	
+		private int getUniqueOperands() {
+			return operandCount.getUniqueCount();
+		}
+		
+		private int getOperands() {
+			return operandCount.getCount();
+		}
+		
 
 	@Override
 	public int[] getDefaultTokens() {

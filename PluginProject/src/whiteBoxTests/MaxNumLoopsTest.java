@@ -1,4 +1,4 @@
-package test;
+package whiteBoxTests;
 
 import org.junit.Assert;
 import org.junit.After;

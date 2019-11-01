@@ -1,4 +1,4 @@
-package test;
+package blackBoxTests;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -16,15 +16,15 @@ public class BlackBoxNumberOfCastsCheckTest {
 
 	@Test
 	public void testTest() {
-		NumberOfCastsCheck c = new NumberOfCastsCheck();
-		TestCheckEngine t = new TestCheckEngine(filePath, c);
+		NumberOfCastsCheck c = new NumberOfCastsCheck(); 
+		TestCheckEngine t = new TestCheckEngine(filePath, c); //create a tester with filepath, and the check c
 		try {
-			t.runTree();
+			t.runTree(); //try to execute the check on the whole tree
 		} catch (CheckstyleException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(c.getCasts());
-		assertEquals(c.getCasts(), 1);
+		System.out.println(c.getCasts()); //print the result (debug)
+		assertEquals(c.getCasts(), 2); //determine if execution created the correct value
 	}
 }

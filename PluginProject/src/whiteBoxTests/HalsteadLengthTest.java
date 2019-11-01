@@ -1,25 +1,20 @@
-package test;
+package whiteBoxTests;
 
 import static org.junit.Assert.*;
-
-import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
-import StructuralMetrics.MaintainabilityIndex;
-import StructuralMetrics.CyclomaticComplexityCounter;;
+import StructuralMetrics.HalsteadLength;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({DetailAST.class, CyclomaticComplexityCounter.class, MaintainabilityIndex.class})
-public class MaintainabilityIndexTest {
+@PrepareForTest(DetailAST.class)
+public class HalsteadLengthTest {
 
 	int[] expectedTokens = { TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC,
 			TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS, TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN,
@@ -30,32 +25,24 @@ public class MaintainabilityIndexTest {
 			TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.SL,
 			TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR, TokenTypes.QUESTION,
 			TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG };
-	
-//	@InjectMocks
-//	private CyclomaticComplexityCounter cyclomaticComplexity = new CyclomaticComplexityCounter(); // mocking this class
-//
-//	@Before
-//	public void setUp() {
-//	    MaintainabilityIndex spy = new 
-//	}
 
 	@Test
 	public void testGetDefaultTokens() {
-		MaintainabilityIndex test = new MaintainabilityIndex();
+		HalsteadLength test = new HalsteadLength();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		MaintainabilityIndex test = new MaintainabilityIndex();
+		HalsteadLength test = new HalsteadLength();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		MaintainabilityIndex test = new MaintainabilityIndex();
+		HalsteadLength test = new HalsteadLength();
 
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
@@ -65,16 +52,9 @@ public class MaintainabilityIndexTest {
 	// do.
 	// AAA = Arrange, Act, Assert
 	@Test
-	public void testGetMaintainabilityIndex1() {
-		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
+	public void testGetHalsteadLength1() {
+		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
-		
-		try {
-			PowerMockito.doReturn(10).when(test, "getCyclomaticComplexity"); //set CyclomaticComplexity to 10
-			PowerMockito.doReturn(100).when(test, "getLOC"); // mock the number of lines to be 100
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		test.beginTree(ast); // begin the tree
 
@@ -86,22 +66,13 @@ public class MaintainabilityIndexTest {
 
 		test.finishTree(ast);
 
-		// MaintainabilityIndex = 171 - 5.2 * log2((operators  +operands) * log2(unique operators + unique operands)) - 0.23 * CyclomaticComplexity - 16.2 * log2(LOC) + 50
-		// MaintainabilityIndex = 171 - 5.2 * log2((1  +1) * log2(1 + 1)) - 0.23 * 10 - 16.2 * log2(100) + 50
-		assertEquals(2, test.getMaintainabilityIndex(), 0.1);
+		assertEquals(2, test.getHalsteadLength());
 	}
 
 	@Test
-	public void testGetMaintainabilityIndex2() {
-		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
+	public void testGetHalsteadLength2() {
+		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
-		
-		try {
-			PowerMockito.doReturn(10).when(test, "getCyclomaticComplexity"); //set CyclomaticComplexity to 10
-			PowerMockito.doReturn(100).when(test, "getLOC"); // mock the number of lines to be 100
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		test.beginTree(ast); // begin the tree
 
@@ -115,22 +86,13 @@ public class MaintainabilityIndexTest {
 
 		test.finishTree(ast);
 
-		// MaintainabilityIndex = 171 - 5.2 * log2((operators  +operands) * log2(unique operators + unique operands)) - 0.23 * CyclomaticComplexity - 16.2 * log2(LOC) + 50
-		// MaintainabilityIndex = 171 - 5.2 * log2((20  +1) * log2(1 + 1)) - 0.23 * 10 - 16.2 * log2(100) + 50
-		assertEquals(88.2, test.getMaintainabilityIndex(), 0.8);
+		assertEquals(21, test.getHalsteadLength());
 	}
 
 	@Test
-	public void testGetMaintainabilityIndex3() {
-		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
+	public void testGetHalsteadLength3() {
+		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
-		
-		try {
-			PowerMockito.doReturn(10).when(test, "getCyclomaticComplexity"); //set CyclomaticComplexity to 10
-			PowerMockito.doReturn(100).when(test, "getLOC"); // mock the number of lines to be 100
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		test.beginTree(ast); // begin the tree
 
@@ -145,22 +107,13 @@ public class MaintainabilityIndexTest {
 
 		test.finishTree(ast);
 
-		// MaintainabilityIndex = 171 - 5.2 * log2((operators  +operands) * log2(unique operators + unique operands)) - 0.23 * CyclomaticComplexity - 16.2 * log2(LOC) + 50
-		// MaintainabilityIndex = 171 - 5.2 * log2((20  +1) * log2(1 + 1)) - 0.23 * 10 - 16.2 * log2(100) + 50
-		assertEquals(88.2, test.getMaintainabilityIndex(), 0.8);
+		assertEquals(21, test.getHalsteadLength());
 	}
 
 	@Test
-	public void testGetMaintainabilityIndex4() {
-		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
+	public void testGetHalsteadLength4() {
+		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
-		
-		try {
-			PowerMockito.doReturn(10).when(test, "getCyclomaticComplexity"); //set CyclomaticComplexity to 10
-			PowerMockito.doReturn(100).when(test, "getLOC"); // mock the number of lines to be 100
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		test.beginTree(ast); // begin the tree
 
@@ -196,8 +149,6 @@ public class MaintainabilityIndexTest {
 
 		test.finishTree(ast);
 
-		// MaintainabilityIndex = 171 - 5.2 * log2((operators  +operands) * log2(unique operators + unique operands)) - 0.23 * CyclomaticComplexity - 16.2 * log2(LOC) + 50
-		// MaintainabilityIndex = 171 - 5.2 * log2((22  +24) * log2(5 + 3)) - 0.23 * 10 - 16.2 * log2(100) + 50
-		assertEquals(74.105, test.getMaintainabilityIndex(), 0.7);
+		assertEquals(46, test.getHalsteadLength());
 	}
 }

@@ -1,9 +1,9 @@
 /*
  * This class is responsible for building a detailASTree for a given file input.
- * There are functions provided to assist with running tests.
+ * Included is the runtTree function that will execute the check on a given file.
  */
 
-package test;
+package blackBoxTests;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,12 +29,17 @@ public class TestCheckEngine {
 	private DetailAST ast;
 	private AbstractCheck check;
 	
+	/**
+	 * 
+	 * @param fp Path to the input .java file to run the check on.
+	 * @param checkToTest AbstractCheck type to execute on the given file.
+	 */
 	public TestCheckEngine(String fp, AbstractCheck checkToTest) {
-		setFilePath(fp);
-		setCheck(checkToTest);
+		setFilePath(fp); //set the internal filepath
+		setCheck(checkToTest); // set the check that will be tested
 		
 		try {
-			ast = buildAST(fp);
+			ast = buildAST(fp); //try to build the AST from the source file
 		} catch (CheckstyleException e1) {
 			System.out.println("CheckstyleException!");
 		} catch (IOException e2) {
@@ -42,10 +47,12 @@ public class TestCheckEngine {
 		}
 	}
 	
+	// setter for the filepath
 	public void setFilePath(String fp) {
 		filePath = fp;
 	}
 	
+	// setter for the check
 	public void setCheck(AbstractCheck checkToTest) {
 		check = checkToTest;
 	}
@@ -58,6 +65,7 @@ public class TestCheckEngine {
 		return JavaParser.parse(fc);
 	}
 	
+	//Execute the check on the tree
 	public void runTree() throws CheckstyleException {
 		check.configure(new DefaultConfiguration("Local"));
 		check.contextualize(new DefaultContext());
@@ -66,19 +74,21 @@ public class TestCheckEngine {
 		check.finishTree(ast);
 	}
 
+	// calls visitToken and leaveToken on all tokens within the ASTree.
 	private void visitTokens(DetailAST root) {
-		List<Integer> tokens = IntStream.of(check.getAcceptableTokens()).boxed().collect(Collectors.toList());
-		DetailAST curNode = root;
-        while (curNode != null) {
-        	if (tokens.contains(curNode.getType()))
+		List<Integer> tokens = IntStream.of(check.getAcceptableTokens()).boxed().collect(Collectors.toList()); //convert the array of acceptable tokens to a list
+		DetailAST curNode = root; //set current node to the root
+        while (curNode != null) { //while there are still nodes in the tree
+        	if (tokens.contains(curNode.getType())) //if the node selected is included in the acceptable Tokens of the check
         		check.visitToken(curNode);
-            DetailAST toVisit = curNode.getFirstChild();
-            while (curNode != null && toVisit == null) {
-            	check.leaveToken(curNode);
-                toVisit = curNode.getNextSibling();
-                curNode = curNode.getParent();
+            DetailAST toVisit = curNode.getFirstChild(); //check if there is a node after this one
+            while (curNode != null && toVisit == null) { //find children nodes
+            	if (tokens.contains(curNode.getType())) //if the node selected is included in the acceptable Tokens of the check
+            		check.leaveToken(curNode);
+                toVisit = curNode.getNextSibling(); //check next node
+                curNode = curNode.getParent(); // reset current node
             }
-            curNode = toVisit;
+            curNode = toVisit; //move on to the next node
         }
 	}
 }
