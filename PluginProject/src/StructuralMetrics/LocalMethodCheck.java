@@ -30,7 +30,12 @@ public class LocalMethodCheck extends AbstractCheck{
 		if(aAST.findFirstToken(TokenTypes.DOT) == null) {
 			//not a dot so this is a local method call
 			localMethodCount++;	
-		}
+		} 
+//		else {
+//			DetailAST ast = aAST.findFirstToken(TokenTypes.DOT);
+//			ast = ast.getParent();
+//			if (String.equals(ast.getTokenNames()[0], "")
+//		}
 	}
 	
 	//calls begin tree to initialize count variable
