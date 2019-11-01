@@ -42,8 +42,10 @@ public class TestCheckEngine {
 			ast = buildAST(fp); //try to build the AST from the source file
 		} catch (CheckstyleException e1) {
 			System.out.println("CheckstyleException!");
+			e1.printStackTrace();
 		} catch (IOException e2) {
 			System.out.println("IOException!");
+			e2.printStackTrace();;
 		}
 	}
 	

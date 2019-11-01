@@ -40,7 +40,12 @@ public class LocalMethodCheck extends AbstractCheck{
 	
 	//prints the log message
 	public void finishTree(DetailAST rootAST) {
-		log(rootAST, CATCH_MSG + localMethodCount);
+		try {
+			log(rootAST, CATCH_MSG + localMethodCount);
+		}
+		catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 	
 	//returns the count variable
