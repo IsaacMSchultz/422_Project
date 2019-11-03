@@ -14,7 +14,7 @@ import StructuralMetrics.VariableCountCheck;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({DetailAST.class})
-public class VariableCountCheckTest {
+public class VariableCountTest {
 
 VariableCountCheck varChk = new VariableCountCheck();
 DetailAST ast = PowerMockito.mock(DetailAST.class);
