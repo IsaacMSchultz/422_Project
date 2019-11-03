@@ -1,3 +1,6 @@
+/*
+* Description: Counts the number expressions in a given test file. 
+*/
 package StructuralMetrics;
 
 import com.puppycrawl.tools.checkstyle.api.*;

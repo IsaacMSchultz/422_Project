@@ -1,3 +1,6 @@
+/*
+* Description: Counts the number of variables in a given test file.
+*/
 package StructuralMetrics;
 
 

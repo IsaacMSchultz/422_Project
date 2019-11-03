@@ -1,4 +1,9 @@
+/*
+* Description: This class tests if the external method check
+* accurately checks the number of external methods. 
+*/
 package whiteBoxTests;
+
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;

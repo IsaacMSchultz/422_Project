@@ -1,4 +1,9 @@
+/*
+* Description: This class tests if the expression count check 
+* accurately checks the number of expressions.
+*/
 package whiteBoxTests;
+
 
 import static org.junit.Assert.*;
 import org.junit.Test;

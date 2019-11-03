@@ -1,4 +1,9 @@
+/* 
+* Description: This class tests if the variable count check
+* is accurately counting the variables in a file. 
+*/
 package whiteBoxTests;
+
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,9 @@
+/*
+* Description: This class tests if the local method check
+* accurately counts the local methods
+*/
 package whiteBoxTests;
+
 
 import static org.junit.Assert.*;
 
