@@ -6,9 +6,9 @@ import org.junit.Test;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
-import StructuralMetrics.LocalMethodCheck;
+import StructuralMetrics.OperandCountCheck;
 
-public class BlackBoxOperandCountCheckTest {
+public class OperandCountBlackBoxTest {
 	
 	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\OperandCountCheck\\OperandCountCheck";
 
