@@ -1,71 +1,57 @@
 package StructuralMetrics;
 
 import com.puppycrawl.tools.checkstyle.api.*;
-import java.util.*;
+
+import java.util.HashSet;
 
 public class OperandCountCheck extends AbstractCheck {
+	int operandCount = 0; // Storing the number of operators in the current file.
+	HashSet<String> uniqueOperands = new HashSet<String>(); // Keep a hashset of each operand
 
-	private static final String CATCH_MSG = "Operand Count: ";
-	private static final String UNIQUE = "Unique Operands: ";
-	
-	private int operandCount = 0;
-	private int nonVariableOperandCount = 0 ;
-	
-	private HashSet variableOperands = new HashSet();
-	
-	public int getOperandCount() {
-		return this.operandCount;
+	@Override
+	public void beginTree(DetailAST rootAST) {
+		operandCount = 0; // Reset to 0 when we start a new tree.
+		uniqueOperands = new HashSet<String>(); // Reset the operands we are counting when we restart!
 	}
-	
-	public int getUniqueOperandCount() {
-		if(this.variableOperands.isEmpty()) {
-			return nonVariableOperandCount;
-		}
-		else return this.variableOperands.size()+nonVariableOperandCount;
+
+	@Override
+	public void visitToken(DetailAST aAST) {
+		operandCount++;
+
+//		System.out.println(aAST.getText());
+		uniqueOperands.add(aAST.getText()); // Assuming the text of the operand is what makes it unique!
 	}
-	
-	
+
+	@Override
+	public void finishTree(DetailAST rootAST) {
+		log(0, "There are {0} unique operands that appear {1} times.", uniqueOperands.size(), operandCount);
+	}
+
+	// Public getter for the operand count
+	public int getCount() {
+		return operandCount;
+	}
+
+	// Public getter for the operand count
+	public int getUniqueCount() {
+		return uniqueOperands.size();
+	}
+
 	@Override
 	public int[] getDefaultTokens() {
-		return new int[] {TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG};	
-	}
-
-	public void visitToken(DetailAST aAST) {
-		if(inExpression(aAST)) {
-			operandCount++;
-			if(aAST.getType()==TokenTypes.IDENT) {
-				if(!variableOperands.contains(aAST.toString())){
-					variableOperands.add(aAST.toString());
-				}
-				else nonVariableOperandCount++;		
-			}
-		}		
+		return new int[] { TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT,
+				TokenTypes.NUM_LONG };
 	}
 
 	@Override
 	public int[] getAcceptableTokens() {
-		return new int[] {TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG};
+		// TODO Auto-generated method stub
+		return getDefaultTokens();
 	}
-	
-	private boolean inExpression(DetailAST aAST) {
-        return aAST.getParent().getType() == TokenTypes.EXPR;
-    }
 
 	@Override
 	public int[] getRequiredTokens() {
+		// TODO Auto-generated method stub
 		return new int[0];
 	}
-	
-	@Override
-	public void beginTree(DetailAST rootAST) {
-		operandCount = 0;
-		this.variableOperands = new HashSet();
-	}
-	
-	@Override
-	public void finishTree(DetailAST rootAST) {
-		log(rootAST, CATCH_MSG + operandCount);
-		log(rootAST, UNIQUE, + this.getUniqueOperandCount());
-	}
-
 }

@@ -18,60 +18,54 @@ import static org.mockito.Mockito.*;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
-import StructuralMetrics.CommentsCount;
+import StructuralMetrics.NumberOfLoopsCheck;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DetailAST.class)
-public class CommentsCountTest {
-	int[] expectedTokens = { TokenTypes.COMMENT_CONTENT };
-
-	@Test
-	public void testBeginTree() {
-		CommentsCount test = new CommentsCount();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
-
-		test.beginTree(ast);
-		assertEquals(0, test.getCountComments());
-	}
+public class NumberOfLoopsTest {
+	int[] expectedTokens = { TokenTypes.LITERAL_FOR, TokenTypes.LITERAL_WHILE, TokenTypes.LITERAL_DO };
 
 	@Test
 	public void testGetDefaultTokens() {
-		CommentsCount test = new CommentsCount();
+		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		CommentsCount test = new CommentsCount();
+		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		CommentsCount test = new CommentsCount();
+		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
 
-	// This is the function that we will be doing all of our tests from, since all
-	// the others require mocking private fields thta we have not yet learned how to
-	// do.
-	// AAA = Arrange, Act, Assert
 	@Test
-	public void testCountCommentsCount() {
-		CommentsCount test = new CommentsCount();
+	public void testCountCommentsCheck() {
+		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
 
-		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
+		assertEquals(0, test.getLoopCount());
+
+		doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType(); // operand
 		test.visitToken(ast);
 
-		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
+		assertEquals(1, test.getLoopCount());
+
+		doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType(); // operator
 		test.visitToken(ast);
 
-		assertEquals(2, test.getCountComments());
+		assertEquals(2, test.getLoopCount());
+
+		test.finishTree(ast);
+
 	}
 }

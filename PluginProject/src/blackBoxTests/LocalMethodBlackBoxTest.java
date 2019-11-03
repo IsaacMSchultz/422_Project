@@ -8,7 +8,7 @@ import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import StructuralMetrics.LocalMethodCheck;
 
-public class BlackBoxLocalMethodCheckTest {
+public class LocalMethodBlackBoxTest {
 	
 	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\LocalMethodCheck\\localMethodCheck";
 
@@ -24,7 +24,7 @@ public class BlackBoxLocalMethodCheckTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(c.getCount(), 3); //determine if execution created the correct value
+		assertEquals(3, c.getCount()); //determine if execution created the correct value
 	}
 	
 	@Test
@@ -39,7 +39,7 @@ public class BlackBoxLocalMethodCheckTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(c.getCount(), 0); //determine if execution created the correct value
+		assertEquals(0, c.getCount()); //determine if execution created the correct value
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class BlackBoxLocalMethodCheckTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(c.getCount(), 2); //determine if execution created the correct value
+		assertEquals(2, c.getCount()); //determine if execution created the correct value
 	}
 	
 	@Test
@@ -69,6 +69,6 @@ public class BlackBoxLocalMethodCheckTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(c.getCount(), 4); //determine if execution created the correct value
+		assertEquals(4, c.getCount()); //determine if execution created the correct value
 	}
 }

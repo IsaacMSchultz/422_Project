@@ -14,7 +14,7 @@ import StructuralMetrics.NumberOfCastsCheck;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DetailAST.class)
-public class NumberOfCastsCheckTest {
+public class NumberOfCastsTest {
 	
 	int[] expectedTokens = {TokenTypes.TYPECAST};
 

@@ -4,7 +4,7 @@ import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 
-public class MaxNumLoopsCheck extends AbstractCheck {
+public class NumberOfLoopsCheck extends AbstractCheck {
 
 	private int max = 1;
 	int loopCount;

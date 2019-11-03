@@ -1,48 +1,48 @@
 package whiteBoxTests;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
-import com.puppycrawl.tools.checkstyle.api.TokenTypes; 
-import StructuralMetrics.ExpressionCountCheck;
+import com.puppycrawl.tools.checkstyle.api.TokenTypes;
+import StructuralMetrics.LocalMethodCheck;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({DetailAST.class})
-public class ExpressionCountCheckTest {
+public class LocalMethodTest {
 
-	ExpressionCountCheck expChk = new ExpressionCountCheck();
+	LocalMethodCheck locChk = new LocalMethodCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
 
-	@Test
+	@Test 
 	public void testGetDefaultTokens() {
-		assertArrayEquals(new int[] {TokenTypes.EXPR}, expChk.getDefaultTokens());
+		assertArrayEquals(new int[] {TokenTypes.METHOD_CALL}, locChk.getDefaultTokens());
 	}
-	
+
 	@Test
 	public void testGetAcceptableTokens() {
-		assertArrayEquals(new int[] {TokenTypes.EXPR}, expChk.getAcceptableTokens());
+		assertArrayEquals(new int[] {TokenTypes.METHOD_CALL}, locChk.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		assertArrayEquals(new int[0], expChk.getRequiredTokens());
-	} 
-	
+		assertArrayEquals(new int[0], locChk.getRequiredTokens());
+	}
+
 	@Test
 	public void testVisitTokenDetailAST() {
-		
-		expChk.beginTree(ast);
-		doReturn(TokenTypes.EXPR).when(ast).getType();
-		
-		expChk.visitToken(ast);
-		
-		assertEquals(1, expChk.getCount());
+		locChk.visitToken(ast);
+		assertEquals(1, locChk.getCount());
+	}
+
+	@Test
+	public void testBeginTreeDetailAST() {
+		assertEquals(0, locChk.getCount());
 	}
 
 }

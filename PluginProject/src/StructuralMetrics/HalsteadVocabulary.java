@@ -10,8 +10,8 @@ public class HalsteadVocabulary extends AbstractCheck {
 
 	private int halsteadVocabulary;
 
-	private OperandCounter operandCount = new OperandCounter();
-	private OperatorCounter operatorCount = new OperatorCounter();
+	private OperandCountCheck operandCount = new OperandCountCheck();
+	private OperatorCountCheck operatorCount = new OperatorCountCheck();
 
 	// Store the tokens they accept in a list so that they can be easily searched.
 	private ArrayList<Integer> operandTokens = arrayToList(operandCount.getDefaultTokens());

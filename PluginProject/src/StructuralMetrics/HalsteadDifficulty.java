@@ -22,8 +22,8 @@ public class HalsteadDifficulty extends AbstractCheck {
 
 	private int halsteadDifficulty;
 
-	private OperandCounter operandCount = new OperandCounter(); //creating the checks that will get run within this check
-	private OperatorCounter operatorCount = new OperatorCounter();
+	private OperandCountCheck operandCount = new OperandCountCheck(); //creating the checks that will get run within this check
+	private OperatorCountCheck operatorCount = new OperatorCountCheck();
 
 	// Store the tokens they accept in a list so that they can be easily searched.
 	private ArrayList<Integer> operandTokens = arrayToList(operandCount.getDefaultTokens());

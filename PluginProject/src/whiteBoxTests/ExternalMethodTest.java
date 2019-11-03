@@ -15,7 +15,7 @@ import StructuralMetrics.ExternalMethodCheck;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({DetailAST.class})
-public class ExternalMethodCheckTest {
+public class ExternalMethodTest {
 	
 	ExternalMethodCheck extChk = new ExternalMethodCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
