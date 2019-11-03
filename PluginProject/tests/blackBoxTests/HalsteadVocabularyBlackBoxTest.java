@@ -24,7 +24,7 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(18, c.getCount()); //determine if execution created the correct value
+		assertEquals(18, c.getHalsteadVocabulary()); //determine if execution created the correct value
 	}
 	
 	@Test
@@ -39,6 +39,6 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getCount()); //determine if execution created the correct value
+		assertEquals(0, c.getHalsteadVocabulary()); //determine if execution created the correct value
 	}
 }
