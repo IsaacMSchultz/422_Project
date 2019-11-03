@@ -17,6 +17,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 
 import StructuralMetrics.HalsteadDifficulty;
 import StructuralMetrics.HalsteadEffort;
+import StructuralMetrics.HalsteadLength;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DetailAST.class)
@@ -58,11 +59,71 @@ public class HalsteadEffortTest {
 		for (int item : test.getRequiredTokens())
 			assertTrue(expectedTokens.contains(item));
 	}
+	
+	@Test
+	public void testVisit() {
+		HalsteadEffort test = new HalsteadEffort();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
-	// This is the function that we will be doing all of our tests from, since all
-	// the others require mocking private fields thta we have not yet learned how to
-	// do.
-	// AAA = Arrange, Act, Assert
+		test.beginTree(ast); // begin the tree
+
+		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
+		test.visitToken(ast);
+
+		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
+		test.visitToken(ast);
+
+		test.finishTree(ast);
+
+		// halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands)
+		// halsteadDifficulty = (1 / 2) * (1 / 1) = 1/2
+		assertEquals(0.5, test.getHalsteadDifficulty(), 0.1);
+		
+		// (operators +operands) * log2(unique operators + unique operands)
+		// (1+1) * log2(1+1) = 2
+		assertEquals(2, test.getHalsteadVolume(), 0.1);
+	}
+
+	//////
+	// updated correctly mocked whitebox text cases
+	//////
+
+	@Test
+	public void testGetHalsteadEffort01() {
+		HalsteadEffort test = spy(new HalsteadEffort());
+		DetailAST ast = new DetailAST();
+
+		doReturn(1.0).when(test).getHalsteadDifficulty();
+		doReturn(6.0).when(test).getHalsteadVolume();
+		test.beginTree(ast); // begin the tree
+
+		test.finishTree(ast);
+		
+		// effort = volume * difficulty
+		// effort = 1*6 = 6
+		assertEquals(6, test.getHalsteadEffort(), 0.1);
+	}
+	
+	@Test
+	public void testGetHalsteadEffort02() {
+		HalsteadEffort test = spy(new HalsteadEffort());
+		DetailAST ast = new DetailAST();
+
+		doReturn(135.0).when(test).getHalsteadDifficulty();
+		doReturn(65.0).when(test).getHalsteadVolume();
+		test.beginTree(ast); // begin the tree
+
+		test.finishTree(ast);
+
+		// effort = volume * difficulty
+		// effort = 135*65 =
+		assertEquals(8775 , test.getHalsteadEffort(), 0.1);
+	}
+
+	//////
+	// old test cases updated (still work!)
+	//////
+
 	@Test
 	public void testGetHalsteadEffort1() {
 		HalsteadEffort test = new HalsteadEffort();
@@ -78,8 +139,9 @@ public class HalsteadEffortTest {
 
 		test.finishTree(ast);
 
-		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
-		assertEquals(3, test.getHalsteadEffort(), 0.1);
+		//((uniqueOperators / 2) * (operands / uniqueOperands)) * ((operators +operands) * log2(unique operators + unique operands))
+		//((1 / 2) * (1 / 1)) * ((1 + 1) * log2(1 + 1)) = 1
+		assertEquals(1, test.getHalsteadEffort(), 0.1);
 	}
 
 	@Test
@@ -99,8 +161,10 @@ public class HalsteadEffortTest {
 
 		test.finishTree(ast);
 
-		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
-		assertEquals(430.5, test.getHalsteadEffort(), 0.1);
+		//((uniqueOperators / 2) * (operands / uniqueOperands)) * ((operators +operands) * log2(unique operators + unique operands))
+		// uniqueOperators = 1, uniqueOperands = 1, operands = 20, operators = 1
+		//((1 / 2) * (20 / 1)) * ((1 + 20) * log2(1 + 1)) = 210
+		assertEquals(210, test.getHalsteadEffort(), 0.1);
 	}
 
 	@Test
@@ -121,23 +185,27 @@ public class HalsteadEffortTest {
 
 		test.finishTree(ast);
 
-		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
-		assertEquals(430.5, test.getHalsteadEffort(), 0.1);
+		//((uniqueOperators / 2) * (operands / uniqueOperands)) * ((operators +operands) * log2(unique operators + unique operands))
+		// uniqueOperators = 1, uniqueOperands = 1, operands = 1, operators = 20
+		//((1 / 2) * (1 / 1)) * ((20 + 1) * log2(1 + 1)) = 10.5
+		assertEquals(10.5, test.getHalsteadEffort(), 0.1);
 	}
 
 	@Test
-	public void testGetHalsteadEffort4() {
+	public void testGetHalsteadEffort4() { //try a ton of different operators and operands
 		HalsteadEffort test = new HalsteadEffort();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand 1
+		doReturn("operand1").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operands
 			test.visitToken(ast);
 		}
 
 		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator 1
+		doReturn("operator1").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
@@ -145,26 +213,34 @@ public class HalsteadEffortTest {
 		// Now lets get some more unique operators and operands in there.
 
 		doReturn(TokenTypes.IDENT).when(ast).getType(); // operand 2
+		doReturn("operand2").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.NUM_INT).when(ast).getType(); // operand 3
+		doReturn("operand3").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.DEC).when(ast).getType(); // operator 2
+		doReturn("operator2").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.LOR).when(ast).getType(); // operator 3
+		doReturn("operator3").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.PLUS).when(ast).getType(); // operator 4
+		doReturn("operator4").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.COMMA).when(ast).getType(); // operator 5
+		doReturn("operator5").when(ast).getText();
 		test.visitToken(ast);
 
 		test.finishTree(ast);
 
-		// https://www.vcalc.com/wiki/MichaelBartmess/Halstead+Complexity+-+Effort
-		assertEquals(1357, test.getHalsteadEffort(), 0.1);
+		//((uniqueOperators / 2) * (operands / uniqueOperands)) * ((operators +operands) * log2(unique operators + unique operands))
+		// uniqueOperators = 5, uniqueOperands = 3, operands = 22, operators = 24
+		//((5 / 2) * (22 / 3)) * ((22 + 24) * log2(3 + 5)) = 2530
+		assertEquals(2530, test.getHalsteadEffort(), 0.1);
 	}
 }

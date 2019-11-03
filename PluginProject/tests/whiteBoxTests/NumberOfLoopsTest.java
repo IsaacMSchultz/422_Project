@@ -47,7 +47,7 @@ public class NumberOfLoopsTest {
 	}
 
 	@Test
-	public void testLoop1() {
+	public void testLoop1() { //test no loops
 		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -58,7 +58,7 @@ public class NumberOfLoopsTest {
 	}
 
 	@Test
-	public void testLoop2() {
+	public void testLoop2() { //test FOR loop
 		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -70,7 +70,7 @@ public class NumberOfLoopsTest {
 	}
 
 	@Test
-	public void testLoop3() {
+	public void testLoop3() { //test WHILE loop
 		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -83,7 +83,7 @@ public class NumberOfLoopsTest {
 	}
 	
 	@Test
-	public void testLoop4() {
+	public void testLoop4() { //test DO loop
 		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -96,7 +96,7 @@ public class NumberOfLoopsTest {
 	}
 	
 	@Test
-	public void testLoop5() {
+	public void testLoop5() { //test tons of all the kinds of loops
 		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 

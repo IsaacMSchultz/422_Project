@@ -17,6 +17,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 
 import StructuralMetrics.HalsteadLength;
 import StructuralMetrics.HalsteadVocabulary;
+import StructuralMetrics.HalsteadVolume;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DetailAST.class)
@@ -58,11 +59,45 @@ public class HalsteadVocabularyTest {
 		for (int item : test.getRequiredTokens())
 			assertTrue(expectedTokens.contains(item));
 	}
+	
+	//////
+	// updated correctly mocked whitebox text cases
+	//////
+	
+	@Test
+	public void testGetHalsteadVocabulary01() { //test with known values
+		HalsteadVocabulary test = spy(new HalsteadVocabulary());
+		DetailAST ast = new DetailAST();
 
-	// This is the function that we will be doing all of our tests from, since all
-	// the others require mocking private fields thta we have not yet learned how to
-	// do.
-	// AAA = Arrange, Act, Assert
+		doReturn(99).when(test).getUniqueOperandCount();
+		doReturn(39).when(test).getUniqueOperatorCount();
+		test.beginTree(ast); // begin the tree
+		test.finishTree(ast);
+
+		// halsteadVocabulary = uniqueOperands + uniqueOperators;
+		// 99 + 39 = 138
+		assertEquals(138, test.getHalsteadVocabulary());
+	}
+
+	@Test
+	public void testGetHalsteadVocabulary02() { //test with known values
+		HalsteadVocabulary test = spy(new HalsteadVocabulary());
+		DetailAST ast = new DetailAST();
+
+		doReturn(9649).when(test).getUniqueOperandCount();
+		doReturn(32).when(test).getUniqueOperatorCount();
+		test.beginTree(ast); // begin the tree
+		test.finishTree(ast);
+
+		// halsteadVocabulary = uniqueOperands + uniqueOperators;
+		// 9649 + 32 = 138
+		assertEquals(9681, test.getHalsteadVocabulary());
+	}
+
+	//////
+	// old test cases updated (still work!)
+	//////
+
 	@Test
 	public void testGetHalsteadVocabulary1() {
 		HalsteadVocabulary test = new HalsteadVocabulary();
@@ -111,10 +146,12 @@ public class HalsteadVocabularyTest {
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
+		doReturn("operand").when(ast).getText();
 
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
+		doReturn("operator").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
@@ -133,11 +170,13 @@ public class HalsteadVocabularyTest {
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand 1
+		doReturn("operand1").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operands
 			test.visitToken(ast);
 		}
 
 		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator 1
+		doReturn("operator1").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
@@ -145,21 +184,27 @@ public class HalsteadVocabularyTest {
 		// Now lets get some more unique operators and operands in there.
 
 		doReturn(TokenTypes.IDENT).when(ast).getType(); // operand 2
+		doReturn("operand2").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.NUM_INT).when(ast).getType(); // operand 3
+		doReturn("operand3").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.DEC).when(ast).getType(); // operator 2
+		doReturn("operator2").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.LOR).when(ast).getType(); // operator 3
+		doReturn("operator3").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.PLUS).when(ast).getType(); // operator 4
+		doReturn("operator4").when(ast).getText();
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.COMMA).when(ast).getType(); // operator 5
+		doReturn("operator5").when(ast).getText();
 		test.visitToken(ast);
 
 		test.finishTree(ast);

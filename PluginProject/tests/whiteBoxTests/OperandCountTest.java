@@ -43,7 +43,7 @@ public class OperandCountTest {
 	}
 
 	@Test
-	public void testGetOperandCount1() {
+	public void testGetOperandCount1() { //tests with a single token
 		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -58,7 +58,7 @@ public class OperandCountTest {
 	}
 
 	@Test
-	public void testGetOperandCount2() {
+	public void testGetOperandCount2() { //tests unique vs count
 		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -75,37 +75,33 @@ public class OperandCountTest {
 	}
 
 	@Test
-	public void testGetOperandCount3() {
+	public void testGetOperandCount3() { //this test tries every possible operand type we have included
 		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
+		
+		// Now lets get some more unique operators and operands in there.
 
 		doReturn(expectedTokens[0]).when(ast).getType(); // operand 1
 		doReturn("operand1").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operands
 			test.visitToken(ast);
 		}
-//		System.out.println(ast.getType());
 
 		doReturn(expectedTokens[1]).when(ast).getType(); // operator 2
 		doReturn("operand2").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
-//		System.out.println(ast.getType());
-
-		// Now lets get some more unique operators and operands in there.
 
 		doReturn(expectedTokens[2]).when(ast).getType(); // operand 3
 		doReturn("operand3").when(ast).getText();
 		test.visitToken(ast);
-//		System.out.println(ast.getType());
 
 		doReturn(expectedTokens[3]).when(ast).getType(); // operand 4
 		doReturn("operand4").when(ast).getText();
 		test.visitToken(ast);
-//		System.out.println(ast.getType());
 
 		assertEquals(42, test.getCount());
 		assertEquals(4, test.getUniqueCount());

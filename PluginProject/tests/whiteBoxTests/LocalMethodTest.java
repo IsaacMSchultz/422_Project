@@ -40,17 +40,17 @@ public class LocalMethodTest {
 	}
 
 	@Test
-	public void testVisitTokenDetailAST1() {
+	public void testVisitTokenDetailAST1() { //try just a method call token
 		locChk.beginTree(ast);
 		doReturn(TokenTypes.METHOD_CALL).when(ast).getType();
-		//not sure how to return a token type inside of a method. 
+
 		locChk.visitToken(ast);
-		//still zero because ast.findfirsttoken inside visit token evaluates to null
+
 		assertEquals(1, locChk.getCount());
 	}
 	
 	@Test
-	public void testVisitTokenDetailAST2() {
+	public void testVisitTokenDetailAST2() { //test to see when it is a external method call
 		locChk.beginTree(ast);
 		
 		DetailAST testAST = PowerMockito.mock(DetailAST.class); //create an AST that we can mock as the parent of the method call token
@@ -66,7 +66,7 @@ public class LocalMethodTest {
 	}
 
 	@Test
-	public void testBeginTreeDetailAST() {
+	public void testBeginTreeDetailAST() { //no tokens
 		assertEquals(0, locChk.getCount());
 	}
 

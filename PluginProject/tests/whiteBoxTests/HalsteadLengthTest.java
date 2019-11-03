@@ -78,9 +78,10 @@ public class HalsteadLengthTest {
 		assertEquals(1, test.getOperandCount());
 		assertEquals(1, test.getOperatorCount());
 	}
-
-	@Mock
-	HalsteadLength tester = mock(HalsteadLength.class);
+	
+	//////
+	// updated correctly mocked whitebox text cases
+	//////
 
 	@Test
 	public void testGetHalsteadLength01() {
@@ -110,12 +111,12 @@ public class HalsteadLengthTest {
 		assertEquals(200, test.getHalsteadLength());
 	}
 
-	// This is the function that we will be doing all of our tests from, since all
-	// the others require mocking private fields thta we have not yet learned how to
-	// do.
-	// AAA = Arrange, Act, Assert
+	//////
+	// old test cases updated (still work!)
+	//////
+
 	@Test
-	public void testGetHalsteadLength1() {
+	public void testGetHalsteadLength1() { // try with one operand and one operator
 		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -133,7 +134,7 @@ public class HalsteadLengthTest {
 	}
 
 	@Test
-	public void testGetHalsteadLength2() {
+	public void testGetHalsteadLength2() { //try 20 of the same operand and one operator
 		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -153,7 +154,7 @@ public class HalsteadLengthTest {
 	}
 
 	@Test
-	public void testGetHalsteadLength3() {
+	public void testGetHalsteadLength3() { //try one operand and 20 of the same operator
 		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -174,7 +175,7 @@ public class HalsteadLengthTest {
 	}
 
 	@Test
-	public void testGetHalsteadLength4() {
+	public void testGetHalsteadLength4() { // try a whole bunch of different operators and operands
 		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 

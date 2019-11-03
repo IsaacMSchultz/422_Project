@@ -39,12 +39,8 @@ public class NumberOfCastsTest {
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
 
-	// This is the function that we will be doing all of our tests from, since all
-	// the others require mocking private fields thta we have not yet learned how to
-	// do.
-	// AAA = Arrange, Act, Assert
 	@Test
-	public void testGetCasts1() {
+	public void testGetCasts1() { //test 1 cast
 		NumberOfCastsCheck test = new NumberOfCastsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -53,12 +49,11 @@ public class NumberOfCastsTest {
 		doReturn(TokenTypes.TYPECAST).when(ast).getType(); // operand
 		test.visitToken(ast);
 
-		// (operators  +operands) * log2(unique operators + unique operands)
 		assertEquals(1, test.getCount());
 	}
 
 	@Test
-	public void testGetCasts2() {
+	public void testGetCasts2() { //test tons of casts
 		NumberOfCastsCheck test = new NumberOfCastsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -69,7 +64,6 @@ public class NumberOfCastsTest {
 			test.visitToken(ast);
 		}
 
-		// (operators  +operands) * log2(unique operators + unique operands)
 		assertEquals(20, test.getCount());
 	}
 }

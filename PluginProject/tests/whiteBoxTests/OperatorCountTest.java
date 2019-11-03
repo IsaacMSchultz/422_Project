@@ -50,7 +50,7 @@ public class OperatorCountTest {
 	}
 
 	@Test
-	public void testGetOperandCount1() {
+	public void testGetOperatorCount1() { //tests with a single token
 		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -65,7 +65,7 @@ public class OperatorCountTest {
 	}
 
 	@Test
-	public void testGetOperandCount2() {
+	public void testGetOperatorCount2() { //checks to see if it can distinguish unique operators
 		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -82,7 +82,7 @@ public class OperatorCountTest {
 	}
 
 	@Test
-	public void testGetOperandCount3() {
+	public void testGetOperatorCount3() { //test ALL the operators!!!
 		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 

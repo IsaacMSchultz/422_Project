@@ -60,11 +60,11 @@ public class MaintainabilityIndex extends AbstractCheck {
 
 	}
 
-	private int getCyclomaticComplexity() { //Using this function since trying to mock private fields' functions is really difficult.
+	public int getCyclomaticComplexity() { //Using this function since trying to mock private fields' functions is really difficult.
 		return cyclomaticComplexity.getCount();
 	}
 
-	private int getLOC() { //Using this function since trying to mock private fields' functions is really difficult.
+	public int getLOC() { //Using this function since trying to mock private fields' functions is really difficult.
 		return this.getFileContents().getText().size();
 	}
 
