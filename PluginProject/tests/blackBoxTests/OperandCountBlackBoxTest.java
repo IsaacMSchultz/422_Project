@@ -26,9 +26,24 @@ public class OperandCountBlackBoxTest {
 
 		assertEquals(76, c.getCount()); //determine if execution created the correct value
 	}
-	
+
 	@Test
 	public void test2() {
+		OperandCountCheck c = new OperandCountCheck(); 
+		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
+		
+		try {
+			t.runTree(); //try to execute the check on the whole tree
+		} catch (CheckstyleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertEquals(13, c.getUniqueCount()); //determine if execution created the correct value
+	}
+	
+	@Test
+	public void test3() {
 		OperandCountCheck c = new OperandCountCheck(); 
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 		
@@ -40,5 +55,20 @@ public class OperandCountBlackBoxTest {
 		}
 
 		assertEquals(0, c.getCount()); //determine if execution created the correct value
+	}
+
+	@Test
+	public void test4() {
+		OperandCountCheck c = new OperandCountCheck(); 
+		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
+		
+		try {
+			t.runTree(); //try to execute the check on the whole tree
+		} catch (CheckstyleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertEquals(0, c.getUniqueCount()); //determine if execution created the correct value
 	}
 }

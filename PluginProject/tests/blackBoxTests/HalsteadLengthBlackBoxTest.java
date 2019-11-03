@@ -24,11 +24,26 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(134, c.getHalsteadLength()); //determine if execution created the correct value
+		assertEquals(81, c.getOperandCount()); //determine if execution created the correct value
+	}
+
+	@Test
+	public void test2() {
+		HalsteadLength c = new HalsteadLength(); 
+		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
+		
+		try {
+			t.runTree(); //try to execute the check on the whole tree
+		} catch (CheckstyleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertEquals(53, c.getOperatorCount()); //determine if execution created the correct value
 	}
 	
 	@Test
-	public void test2() {
+	public void test3() {
 		HalsteadLength c = new HalsteadLength(); 
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 		
@@ -39,6 +54,21 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getHalsteadLength()); //determine if execution created the correct value
+		assertEquals(0, c.getOperandCount()); //determine if execution created the correct value
+	}
+
+	@Test
+	public void test4() {
+		HalsteadLength c = new HalsteadLength(); 
+		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
+		
+		try {
+			t.runTree(); //try to execute the check on the whole tree
+		} catch (CheckstyleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertEquals(0, c.getOperatorCount()); //determine if execution created the correct value
 	}
 }
