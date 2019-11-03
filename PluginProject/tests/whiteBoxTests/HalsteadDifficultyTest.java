@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -72,117 +73,79 @@ public class HalsteadDifficultyTest {
 
 		test.finishTree(ast);
 
-		assertEquals(1, test.getUniqueOperators());
-		assertEquals(1, test.getUniqueOperands());
-		assertEquals(1, test.getOperands());
+		assertEquals(1.0, test.getUniqueOperators(), 0.1);
+		assertEquals(1.0 , test.getUniqueOperands(), 0.1);
+		assertEquals(1.0, test.getOperands(), 0.1);
 	}
 
-	// This is the function that we will be doing all of our tests from, since all
-	// the others require mocking private fields thta we have not yet learned how to
-	// do.
-	// AAA = Arrange, Act, Assert
+	@Mock
+	HalsteadDifficulty tester = mock(HalsteadDifficulty.class);
+
 	@Test
 	public void testGetHalsteadDifficulty1() {
-		HalsteadDifficulty test = new HalsteadDifficulty();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		HalsteadDifficulty test = spy(new HalsteadDifficulty());
+		DetailAST ast = new DetailAST();
 
+		doReturn(1.0).when(test).getOperands(); // operand
+		doReturn(1.0).when(test).getUniqueOperators(); // operator
+		doReturn(1.0).when(test).getUniqueOperands(); // operator
 		test.beginTree(ast); // begin the tree
-
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
-		test.visitToken(ast);
 
 		test.finishTree(ast);
 
-		// (unique operators / 2)(operands / unique operands
+		// halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands)
+		// halsteadDifficulty = (1 / 2) * (1 / 1) = 1/2
 		assertEquals(0.5, test.getHalsteadDifficulty(), 0.1);
 	}
-
+	
 	@Test
 	public void testGetHalsteadDifficulty2() {
-		HalsteadDifficulty test = new HalsteadDifficulty();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		HalsteadDifficulty test = spy(new HalsteadDifficulty());
+		DetailAST ast = new DetailAST();
 
+		doReturn(20.0).when(test).getOperands(); // operand
+		doReturn(1.0).when(test).getUniqueOperators(); // operator
+		doReturn(1.0).when(test).getUniqueOperands(); // operator
 		test.beginTree(ast); // begin the tree
-
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
-		for (int i = 0; i < 20; i++) { // do 20 operands
-			test.visitToken(ast);
-		}
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
-		test.visitToken(ast);
 
 		test.finishTree(ast);
 
-		// (unique operators / 2)(operands / unique operands
+		// halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands)
+		// halsteadDifficulty = (1 / 2) * (20 / 1) = 10
 		assertEquals(10, test.getHalsteadDifficulty(), 0.1);
 	}
-
+	
 	@Test
 	public void testGetHalsteadDifficulty3() {
-		HalsteadDifficulty test = new HalsteadDifficulty();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		HalsteadDifficulty test = spy(new HalsteadDifficulty());
+		DetailAST ast = new DetailAST();
 
+		doReturn(20.0).when(test).getOperands(); // operand
+		doReturn(20.0).when(test).getUniqueOperators(); // operator
+		doReturn(1.0).when(test).getUniqueOperands(); // operator
 		test.beginTree(ast); // begin the tree
-
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
-
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
-		for (int i = 0; i < 20; i++) { // do 20 operators
-			test.visitToken(ast);
-		}
 
 		test.finishTree(ast);
 
-		// (unique operators / 2)(operands / unique operands
-		assertEquals(0.5, test.getHalsteadDifficulty(), 0.1);
+		// halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands)
+		// halsteadDifficulty = (20 / 2) * (20 / 1) = 200
+		assertEquals(200, test.getHalsteadDifficulty(), 0.1);
 	}
-
+	
 	@Test
 	public void testGetHalsteadDifficulty4() {
-		HalsteadDifficulty test = new HalsteadDifficulty();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		HalsteadDifficulty test = spy(new HalsteadDifficulty());
+		DetailAST ast = new DetailAST();
 
+		doReturn(37.0).when(test).getOperands(); // operand
+		doReturn(15.0).when(test).getUniqueOperators(); // operator
+		doReturn(11.0).when(test).getUniqueOperands(); // operator
 		test.beginTree(ast); // begin the tree
-
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand 1
-		for (int i = 0; i < 20; i++) { // do 20 operands
-			test.visitToken(ast);
-		}
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator 1
-		for (int i = 0; i < 20; i++) { // do 20 operators
-			test.visitToken(ast);
-		}
-
-		// Now lets get some more unique operators and operands in there.
-
-		doReturn(TokenTypes.IDENT).when(ast).getType(); // operand 2
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.NUM_INT).when(ast).getType(); // operand 3
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.DEC).when(ast).getType(); // operator 2
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.LOR).when(ast).getType(); // operator 3
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.PLUS).when(ast).getType(); // operator 4
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.COMMA).when(ast).getType(); // operator 5
-		test.visitToken(ast);
 
 		test.finishTree(ast);
 
-		// (unique operators / 2)(operands / unique operands
-		assertEquals(18.3333, test.getHalsteadDifficulty(), 0.5);
+		// halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands)
+		// halsteadDifficulty = (15 / 2) * (37 / 11) = 25.22727
+		assertEquals(25.22727, test.getHalsteadDifficulty(), 0.1);
 	}
 }

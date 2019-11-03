@@ -55,7 +55,7 @@ public class HalsteadEffort extends AbstractCheck {
 		halsteadDifficulty.finishTree(rootAST);
 		halsteadVolume.finishTree(rootAST);
 
-		int difficulty = getHalsteadDifficulty(); // using getters to make whitebox testing easier
+		double difficulty = getHalsteadDifficulty(); // using getters to make whitebox testing easier
 		double volume = getHalsteadVolume();
 
 		halsteadEffort = difficulty * volume; //calculate halsteadEffort
@@ -73,7 +73,7 @@ public class HalsteadEffort extends AbstractCheck {
 	}
 
 	// getters for whitebox testing
-	public int getHalsteadDifficulty() {
+	public double getHalsteadDifficulty() {
 		return halsteadDifficulty.getHalsteadDifficulty();
 	}
 

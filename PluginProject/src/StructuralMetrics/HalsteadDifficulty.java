@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class HalsteadDifficulty extends AbstractCheck {
 
-	private int halsteadDifficulty;
+	private double halsteadDifficulty;
 
 	private OperandCountCheck operandCount = new OperandCountCheck(); //creating the checks that will get run within this check
 	private OperatorCountCheck operatorCount = new OperatorCountCheck();
@@ -48,12 +48,14 @@ public class HalsteadDifficulty extends AbstractCheck {
 	// This is the function where the halstead volume gets calculated.
 	@Override
 	public void finishTree(DetailAST rootAST) {
-		int uniqueOperators = getUniqueOperators(); // using getters to make whitebox testing easier
-		int uniqueOperands = getUniqueOperands();
-		int operands = getOperands();
-
 		// formula for calculating halstead difficulty
-		halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands);
+		double diff = (getUniqueOperators() / 2);  // using getters to make whitebox testing easier
+		double iculty = (getOperands() / getUniqueOperands());
+		
+		System.out.println(diff);
+		System.out.println(iculty);
+		
+		halsteadDifficulty = diff * iculty;
 
 		try { // try-catch log since it can only be called from a treewalker.
 			log(0, "Halstead Difficulty: " + halsteadDifficulty);
@@ -63,21 +65,21 @@ public class HalsteadDifficulty extends AbstractCheck {
 	}
 
 	// Public getter for the halstead length.
-	public int getHalsteadDifficulty() {
+	public double getHalsteadDifficulty() {
 		return halsteadDifficulty;
 	}
 
 	// getters for whitebox testing
-	public int getUniqueOperators() {
-		return operatorCount.getUniqueCount();
+	public double getUniqueOperators() {
+		return (double) operatorCount.getUniqueCount();
 	}
 
-	public int getUniqueOperands() {
-		return operandCount.getUniqueCount();
+	public double getUniqueOperands() {
+		return (double) operandCount.getUniqueCount();
 	}
 
-	public int getOperands() {
-		return operandCount.getCount();
+	public double getOperands() {
+		return (double) operandCount.getCount();
 	}
 
 	//token types from checks that are depending on
