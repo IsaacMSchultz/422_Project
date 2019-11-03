@@ -7,7 +7,7 @@ class NumberOfCastsCheck3 { // total of: 3
         double d = 1.2, e = 3.5, f = 34.1;
         a = (int) d;
         e = (double) b;
-        c = (double) a;
+        c = (int) a;
         // a = (int) d;
         // e = (double) b;
         // c = a;

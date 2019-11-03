@@ -79,7 +79,7 @@ public class HalsteadEffort extends AbstractCheck {
 	}
 
 	public double getHalsteadVolume() {
-		halsteadVolume.getHalsteadVolume();
+		return halsteadVolume.getHalsteadVolume();
 	}
 
 	//token types from checks that are depending on
