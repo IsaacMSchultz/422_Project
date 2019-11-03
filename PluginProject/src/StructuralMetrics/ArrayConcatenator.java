@@ -13,8 +13,8 @@ public final class ArrayConcatenator {
 			arrThree[i + index] = arrOne[i];
 		}
 
-//		System.out.println("1: " + arrOne.length + ", 2: " + arrTwo.length + ", 3: " + arrThree.length);
-		
+		//		System.out.println("1: " + arrOne.length + ", 2: " + arrTwo.length + ", 3: " + arrThree.length);
+
 		return arrThree;
 	}
 }

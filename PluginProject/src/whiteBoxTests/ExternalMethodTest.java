@@ -4,7 +4,6 @@
 */
 package whiteBoxTests;
 
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;
 
@@ -19,26 +18,26 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import StructuralMetrics.ExternalMethodCheck;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({DetailAST.class})
+@PrepareForTest({ DetailAST.class })
 public class ExternalMethodTest {
-	
+
 	ExternalMethodCheck extChk = new ExternalMethodCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
-	
+
 	@Test
 	public void testGetDefaultTokens() {
-		assertArrayEquals(new int[] {TokenTypes.METHOD_CALL}, extChk.getDefaultTokens());
+		assertArrayEquals(new int[] { TokenTypes.METHOD_CALL }, extChk.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		assertArrayEquals(new int[] {TokenTypes.METHOD_CALL}, extChk.getAcceptableTokens());
+		assertArrayEquals(new int[] { TokenTypes.METHOD_CALL }, extChk.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
 		assertArrayEquals(new int[0], extChk.getRequiredTokens());
-	} 
+	}
 
 	@Test
 	public void testVisitTokenDetailAST() {

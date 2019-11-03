@@ -9,14 +9,14 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import StructuralMetrics.NumberOfCastsCheck;
 
 public class NumberOfCastsBlackBoxTest {
-	
+
 	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\NumberOfCastsCheck\\NumberOfCastsCheck";
 
 	@Test
 	public void test1() {
-		NumberOfCastsCheck c = new NumberOfCastsCheck(); 
+		NumberOfCastsCheck c = new NumberOfCastsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
-		
+
 		try {
 			t.runTree(); //try to execute the check on the whole tree
 		} catch (CheckstyleException e) {
@@ -26,12 +26,12 @@ public class NumberOfCastsBlackBoxTest {
 
 		assertEquals(2, c.getCount()); //determine if execution created the correct value
 	}
-	
+
 	@Test
 	public void test2() {
-		NumberOfCastsCheck c = new NumberOfCastsCheck(); 
+		NumberOfCastsCheck c = new NumberOfCastsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
-		
+
 		try {
 			t.runTree(); //try to execute the check on the whole tree
 		} catch (CheckstyleException e) {
@@ -41,12 +41,12 @@ public class NumberOfCastsBlackBoxTest {
 
 		assertEquals(0, c.getCount()); //determine if execution created the correct value
 	}
-	
+
 	@Test
 	public void test3() {
-		NumberOfCastsCheck c = new NumberOfCastsCheck(); 
+		NumberOfCastsCheck c = new NumberOfCastsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "3.java", c); //create a tester with filepath, and the check c
-		
+
 		try {
 			t.runTree(); //try to execute the check on the whole tree
 		} catch (CheckstyleException e) {

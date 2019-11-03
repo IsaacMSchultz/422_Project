@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class HalsteadEffort extends AbstractCheck {
 
 	private double halsteadEffort;
-	
+
 	// I AM IN THE PROCESS OF TURNING OPERAND INTO HALSTEAD VOLUME AND OPERATOR INTO HALSTEAD VOCABULARY!!!!!!
 
 	private HalsteadDifficulty halsteadDifficulty = new HalsteadDifficulty();
@@ -59,11 +59,10 @@ public class HalsteadEffort extends AbstractCheck {
 		double volume = getHalsteadVolume();
 
 		halsteadEffort = difficulty * volume; //calculate halsteadEffort
-		
+
 		try { // try-catch log since it can only be called from a treewalker.
 			log(0, "Halstead Effort: " + halsteadEffort);
-		}
-		catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			System.out.println("Can't run log unless called from treewalker!");
 		}
 	}
@@ -90,12 +89,14 @@ public class HalsteadEffort extends AbstractCheck {
 
 	@Override
 	public int[] getAcceptableTokens() {
-		return ArrayConcatenator.concatArray(halsteadDifficulty.getAcceptableTokens(), halsteadVolume.getAcceptableTokens());
+		return ArrayConcatenator.concatArray(halsteadDifficulty.getAcceptableTokens(),
+				halsteadVolume.getAcceptableTokens());
 	}
 
 	@Override
 	public final int[] getRequiredTokens() {
-		return ArrayConcatenator.concatArray(halsteadDifficulty.getRequiredTokens(), halsteadVolume.getRequiredTokens());
+		return ArrayConcatenator.concatArray(halsteadDifficulty.getRequiredTokens(),
+				halsteadVolume.getRequiredTokens());
 	}
 
 	// Simple function to create an ArrayList from an integer array

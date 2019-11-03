@@ -87,7 +87,7 @@ public class HalsteadDifficultyTest {
 
 		test.finishTree(ast);
 
-	// (unique operators / 2)(operands / unique operands
+		// (unique operators / 2)(operands / unique operands
 		assertEquals(10, test.getHalsteadDifficulty(), 0.1);
 	}
 

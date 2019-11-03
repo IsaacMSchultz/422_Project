@@ -18,7 +18,7 @@ import StructuralMetrics.MaintainabilityIndex;
 import StructuralMetrics.CyclomaticComplexityCounter;;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({DetailAST.class, CyclomaticComplexityCounter.class, MaintainabilityIndex.class})
+@PrepareForTest({ DetailAST.class, CyclomaticComplexityCounter.class, MaintainabilityIndex.class })
 public class MaintainabilityIndexTest {
 
 	int[] expectedTokens = { TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC,
@@ -30,14 +30,14 @@ public class MaintainabilityIndexTest {
 			TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.SL,
 			TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR, TokenTypes.QUESTION,
 			TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG };
-	
-//	@InjectMocks
-//	private CyclomaticComplexityCounter cyclomaticComplexity = new CyclomaticComplexityCounter(); // mocking this class
-//
-//	@Before
-//	public void setUp() {
-//	    MaintainabilityIndex spy = new 
-//	}
+
+	//	@InjectMocks
+	//	private CyclomaticComplexityCounter cyclomaticComplexity = new CyclomaticComplexityCounter(); // mocking this class
+	//
+	//	@Before
+	//	public void setUp() {
+	//	    MaintainabilityIndex spy = new 
+	//	}
 
 	@Test
 	public void testGetDefaultTokens() {
@@ -68,7 +68,7 @@ public class MaintainabilityIndexTest {
 	public void testGetMaintainabilityIndex1() {
 		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
-		
+
 		try {
 			PowerMockito.doReturn(10).when(test, "getCyclomaticComplexity"); //set CyclomaticComplexity to 10
 			PowerMockito.doReturn(100).when(test, "getLOC"); // mock the number of lines to be 100
@@ -95,7 +95,7 @@ public class MaintainabilityIndexTest {
 	public void testGetMaintainabilityIndex2() {
 		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
-		
+
 		try {
 			PowerMockito.doReturn(10).when(test, "getCyclomaticComplexity"); //set CyclomaticComplexity to 10
 			PowerMockito.doReturn(100).when(test, "getLOC"); // mock the number of lines to be 100
@@ -124,7 +124,7 @@ public class MaintainabilityIndexTest {
 	public void testGetMaintainabilityIndex3() {
 		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
-		
+
 		try {
 			PowerMockito.doReturn(10).when(test, "getCyclomaticComplexity"); //set CyclomaticComplexity to 10
 			PowerMockito.doReturn(100).when(test, "getLOC"); // mock the number of lines to be 100
@@ -154,7 +154,7 @@ public class MaintainabilityIndexTest {
 	public void testGetMaintainabilityIndex4() {
 		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
-		
+
 		try {
 			PowerMockito.doReturn(10).when(test, "getCyclomaticComplexity"); //set CyclomaticComplexity to 10
 			PowerMockito.doReturn(100).when(test, "getLOC"); // mock the number of lines to be 100

@@ -15,8 +15,8 @@ import StructuralMetrics.NumberOfCastsCheck;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DetailAST.class)
 public class NumberOfCastsTest {
-	
-	int[] expectedTokens = {TokenTypes.TYPECAST};
+
+	int[] expectedTokens = { TokenTypes.TYPECAST };
 
 	@Test
 	public void testGetDefaultTokens() {
@@ -59,7 +59,7 @@ public class NumberOfCastsTest {
 		// (operators  +operands) * log2(unique operators + unique operands)
 		assertEquals(1, test.getCount());
 	}
-	
+
 	@Test
 	public void testGetCasts2() {
 		NumberOfCastsCheck test = new NumberOfCastsCheck();
@@ -76,7 +76,7 @@ public class NumberOfCastsTest {
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
-		
+
 		// (operators  +operands) * log2(unique operators + unique operands)
 		assertEquals(20, test.getCount());
 	}

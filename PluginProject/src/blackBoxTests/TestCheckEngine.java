@@ -29,7 +29,7 @@ public class TestCheckEngine {
 	private String filePath; //generic reference to where the folder containing all our test files is located
 	private DetailAST ast;
 	private AbstractCheck check;
-	
+
 	/**
 	 * 
 	 * @param fp Path to the input .java file to run the check on.
@@ -38,7 +38,7 @@ public class TestCheckEngine {
 	public TestCheckEngine(String fp, AbstractCheck checkToTest) {
 		setFilePath(fp); //set the internal filepath
 		setCheck(checkToTest); // set the check that will be tested
-		
+
 		try {
 			ast = buildAST(fp); //try to build the AST from the source file
 		} catch (CheckstyleException e1) {
@@ -46,25 +46,26 @@ public class TestCheckEngine {
 			e1.printStackTrace();
 		} catch (IOException e2) {
 			System.out.println("IOException!");
-			e2.printStackTrace();;
+			e2.printStackTrace();
+			;
 		}
 	}
-	
+
 	// setter for the filepath
 	public void setFilePath(String fp) {
 		filePath = fp;
 	}
-	
+
 	// setter for the check
 	public void setCheck(AbstractCheck checkToTest) {
 		check = checkToTest;
 	}
-	
+
 	// Using the base filePath, this function creates a detailASTree by parsing the file passed in fileName
 	public DetailAST buildAST(String fileName) throws IOException, CheckstyleException {
 		File f = new File(fileName);
 		DetailAST root;
-		
+
 		if (check.isCommentNodesRequired()) {
 			root = JavaParser.parseFile(f, Options.WITH_COMMENTS);
 		} else {
@@ -74,7 +75,7 @@ public class TestCheckEngine {
 		}
 		return root;
 	}
-	
+
 	//Execute the check on the tree
 	public void runTree() throws CheckstyleException {
 		check.configure(new DefaultConfiguration("Local"));
@@ -88,17 +89,17 @@ public class TestCheckEngine {
 	private void visitTokens(DetailAST root) {
 		List<Integer> tokens = IntStream.of(check.getAcceptableTokens()).boxed().collect(Collectors.toList()); //convert the array of acceptable tokens to a list
 		DetailAST curNode = root; //set current node to the root
-        while (curNode != null) { //while there are still nodes in the tree
-        	if (tokens.contains(curNode.getType())) //if the node selected is included in the acceptable Tokens of the check
-        		check.visitToken(curNode);
-            DetailAST toVisit = curNode.getFirstChild(); //check if there is a node after this one
-            while (curNode != null && toVisit == null) { //find children nodes
-            	if (tokens.contains(curNode.getType())) //if the node selected is included in the acceptable Tokens of the check
-            		check.leaveToken(curNode);
-                toVisit = curNode.getNextSibling(); //check next node
-                curNode = curNode.getParent(); // reset current node
-            }
-            curNode = toVisit; //move on to the next node
-        }
+		while (curNode != null) { //while there are still nodes in the tree
+			if (tokens.contains(curNode.getType())) //if the node selected is included in the acceptable Tokens of the check
+				check.visitToken(curNode);
+			DetailAST toVisit = curNode.getFirstChild(); //check if there is a node after this one
+			while (curNode != null && toVisit == null) { //find children nodes
+				if (tokens.contains(curNode.getType())) //if the node selected is included in the acceptable Tokens of the check
+					check.leaveToken(curNode);
+				toVisit = curNode.getNextSibling(); //check next node
+				curNode = curNode.getParent(); // reset current node
+			}
+			curNode = toVisit; //move on to the next node
+		}
 	}
 }

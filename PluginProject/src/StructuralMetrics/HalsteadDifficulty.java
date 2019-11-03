@@ -53,7 +53,7 @@ public class HalsteadDifficulty extends AbstractCheck {
 		int operands = getOperands();
 
 		// formula for calculating halstead difficulty
-		halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands); 
+		halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands);
 
 		try { // try-catch log since it can only be called from a treewalker.
 			log(0, "Halstead Difficulty: " + halsteadDifficulty);
@@ -82,7 +82,7 @@ public class HalsteadDifficulty extends AbstractCheck {
 
 	//token types from checks that are depending on
 	@Override
-	public int[] getDefaultTokens() { 
+	public int[] getDefaultTokens() {
 		return ArrayConcatenator.concatArray(operandCount.getDefaultTokens(), operatorCount.getDefaultTokens());
 	}
 

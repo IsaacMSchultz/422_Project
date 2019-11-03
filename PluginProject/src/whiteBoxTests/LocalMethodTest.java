@@ -4,7 +4,6 @@
 */
 package whiteBoxTests;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -18,20 +17,20 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import StructuralMetrics.LocalMethodCheck;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({DetailAST.class})
+@PrepareForTest({ DetailAST.class })
 public class LocalMethodTest {
 
 	LocalMethodCheck locChk = new LocalMethodCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
 
-	@Test 
+	@Test
 	public void testGetDefaultTokens() {
-		assertArrayEquals(new int[] {TokenTypes.METHOD_CALL}, locChk.getDefaultTokens());
+		assertArrayEquals(new int[] { TokenTypes.METHOD_CALL }, locChk.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		assertArrayEquals(new int[] {TokenTypes.METHOD_CALL}, locChk.getAcceptableTokens());
+		assertArrayEquals(new int[] { TokenTypes.METHOD_CALL }, locChk.getAcceptableTokens());
 	}
 
 	@Test

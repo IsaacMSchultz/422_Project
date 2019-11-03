@@ -20,8 +20,7 @@ public class NumberOfCastsCheck extends AbstractCheck {
 	public void finishTree(DetailAST rootAST) {
 		try {
 			log(rootAST, "Number of casts: {0}.", casts);
-		}
-		catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			System.out.println("Can't run log unless called from treewalker!");
 		}
 	}

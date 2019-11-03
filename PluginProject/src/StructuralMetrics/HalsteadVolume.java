@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class HalsteadVolume extends AbstractCheck {
 
 	private double halsteadVolume;
-	
+
 	// I AM IN THE PROCESS OF TURNING OPERAND INTO HALSTEAD VOLUME AND OPERATOR INTO HALSTEAD VOCABULARY!!!!!!
 
 	private HalsteadLength halsteadLength = new HalsteadLength();
@@ -46,11 +46,10 @@ public class HalsteadVolume extends AbstractCheck {
 
 		System.out.println("length: " + length + " vocab: " + vocabulary);
 		halsteadVolume = length * log2(vocabulary);
-		
+
 		try {
 			log(0, "Halstead Volume: " + halsteadVolume);
-		}
-		catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			System.out.println("Can't run log unless called from treewalker!");
 		}
 	}
@@ -59,7 +58,7 @@ public class HalsteadVolume extends AbstractCheck {
 	public double getHalsteadVolume() {
 		return halsteadVolume;
 	}
-	
+
 	// getters for whitebox testing
 	public int getHalsteadLength() {
 		return halsteadLength.getHalsteadLength();
@@ -69,7 +68,6 @@ public class HalsteadVolume extends AbstractCheck {
 		return halsteadVocabulary.getHalsteadVocabulary();
 	}
 
-
 	@Override
 	public int[] getDefaultTokens() {
 		return ArrayConcatenator.concatArray(halsteadLength.getDefaultTokens(), halsteadVocabulary.getDefaultTokens());
@@ -77,14 +75,16 @@ public class HalsteadVolume extends AbstractCheck {
 
 	@Override
 	public int[] getAcceptableTokens() {
-		return ArrayConcatenator.concatArray(halsteadLength.getAcceptableTokens(), halsteadVocabulary.getAcceptableTokens());
+		return ArrayConcatenator.concatArray(halsteadLength.getAcceptableTokens(),
+				halsteadVocabulary.getAcceptableTokens());
 	}
 
 	@Override
 	public final int[] getRequiredTokens() {
-		return ArrayConcatenator.concatArray(halsteadLength.getRequiredTokens(), halsteadVocabulary.getRequiredTokens());
+		return ArrayConcatenator.concatArray(halsteadLength.getRequiredTokens(),
+				halsteadVocabulary.getRequiredTokens());
 	}
-	
+
 	public static double log2(int x) {
 		return (Math.log(x) / Math.log(2));
 	}

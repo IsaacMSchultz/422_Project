@@ -18,7 +18,7 @@ public class OperandCountCheck extends AbstractCheck {
 	public void visitToken(DetailAST aAST) {
 		operandCount++;
 
-//		System.out.println(aAST.getText());
+		//		System.out.println(aAST.getText());
 		uniqueOperands.add(aAST.getText()); // Assuming the text of the operand is what makes it unique!
 	}
 

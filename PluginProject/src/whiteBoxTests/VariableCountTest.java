@@ -4,7 +4,6 @@
 */
 package whiteBoxTests;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -18,22 +17,22 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import StructuralMetrics.VariableCountCheck;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({DetailAST.class})
+@PrepareForTest({ DetailAST.class })
 public class VariableCountTest {
 
-VariableCountCheck varChk = new VariableCountCheck();
-DetailAST ast = PowerMockito.mock(DetailAST.class);
-	
+	VariableCountCheck varChk = new VariableCountCheck();
+	DetailAST ast = PowerMockito.mock(DetailAST.class);
+
 	@Test
 	public void testGetDefaultTokens() {
-		assertArrayEquals(new int[] {TokenTypes.VARIABLE_DEF}, varChk.getDefaultTokens());
+		assertArrayEquals(new int[] { TokenTypes.VARIABLE_DEF }, varChk.getDefaultTokens());
 	}
 
-	@Test 
+	@Test
 	public void testGetAcceptableTokens() {
-		assertArrayEquals(new int[] {TokenTypes.VARIABLE_DEF}, varChk.getAcceptableTokens());
+		assertArrayEquals(new int[] { TokenTypes.VARIABLE_DEF }, varChk.getAcceptableTokens());
 	}
- 
+
 	@Test
 	public void testGetRequiredTokens() {
 		assertArrayEquals(new int[0], varChk.getRequiredTokens());
@@ -42,7 +41,7 @@ DetailAST ast = PowerMockito.mock(DetailAST.class);
 	@Test
 	public void testVisitTokenDetailAST() {
 		varChk.visitToken(ast);
-		
+
 		assertEquals(1, varChk.getCount());
 	}
 
@@ -50,12 +49,12 @@ DetailAST ast = PowerMockito.mock(DetailAST.class);
 	public void testBeginTreeDetailAST() {
 		assertEquals(0, varChk.getCount());
 	}
-	
+
 	@Test
 	public void testGetActualCount() {
 		assertEquals(0, varChk.getActualCount());
 	}
-	
+
 	@Test
 	public void testGetVariableCount() {
 		assertEquals(0, varChk.getVariableCount());
