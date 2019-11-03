@@ -9,6 +9,7 @@ import static org.mockito.Mockito.doReturn;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -20,6 +21,7 @@ import StructuralMetrics.ExternalMethodCheck;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ DetailAST.class })
 public class ExternalMethodTest {
+	
 
 	ExternalMethodCheck extChk = new ExternalMethodCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
@@ -43,22 +45,26 @@ public class ExternalMethodTest {
 	public void testVisitTokenDetailAST1() {
 		extChk.beginTree(ast);
 		doReturn(TokenTypes.METHOD_CALL).when(ast).getType();
-		doReturn(TokenTypes.DOT).when(ast).getType();
 		//not sure how to return a token type inside of a method. 
 		extChk.visitToken(ast);
 		//still zero because ast.findfirsttoken inside visit token evaluates to null
-		assertEquals(1, extChk.getCount());
+		assertEquals(0, extChk.getCount());
 	}
 	
 	@Test
 	public void testVisitTokenDetailAST2() {
 		extChk.beginTree(ast);
-		doReturn(TokenTypes.METHOD_CALL).when(ast).getType();
-		doReturn(TokenTypes.DOT).when(ast).getType();
-		//not sure how to return a token type inside of a method. 
+		
+		DetailAST testAST = PowerMockito.mock(DetailAST.class); //create an AST that we can mock as the parent of the method call token
+		
+		doReturn(TokenTypes.DOT).when(testAST).getType(); //mock the parent being a DOT
+		
+		doReturn(TokenTypes.METHOD_CALL).when(ast).getType(); //mock the AST being a method call
+		doReturn(testAST).when(ast).findFirstToken(TokenTypes.DOT); //mock the child to return our mocked parent
+
 		extChk.visitToken(ast);
-		//still zero because ast.findfirsttoken inside visit token evaluates to null
-		assertEquals(1, extChk.getCount());
+
+		assertEquals(1, extChk.getCount()); //should be an external method call
 	}
 
 	@Test

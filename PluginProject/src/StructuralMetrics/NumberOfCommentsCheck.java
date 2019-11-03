@@ -72,7 +72,7 @@ public class NumberOfCommentsCheck extends AbstractCheck {
 
 	@Override
 	public int[] getAcceptableTokens() {
-		return new int[] { TokenTypes.COMMENT_CONTENT };
+		return getDefaultTokens();
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class NumberOfCommentsCheck extends AbstractCheck {
 
 	@Override
 	public int[] getRequiredTokens() {
-		return new int[0];
+		return getDefaultTokens();
 	}
 
 	@Override

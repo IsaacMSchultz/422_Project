@@ -56,6 +56,6 @@ public class OperatorCountCheck extends AbstractCheck {
 
 	@Override
 	public int[] getRequiredTokens() {
-		return new int[0];
+		return getDefaultTokens();
 	}
 }

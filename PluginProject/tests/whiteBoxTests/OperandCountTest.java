@@ -42,10 +42,6 @@ public class OperandCountTest {
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
 
-	// This is the function that we will be doing all of our tests from, since all
-	// the others require mocking private fields thta we have not yet learned how to
-	// do.
-	// AAA = Arrange, Act, Assert
 	@Test
 	public void testGetOperandCount1() {
 		OperandCountCheck test = new OperandCountCheck();
@@ -53,10 +49,8 @@ public class OperandCountTest {
 
 		test.beginTree(ast); // begin the tree
 
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
+		doReturn(expectedTokens[0]).when(ast).getType(); // operand
+		doReturn("operand").when(ast).getText();
 		test.visitToken(ast);
 
 		assertEquals(1, test.getCount());
@@ -70,14 +64,11 @@ public class OperandCountTest {
 
 		test.beginTree(ast); // begin the tree
 
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
+		doReturn(expectedTokens[0]).when(ast).getType(); // operand
+		doReturn("operand").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operands
 			test.visitToken(ast);
-			System.out.println("DSJKIOFDSKJFKLJDSFH");
 		}
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
-		test.visitToken(ast);
 
 		assertEquals(20, test.getCount());
 		assertEquals(1, test.getUniqueCount());
@@ -90,57 +81,33 @@ public class OperandCountTest {
 
 		test.beginTree(ast); // begin the tree
 
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
-
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
-		for (int i = 0; i < 20; i++) { // do 20 operators
-			test.visitToken(ast);
-		}
-
-		assertEquals(20, test.getCount());
-		assertEquals(1, test.getUniqueCount());
-	}
-
-	@Test
-	public void testGetOperandCount4() {
-		OperandCountCheck test = new OperandCountCheck();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
-
-		test.beginTree(ast); // begin the tree
-
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand 1
+		doReturn(expectedTokens[0]).when(ast).getType(); // operand 1
+		doReturn("operand1").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operands
 			test.visitToken(ast);
 		}
+//		System.out.println(ast.getType());
 
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator 1
+		doReturn(expectedTokens[1]).when(ast).getType(); // operator 2
+		doReturn("operand2").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
+//		System.out.println(ast.getType());
 
 		// Now lets get some more unique operators and operands in there.
 
-		doReturn(TokenTypes.IDENT).when(ast).getType(); // operand 2
+		doReturn(expectedTokens[2]).when(ast).getType(); // operand 3
+		doReturn("operand3").when(ast).getText();
 		test.visitToken(ast);
+//		System.out.println(ast.getType());
 
-		doReturn(TokenTypes.NUM_INT).when(ast).getType(); // operand 3
+		doReturn(expectedTokens[3]).when(ast).getType(); // operand 4
+		doReturn("operand4").when(ast).getText();
 		test.visitToken(ast);
+//		System.out.println(ast.getType());
 
-		doReturn(TokenTypes.DEC).when(ast).getType(); // operator 2
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.LOR).when(ast).getType(); // operator 3
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.PLUS).when(ast).getType(); // operator 4
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.COMMA).when(ast).getType(); // operator 5
-		test.visitToken(ast);
-
-		assertEquals(24, test.getCount());
-		assertEquals(5, test.getUniqueCount());
+		assertEquals(42, test.getCount());
+		assertEquals(4, test.getUniqueCount());
 	}
 }

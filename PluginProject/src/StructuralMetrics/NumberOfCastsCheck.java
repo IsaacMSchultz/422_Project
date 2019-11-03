@@ -36,11 +36,11 @@ public class NumberOfCastsCheck extends AbstractCheck {
 
 	@Override
 	public int[] getAcceptableTokens() {
-		return new int[] { TokenTypes.TYPECAST };
+		return getDefaultTokens();
 	}
 
 	@Override
 	public int[] getRequiredTokens() {
-		return new int[0];
+		return getDefaultTokens();
 	}
 }

@@ -49,13 +49,11 @@ public class OperandCountCheck extends AbstractCheck {
 
 	@Override
 	public int[] getAcceptableTokens() {
-		// TODO Auto-generated method stub
 		return getDefaultTokens();
 	}
 
 	@Override
 	public int[] getRequiredTokens() {
-		// TODO Auto-generated method stub
-		return new int[0];
+		return getDefaultTokens();
 	}
 }

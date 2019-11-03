@@ -53,9 +53,6 @@ public class NumberOfCastsTest {
 		doReturn(TokenTypes.TYPECAST).when(ast).getType(); // operand
 		test.visitToken(ast);
 
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
-		test.visitToken(ast);
-
 		// (operators  +operands) * log2(unique operators + unique operands)
 		assertEquals(1, test.getCount());
 	}
@@ -68,11 +65,6 @@ public class NumberOfCastsTest {
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.TYPECAST).when(ast).getType(); // operand
-		for (int i = 0; i < 20; i++) { // do 20 operators
-			test.visitToken(ast);
-		}
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}

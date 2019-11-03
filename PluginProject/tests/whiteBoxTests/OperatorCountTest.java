@@ -11,6 +11,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 
+import StructuralMetrics.OperandCountCheck;
 import StructuralMetrics.OperatorCountCheck;
 import StructuralMetrics.OperatorCountCheck;
 
@@ -48,21 +49,15 @@ public class OperatorCountTest {
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
 
-	// This is the function that we will be doing all of our tests from, since all
-	// the others require mocking private fields thta we have not yet learned how to
-	// do.
-	// AAA = Arrange, Act, Assert
 	@Test
-	public void testGetOperatorCount1() {
-		OperatorCountCheck test = new OperatorCountCheck();
+	public void testGetOperandCount1() {
+		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
 
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
+		doReturn(expectedTokens[0]).when(ast).getType(); // operand
+		doReturn("operand").when(ast).getText();
 		test.visitToken(ast);
 
 		assertEquals(1, test.getCount());
@@ -70,36 +65,14 @@ public class OperatorCountTest {
 	}
 
 	@Test
-	public void testGetOperatorCount2() {
-		OperatorCountCheck test = new OperatorCountCheck();
+	public void testGetOperandCount2() {
+		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
 
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
-		for (int i = 0; i < 20; i++) { // do 20 operands
-			test.visitToken(ast);
-		}
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
-		test.visitToken(ast);
-
-		assertEquals(1, test.getCount());
-		assertEquals(1, test.getUniqueCount());
-	}
-
-	@Test
-	public void testGetOperatorCount3() {
-		OperatorCountCheck test = new OperatorCountCheck();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
-
-		test.beginTree(ast); // begin the tree
-
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
-
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
+		doReturn(expectedTokens[0]).when(ast).getType(); // operator
+		doReturn("operator").when(ast).getText();
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
@@ -109,43 +82,27 @@ public class OperatorCountTest {
 	}
 
 	@Test
-	public void testGetOperatorCount4() {
-		OperatorCountCheck test = new OperatorCountCheck();
+	public void testGetOperandCount3() {
+		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
-
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand 1
-		for (int i = 0; i < 20; i++) { // do 20 operands
-			test.visitToken(ast);
+		
+		int count = 0;
+		for(int operator : expectedTokens) {
+			doReturn(operator).when(ast).getType();
+			doReturn("operator" + operator).when(ast).getText();
+			
+			for (int i = 0; i < 20; i++) { // do 20 operator
+				test.visitToken(ast);
+			}
+			
+			count++;
 		}
+		
+		int finalNumber = count * 20;
 
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator 1
-		for (int i = 0; i < 20; i++) { // do 20 operators
-			test.visitToken(ast);
-		}
-
-		// Now lets get some more unique operators and operands in there.
-
-		doReturn(TokenTypes.IDENT).when(ast).getType(); // operand 2
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.NUM_INT).when(ast).getType(); // operand 3
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.DEC).when(ast).getType(); // operator 2
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.LOR).when(ast).getType(); // operator 3
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.PLUS).when(ast).getType(); // operator 4
-		test.visitToken(ast);
-
-		doReturn(TokenTypes.COMMA).when(ast).getType(); // operator 5
-		test.visitToken(ast);
-
-		assertEquals(24, test.getCount());
-		assertEquals(5, test.getUniqueCount());
+		assertEquals(finalNumber, test.getCount());
+		assertEquals(count, test.getUniqueCount());
 	}
 }
