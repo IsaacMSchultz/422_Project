@@ -24,7 +24,7 @@ public class NumberOfCastsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getCasts()); //determine if execution created the correct value
+		assertEquals(2, c.getCount()); //determine if execution created the correct value
 	}
 	
 	@Test
@@ -39,7 +39,7 @@ public class NumberOfCastsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getCasts()); //determine if execution created the correct value
+		assertEquals(0, c.getCount()); //determine if execution created the correct value
 	}
 	
 	@Test
@@ -54,6 +54,6 @@ public class NumberOfCastsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(3, c.getCasts()); //determine if execution created the correct value
+		assertEquals(3, c.getCount()); //determine if execution created the correct value
 	}
 }

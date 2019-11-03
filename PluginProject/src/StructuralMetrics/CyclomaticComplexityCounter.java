@@ -55,7 +55,7 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
 		cyclomaticComplexity = 0;
 	}
 
-	public int getCycles() {
+	public int getCount() {
 		return cyclomaticComplexity;
 	}
 

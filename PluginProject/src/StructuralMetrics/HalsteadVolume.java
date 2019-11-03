@@ -41,8 +41,8 @@ public class HalsteadVolume extends AbstractCheck {
 		halsteadLength.finishTree(rootAST);
 		halsteadVocabulary.finishTree(rootAST);
 
-		int length = halsteadLength.getHalsteadLength();
-		int vocabulary = halsteadVocabulary.getHalsteadVocabulary();
+		int length = getHalsteadLength();
+		int vocabulary = getHalsteadVocabulary();
 
 		System.out.println("length: " + length + " vocab: " + vocabulary);
 		halsteadVolume = length * log2(vocabulary);
@@ -59,6 +59,16 @@ public class HalsteadVolume extends AbstractCheck {
 	public double getHalsteadVolume() {
 		return halsteadVolume;
 	}
+	
+	// getters for whitebox testing
+	public int getHalsteadLength() {
+		return halsteadLength.getHalsteadLength();
+	}
+
+	public int getHalsteadVocabulary() {
+		return halsteadVocabulary.getHalsteadVocabulary();
+	}
+
 
 	@Override
 	public int[] getDefaultTokens() {

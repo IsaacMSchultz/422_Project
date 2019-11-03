@@ -41,7 +41,7 @@ public class LinesOfCommentsCheck extends AbstractCheck {
 		return new int[] { TokenTypes.SINGLE_LINE_COMMENT, TokenTypes.BLOCK_COMMENT_BEGIN };
 	}
 
-	public int getLineCount() {
+	public int getCount() {
 		return this.lineCount;
 	}
 

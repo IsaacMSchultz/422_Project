@@ -31,7 +31,7 @@ public class NumberOfCommentsTest {
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast);
-		assertEquals(0, test.getCountComments());
+		assertEquals(0, test.getCount());
 	}
 
 	@Test
@@ -72,6 +72,6 @@ public class NumberOfCommentsTest {
 		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
 		test.visitToken(ast);
 
-		assertEquals(2, test.getCountComments());
+		assertEquals(2, test.getCount());
 	}
 }

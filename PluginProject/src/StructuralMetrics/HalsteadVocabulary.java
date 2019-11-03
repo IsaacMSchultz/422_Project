@@ -37,8 +37,8 @@ public class HalsteadVocabulary extends AbstractCheck {
 	// This is the function where the halstead volume gets calculated.
 	@Override
 	public void finishTree(DetailAST rootAST) {
-		int uniqueOperands = operandCount.getUniqueCount();
-		int uniqueOperators = operatorCount.getUniqueCount();
+		int uniqueOperands = getUniqueOperandCount();
+		int uniqueOperators = getUniqueOperatorCount();
 
 		halsteadVocabulary = uniqueOperands + uniqueOperators;
 		
@@ -53,6 +53,15 @@ public class HalsteadVocabulary extends AbstractCheck {
 	// Public getter for the halstead length.
 	public int getHalsteadVocabulary() {
 		return halsteadVocabulary;
+	}
+
+	// getters for whitebox testing
+	public int getUniqueOperandCount() {
+		return operandCount.getUniqueCount();
+	}
+
+	public int getUniqueOperatorCount() {
+		return operatorCount.getUniqueCount();
 	}
 
 	@Override

@@ -47,9 +47,9 @@ public class MaintainabilityIndex extends AbstractCheck {
 		halsteadVolume.finishTree(rootAST); 
 		
 		int G = getCyclomaticComplexity();
-		double V = halsteadVolume.getHalsteadVolume();
+		double V = getHalsteadVolume();
 		int LOC = getLOC();
-		System.out.println("cyclo: " + G + " volume: " + V + " LOC: " + LOC); // debug
+
 		MaintainabilityIndex = 171 - 5.2 * log2(V) - 0.23 * G - 16.2 * log2(LOC) + 50;
 		
 		try {
@@ -62,7 +62,7 @@ public class MaintainabilityIndex extends AbstractCheck {
 	}
 	
 	private int getCyclomaticComplexity() { //Using this function since trying to mock private fields' functions is really difficult.
-		return cyclomaticComplexity.getCycles();
+		return cyclomaticComplexity.getCount();
 	}
 	
 	private int getLOC() { //Using this function since trying to mock private fields' functions is really difficult.
@@ -71,6 +71,11 @@ public class MaintainabilityIndex extends AbstractCheck {
 	
 	public double getMaintainabilityIndex() {
 		return MaintainabilityIndex;
+	}
+	
+	// getter for whitebox testing
+	public double getHalsteadVolume() {
+		return halsteadVolume.getHalsteadVolume();
 	}
 
 	@Override

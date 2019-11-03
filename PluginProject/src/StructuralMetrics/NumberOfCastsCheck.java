@@ -26,7 +26,7 @@ public class NumberOfCastsCheck extends AbstractCheck {
 		}
 	}
 
-	public int getCasts() {
+	public int getCount() {
 		return casts;
 	}
 

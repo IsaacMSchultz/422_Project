@@ -57,7 +57,7 @@ public class NumberOfCastsTest {
 		test.visitToken(ast);
 
 		// (operators  +operands) * log2(unique operators + unique operands)
-		assertEquals(1, test.getCasts());
+		assertEquals(1, test.getCount());
 	}
 	
 	@Test
@@ -78,6 +78,6 @@ public class NumberOfCastsTest {
 		}
 		
 		// (operators  +operands) * log2(unique operators + unique operands)
-		assertEquals(20, test.getCasts());
+		assertEquals(20, test.getCount());
 	}
 }

@@ -45,8 +45,7 @@ public class NumberOfCommentsCheck extends AbstractCheck {
 		System.out.print(a);
 	}
 
-	public int getCountComments() {
-
+	public int getCount() {
 		return this.countComments;
 	}
 

@@ -37,15 +37,14 @@ public class HalsteadLength extends AbstractCheck {
 	// This is the function where the halstead volume gets calculated.
 	@Override
 	public void finishTree(DetailAST rootAST) {
-		int operands = operandCount.getCount();
-		int operators = operatorCount.getCount();
+		int operands = getOperandCount();
+		int operators = getOperatorCount();
 
 		halsteadLength = operands + operators;
-		
+
 		try {
 			log(0, "Halstead Length: " + halsteadLength);
-		}
-		catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			System.out.println("Can't run log unless called from treewalker!");
 		}
 	}
@@ -53,6 +52,15 @@ public class HalsteadLength extends AbstractCheck {
 	// Public getter for the halstead length.
 	public int getHalsteadLength() {
 		return halsteadLength;
+	}
+
+	// getters for whitebox testing
+	public int getOperandCount() {
+		return operandCount.getCount();
+	}
+
+	public int getOperatorCount() {
+		return operatorCount.getCount();
 	}
 
 	@Override
