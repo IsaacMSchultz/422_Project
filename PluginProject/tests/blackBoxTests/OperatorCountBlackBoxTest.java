@@ -24,7 +24,7 @@ public class OperatorCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(75, c.getCount()); //determine if execution created the correct value
+		assertEquals(76, c.getCount()); //determine if execution created the correct value
 	}
 	
 	@Test
@@ -38,7 +38,7 @@ public class OperatorCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(40, c.getUniqueCount()); //check if it found the 40 unique operators
+		assertEquals(39, c.getUniqueCount()); //check if it found the 40 unique operators
 	}
 	
 	@Test

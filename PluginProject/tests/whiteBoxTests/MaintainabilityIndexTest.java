@@ -10,6 +10,8 @@ import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,19 +31,33 @@ import StructuralMetrics.HalsteadVolume;;
 @PrepareForTest({ DetailAST.class, CyclomaticComplexityCounter.class, MaintainabilityIndex.class })
 public class MaintainabilityIndexTest {
 
-	Integer[] tokens = { TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC,
-			TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS, TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN,
-			TokenTypes.BNOT, TokenTypes.BOR, TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN,
-			TokenTypes.BXOR, TokenTypes.BXOR_ASSIGN, TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DIV,
-			TokenTypes.DIV_ASSIGN, TokenTypes.DOT, TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.LAND,
-			TokenTypes.LE, TokenTypes.LOR, TokenTypes.LT, TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD,
-			TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.SL,
-			TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR, TokenTypes.QUESTION,
-			TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG,
+	Integer[] tokens = { TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN, TokenTypes.BNOT, TokenTypes.BOR,
+			TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN, TokenTypes.BXOR, TokenTypes.BXOR_ASSIGN,
+			TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DEC, TokenTypes.DIV, TokenTypes.DIV_ASSIGN, TokenTypes.DOT,
+			TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.INC, TokenTypes.INDEX_OP, TokenTypes.LAND,
+			TokenTypes.LE, TokenTypes.LITERAL_INSTANCEOF, TokenTypes.LNOT, TokenTypes.LOR, TokenTypes.LT,
+			TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD, TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL,
+			TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.POST_DEC, TokenTypes.POST_INC, TokenTypes.QUESTION,
+			TokenTypes.SL, TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR,
+			TokenTypes.STAR_ASSIGN, TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS, TokenTypes.IDENT,
+			TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG,
 			TokenTypes.LITERAL_FOR, TokenTypes.LITERAL_WHILE, TokenTypes.LITERAL_DO, TokenTypes.CTOR_DEF,
 			TokenTypes.METHOD_DEF, TokenTypes.INSTANCE_INIT, TokenTypes.STATIC_INIT, TokenTypes.LITERAL_WHILE,
 			TokenTypes.LITERAL_DO, TokenTypes.LITERAL_FOR, TokenTypes.LITERAL_IF, TokenTypes.LITERAL_SWITCH,
 			TokenTypes.LITERAL_CASE, TokenTypes.LITERAL_CATCH, TokenTypes.QUESTION, TokenTypes.LAND, TokenTypes.LOR };
+
+	Integer[] tokensAccept = { TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN, TokenTypes.BNOT,
+			TokenTypes.BOR, TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN, TokenTypes.BXOR,
+			TokenTypes.BXOR_ASSIGN, TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DEC, TokenTypes.DIV,
+			TokenTypes.DIV_ASSIGN, TokenTypes.DOT, TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.INC,
+			TokenTypes.INDEX_OP, TokenTypes.LAND, TokenTypes.LE, TokenTypes.LITERAL_INSTANCEOF, TokenTypes.LNOT,
+			TokenTypes.LOR, TokenTypes.LT, TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD,
+			TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.POST_DEC,
+			TokenTypes.POST_INC, TokenTypes.QUESTION, TokenTypes.SL, TokenTypes.SL_ASSIGN, TokenTypes.SR,
+			TokenTypes.SR_ASSIGN, TokenTypes.STAR, TokenTypes.STAR_ASSIGN, TokenTypes.UNARY_MINUS,
+			TokenTypes.UNARY_PLUS, TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT,
+			TokenTypes.NUM_LONG, TokenTypes.LITERAL_FOR, TokenTypes.LITERAL_WHILE, TokenTypes.LITERAL_DO,
+			TokenTypes.CTOR_DEF, TokenTypes.METHOD_DEF, TokenTypes.INSTANCE_INIT, TokenTypes.STATIC_INIT, };
 
 	HashSet<Integer> expectedTokens = new HashSet<Integer>(Arrays.asList(tokens));
 
@@ -49,32 +65,50 @@ public class MaintainabilityIndexTest {
 	public void testGetDefaultTokens() {
 		MaintainabilityIndex test = new MaintainabilityIndex();
 
-		for (int item : test.getDefaultTokens())
-			assertTrue(expectedTokens.contains(item));
+		List<Integer> toks = Arrays.stream(test.getDefaultTokens()).boxed().collect(Collectors.toList());
+		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
+
+		for (int token : expectedTokens)
+			assertTrue(actualTokens.contains(token));
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
 		MaintainabilityIndex test = new MaintainabilityIndex();
 
-		for (int item : test.getAcceptableTokens())
-			assertTrue(expectedTokens.contains(item));
+		List<Integer> toks = Arrays.stream(test.getAcceptableTokens()).boxed().collect(Collectors.toList());
+		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
+
+		for (int token : expectedTokens)
+			assertTrue(actualTokens.contains(token));
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
 		MaintainabilityIndex test = new MaintainabilityIndex();
+		List<Integer> toks = Arrays.stream(test.getRequiredTokens()).boxed().collect(Collectors.toList());
+		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
 
-		for (int item : test.getRequiredTokens())
-			assertTrue(expectedTokens.contains(item));
+		for (int token : tokensAccept)
+			assertTrue(actualTokens.contains(token)); // not accounting for all tokens in acceptable tokens within the test
 	}
 
 	@Test
 	public void testVisit() {
-		HalsteadEffort test = new HalsteadEffort();
+		MaintainabilityIndex test = spy(new MaintainabilityIndex());
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
+
+		doReturn(50234).when(test).getLOC(); // mock LOC
+
+		doReturn(TokenTypes.METHOD_DEF).when(ast).getType(); // loop
+		test.visitToken(ast);
+		test.leaveToken(ast);
+		
+		doReturn(TokenTypes.LITERAL_DO).when(ast).getType(); // loop
+		test.visitToken(ast);
+		test.leaveToken(ast);
 
 		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
 		test.visitToken(ast);
@@ -82,14 +116,9 @@ public class MaintainabilityIndexTest {
 		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
 		test.visitToken(ast);
 
-		doReturn(TokenTypes.LITERAL_DO).when(ast).getType(); // loop
-		test.visitToken(ast);
-
 		test.finishTree(ast);
 
-		// halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands)
-		// halsteadDifficulty = (1 / 2) * (1 / 1) = 1/2
-		assertEquals(0.5, test.getHalsteadDifficulty(), 0.1);
+		assertEquals(0, test.getCyclomaticComplexity());
 
 		// (operators +operands) * log2(unique operators + unique operands)
 		// (1+1) * log2(1+1) = 2
@@ -141,7 +170,7 @@ public class MaintainabilityIndexTest {
 	//////
 
 	@Test
-	public void testGetMaintainabilityIndex1() { //try 1 operand and 1 operator with 10 cyclocomplexity and 100 LOC
+	public void testGetMaintainabilityIndex1() { // try 1 operand and 1 operator with 10 cyclocomplexity and 100 LOC
 		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -169,7 +198,7 @@ public class MaintainabilityIndexTest {
 	}
 
 	@Test
-	public void testGetMaintainabilityIndex2() { //try 20 operands and 1 operator with 10 cyclocomplexity and 100 LOC
+	public void testGetMaintainabilityIndex2() { // try 20 operands and 1 operator with 10 cyclocomplexity and 100 LOC
 		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -199,7 +228,7 @@ public class MaintainabilityIndexTest {
 	}
 
 	@Test
-	public void testGetMaintainabilityIndex3() { //try 1 operand and 20 operators with 10 cyclocomplexity and 100 LOC
+	public void testGetMaintainabilityIndex3() { // try 1 operand and 20 operators with 10 cyclocomplexity and 100 LOC
 		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -230,7 +259,8 @@ public class MaintainabilityIndexTest {
 	}
 
 	@Test
-	public void testGetMaintainabilityIndex4() { //try a whole bunch of operators and operands with 10 cyclocomplexity and 100 LOC
+	public void testGetMaintainabilityIndex4() { // try a whole bunch of operators and operands with 10 cyclocomplexity
+													// and 100 LOC
 		MaintainabilityIndex test = PowerMockito.spy(new MaintainabilityIndex());
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 

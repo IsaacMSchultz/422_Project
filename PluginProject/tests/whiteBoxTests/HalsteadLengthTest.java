@@ -6,6 +6,8 @@ import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -23,41 +25,49 @@ import StructuralMetrics.HalsteadLength;
 @PrepareForTest(DetailAST.class)
 public class HalsteadLengthTest {
 
-	Integer[] tokens = { TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC,
-			TokenTypes.POST_INC, TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS, TokenTypes.ASSIGN, TokenTypes.BAND,
-			TokenTypes.BAND_ASSIGN, TokenTypes.BNOT, TokenTypes.BOR, TokenTypes.BOR_ASSIGN, TokenTypes.BSR,
-			TokenTypes.BSR_ASSIGN, TokenTypes.BXOR, TokenTypes.BXOR_ASSIGN, TokenTypes.COLON, TokenTypes.COMMA,
-			TokenTypes.DIV, TokenTypes.DIV_ASSIGN, TokenTypes.DOT, TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT,
-			TokenTypes.LAND, TokenTypes.LE, TokenTypes.LOR, TokenTypes.LT, TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN,
-			TokenTypes.MOD, TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN,
+	Integer[] tokens = { TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN, TokenTypes.BNOT, TokenTypes.BOR,
+			TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN, TokenTypes.BXOR, TokenTypes.BXOR_ASSIGN,
+			TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DEC, TokenTypes.DIV, TokenTypes.DIV_ASSIGN, TokenTypes.DOT,
+			TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.INC, TokenTypes.INDEX_OP, TokenTypes.LAND,
+			TokenTypes.LE, TokenTypes.LITERAL_INSTANCEOF, TokenTypes.LNOT, TokenTypes.LOR, TokenTypes.LT,
+			TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD, TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL,
+			TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.POST_DEC, TokenTypes.POST_INC, TokenTypes.QUESTION,
 			TokenTypes.SL, TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR,
-			TokenTypes.QUESTION, TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT,
-			TokenTypes.NUM_LONG };
-	
+			TokenTypes.STAR_ASSIGN, TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS, TokenTypes.IDENT,
+			TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG };
+
 	HashSet<Integer> expectedTokens = new HashSet<Integer>(Arrays.asList(tokens));
 
 	@Test
 	public void testGetDefaultTokens() {
 		HalsteadLength test = new HalsteadLength();
 
-		for (int item : test.getDefaultTokens())
-			assertTrue(expectedTokens.contains(item));
+		List<Integer> toks = Arrays.stream(test.getDefaultTokens()).boxed().collect(Collectors.toList());
+		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
+
+		for (int token : expectedTokens)
+			assertTrue(actualTokens.contains(token));
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
 		HalsteadLength test = new HalsteadLength();
+		
+		List<Integer> toks = Arrays.stream(test.getAcceptableTokens()).boxed().collect(Collectors.toList());
+		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
 
-		for (int item : test.getAcceptableTokens())
-			assertTrue(expectedTokens.contains(item));
+		for (int token : expectedTokens)
+			assertTrue(actualTokens.contains(token));
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
 		HalsteadLength test = new HalsteadLength();
+		List<Integer> toks = Arrays.stream(test.getRequiredTokens()).boxed().collect(Collectors.toList());
+		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
 
-		for (int item : test.getRequiredTokens())
-			assertTrue(expectedTokens.contains(item));
+		for (int token : expectedTokens)
+			assertTrue(actualTokens.contains(token));
 	}
 
 	@Test
@@ -78,7 +88,7 @@ public class HalsteadLengthTest {
 		assertEquals(1, test.getOperandCount());
 		assertEquals(1, test.getOperatorCount());
 	}
-	
+
 	//////
 	// updated correctly mocked whitebox text cases
 	//////
@@ -96,7 +106,7 @@ public class HalsteadLengthTest {
 
 		assertEquals(2, test.getHalsteadLength());
 	}
-	
+
 	@Test
 	public void testGetHalsteadLength02() {
 		HalsteadLength test = spy(new HalsteadLength());
@@ -134,7 +144,7 @@ public class HalsteadLengthTest {
 	}
 
 	@Test
-	public void testGetHalsteadLength2() { //try 20 of the same operand and one operator
+	public void testGetHalsteadLength2() { // try 20 of the same operand and one operator
 		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -154,7 +164,7 @@ public class HalsteadLengthTest {
 	}
 
 	@Test
-	public void testGetHalsteadLength3() { //try one operand and 20 of the same operator
+	public void testGetHalsteadLength3() { // try one operand and 20 of the same operator
 		HalsteadLength test = new HalsteadLength();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
