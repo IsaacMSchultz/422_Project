@@ -24,7 +24,7 @@ public class NumberOfCommentsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(6, c.getCount()); //determine if execution created the correct value
+		assertEquals(7, c.getCount()); //determine if execution created the correct value
     }
     
     @Test

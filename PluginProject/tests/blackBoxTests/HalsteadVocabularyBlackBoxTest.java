@@ -24,7 +24,7 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(15, c.getUniqueOperatorCount()); //determine if execution created the correct value
+		assertEquals(15, c.getUniqueOperatorCount()); //doesnt catch parenthesis being operators
 	}
 	
 	@Test
@@ -39,7 +39,7 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(3, c.getUniqueOperandCount()); //determine if execution created the correct value
+		assertEquals(5, c.getUniqueOperandCount()); //determine if execution created the correct value
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getUniqueOperandCount()); //determine if execution created the correct value
+		assertEquals(1, c.getUniqueOperandCount()); 
 	}
 
 	@Test
@@ -69,6 +69,6 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getUniqueOperatorCount()); //determine if execution created the correct value
+		assertEquals(0, c.getUniqueOperatorCount());
 	}
 }

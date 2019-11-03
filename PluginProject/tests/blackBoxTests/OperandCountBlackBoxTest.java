@@ -24,7 +24,7 @@ public class OperandCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(76, c.getCount()); //determine if execution created the correct value
+		assertEquals(116, c.getCount()); //determine if execution created the correct value
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class OperandCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(13, c.getUniqueCount()); //determine if execution created the correct value
+		assertEquals(45, c.getUniqueCount()); //determine if execution created the correct value
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class OperandCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getCount()); //determine if execution created the correct value
+		assertEquals(2, c.getCount()); //counts 2 from class name and method def
 	}
 
 	@Test
@@ -69,6 +69,6 @@ public class OperandCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getUniqueCount()); //determine if execution created the correct value
+		assertEquals(2, c.getUniqueCount()); //Found a bug! Since operand names are the same they are only counted as one unique operand
 	}
 }

@@ -24,7 +24,7 @@ public class ExternalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getCount()); //determine if execution created the correct value
+		assertEquals(1, c.getCount()); //this.  should not count as external method
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class ExternalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(1, c.getCount()); //determine if execution created the correct value
+		assertEquals(1, c.getCount()); //this.  should not count as external method
 	}
 
 	@Test

@@ -24,7 +24,7 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(81, c.getOperandCount()); //determine if execution created the correct value
+		assertEquals(102, c.getOperandCount()); //BUG: does not catch "this.that" as two operands
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(53, c.getOperatorCount()); //determine if execution created the correct value
+		assertEquals(70, c.getOperatorCount()); //BUG: does not count {} or () as operators when it should
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getOperandCount()); //determine if execution created the correct value
+		assertEquals(2, c.getOperandCount()); //determine if execution created the correct value
 	}
 
 	@Test

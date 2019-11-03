@@ -55,6 +55,6 @@ public class VariableCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getCount()); //determine if execution created the correct value
+		assertEquals(3, c.getCount()); //determine if execution created the correct value
 	}
 }

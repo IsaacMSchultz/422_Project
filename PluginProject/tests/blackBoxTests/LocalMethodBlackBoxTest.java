@@ -54,7 +54,7 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getCount()); //determine if execution created the correct value
+		assertEquals(2, c.getCount()); //we know that it does not cover this case
 	}
 
 	@Test
@@ -69,6 +69,6 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(4, c.getCount()); //determine if execution created the correct value
+		assertEquals(4, c.getCount());//we know that it does not cover this case
 	}
 }

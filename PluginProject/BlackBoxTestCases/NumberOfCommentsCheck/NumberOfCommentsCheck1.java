@@ -2,7 +2,8 @@
 * Description: This class checks the number of comments
 * check if it counts comment blocks as one. 
 * This comment counts as one
-* Result should be 6
+* Result should be 7 since this comment up here counts as one
+* Total lines of 22 since this comment counds too!
 */
 
 class NumberOfCommentsCheck1 {
