@@ -41,7 +41,11 @@ public class ExternalMethodCheck extends AbstractCheck {
 
 	//logs the external method count
 	public void finishTree(DetailAST rootAST) {
-		log(rootAST, CATCH_MSG + extMethodCount);
+		try {
+			log(rootAST, CATCH_MSG + extMethodCount);
+		} catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	//returns the external method count

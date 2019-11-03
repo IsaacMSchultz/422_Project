@@ -1,12 +1,13 @@
-public class HalseadLengthTester
-{
-	//Halstead Length: Sum of Operators and Operands in the file N = N1 + N2
-	
+public class HalseadLengthTester {
+	// Halstead Length: Sum of Operators and Operands in the file N = N1 + N2
+
 	// ASSIGN token type "=" is an operator in each assignment should count: N1 = 2
 	// LITERAL_INT token type "int' is an operand should count N2 = 2
 	// IDENT token type Operand1 and Operator2 should each be a Operand: N2 = 4
 	public int operand1 = 1;
 	public int operand2 = 2;
+
+	public HalseadLengthTester() {
 	
 	// POST_INC: "++" should count as operator
 	// N2 + 2 = 6, N1 + 2 = 4
@@ -127,6 +128,5 @@ public class HalseadLengthTester
 	
 	//Total number of operands (N1) = 81
 	//Total number of operator (N2) = 53
-	
-
+}
 }

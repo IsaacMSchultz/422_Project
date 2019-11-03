@@ -16,7 +16,7 @@ public class VariableCountCheck extends AbstractCheck {
 		return new int[] { TokenTypes.VARIABLE_DEF };
 	}
 
-	//increment variable count
+	// increment variable count
 	@Override
 	public void visitToken(DetailAST aAST) {
 		++varCount;
@@ -32,28 +32,32 @@ public class VariableCountCheck extends AbstractCheck {
 		return new int[0];
 	}
 
-	//calls begin tree to initialize count variable
+	// calls begin tree to initialize count variable
 	public void beginTree(DetailAST rootAST) {
 		varCount = 0;
 	}
 
-	//logs the number of variables
+	// logs the number of variables
 	@Override
 	public void finishTree(DetailAST rootAST) {
-		log(rootAST, CATCH_MSG + varCount);
+		try {
+			log(rootAST, CATCH_MSG + varCount);
+		} catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
-	//returns the variable count
+	// returns the variable count
 	public int getCount() {
 		return varCount;
 	}
 
-	//implementing anti pattern duplicate code
+	// implementing anti pattern duplicate code
 	public int getVariableCount() {
 		return varCount;
 	}
 
-	//implementing anti pattern duplicate code
+	// implementing anti pattern duplicate code
 	public int getActualCount() {
 		return varCount;
 	}

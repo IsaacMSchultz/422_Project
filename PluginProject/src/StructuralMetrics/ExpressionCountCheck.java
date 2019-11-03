@@ -38,7 +38,11 @@ public class ExpressionCountCheck extends AbstractCheck {
 
 	//logs the expression count
 	public void finishTree(DetailAST rootAST) {
-		log(rootAST, CATCH_MSG + expressionCount);
+		try {
+			log(rootAST, CATCH_MSG + expressionCount);
+		} catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	//returns the expression count 

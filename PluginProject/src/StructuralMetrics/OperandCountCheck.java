@@ -24,7 +24,11 @@ public class OperandCountCheck extends AbstractCheck {
 
 	@Override
 	public void finishTree(DetailAST rootAST) {
-		log(0, "There are {0} unique operands that appear {1} times.", uniqueOperands.size(), operandCount);
+		try {
+			log(0, "There are {0} unique operands that appear {1} times.", uniqueOperands.size(), operandCount);
+		} catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	// Public getter for the operand count

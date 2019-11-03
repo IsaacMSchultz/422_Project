@@ -1,8 +1,0 @@
-public int testFunction(int i){
-	return i+i;
-}
-
-int testVal = testFunction(5);
-
-testVal = Other.externalTest(3);
-
