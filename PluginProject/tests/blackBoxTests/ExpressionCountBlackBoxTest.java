@@ -24,7 +24,7 @@ public class ExpressionCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(c.getCount(), 7); //determine if execution created the correct value
+		assertEquals(7, c.getCount()); //determine if execution created the correct value
     }
     
     @Test
@@ -39,6 +39,6 @@ public class ExpressionCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(c.getCount(), 0); //determine if execution created the correct value
+		assertEquals(0, c.getCount()); //determine if execution created the correct value
 	}
 }
