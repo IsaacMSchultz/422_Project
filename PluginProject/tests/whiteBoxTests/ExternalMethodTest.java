@@ -40,7 +40,18 @@ public class ExternalMethodTest {
 	}
 
 	@Test
-	public void testVisitTokenDetailAST() {
+	public void testVisitTokenDetailAST1() {
+		extChk.beginTree(ast);
+		doReturn(TokenTypes.METHOD_CALL).when(ast).getType();
+		doReturn(TokenTypes.DOT).when(ast).getType();
+		//not sure how to return a token type inside of a method. 
+		extChk.visitToken(ast);
+		//still zero because ast.findfirsttoken inside visit token evaluates to null
+		assertEquals(1, extChk.getCount());
+	}
+	
+	@Test
+	public void testVisitTokenDetailAST2() {
 		extChk.beginTree(ast);
 		doReturn(TokenTypes.METHOD_CALL).when(ast).getType();
 		doReturn(TokenTypes.DOT).when(ast).getType();

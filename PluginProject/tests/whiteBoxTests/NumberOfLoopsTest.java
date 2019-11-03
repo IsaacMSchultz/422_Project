@@ -47,25 +47,76 @@ public class NumberOfLoopsTest {
 	}
 
 	@Test
-	public void testCountCommentsCheck() {
+	public void testLoop1() {
 		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
-
-		assertEquals(0, test.getLoopCount());
-
-		doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType(); // operand
-		test.visitToken(ast);
-
-		assertEquals(1, test.getLoopCount());
-
-		doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType(); // operator
-		test.visitToken(ast);
-
-		assertEquals(2, test.getLoopCount());
-
 		test.finishTree(ast);
 
+		assertEquals(0, test.getLoopCount());
+	}
+
+	@Test
+	public void testLoop2() {
+		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		doReturn(TokenTypes.LITERAL_FOR).when(ast).getType();
+		test.visitToken(ast);
+		test.finishTree(ast);
+
+		assertEquals(1, test.getLoopCount());
+	}
+
+	@Test
+	public void testLoop3() {
+		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		doReturn(TokenTypes.LITERAL_WHILE).when(ast).getType();
+		test.visitToken(ast);
+		
+		test.finishTree(ast);
+
+		assertEquals(1, test.getLoopCount());
+	}
+	
+	@Test
+	public void testLoop4() {
+		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		doReturn(TokenTypes.LITERAL_DO).when(ast).getType();
+		test.visitToken(ast);
+		
+		test.finishTree(ast);
+
+		assertEquals(1, test.getLoopCount());
+	}
+	
+	@Test
+	public void testLoop5() {
+		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		doReturn(TokenTypes.LITERAL_DO).when(ast).getType();
+		for (int i = 0; i < 20; i++) { // do 20 expressions
+			test.visitToken(ast);
+		}
+		
+		doReturn(TokenTypes.LITERAL_FOR).when(ast).getType();
+		for (int i = 0; i < 20; i++) { // do 20 expressions
+			test.visitToken(ast);
+		}
+		
+		doReturn(TokenTypes.LITERAL_WHILE).when(ast).getType();
+		for (int i = 0; i < 20; i++) { // do 20 expressions
+			test.visitToken(ast);
+		}
+
+		test.finishTree(ast);
+		
+		assertEquals(60, test.getLoopCount());
 	}
 }

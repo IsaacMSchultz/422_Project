@@ -1,19 +1,27 @@
 package StructuralMetrics;
 
+import java.util.HashSet;
+
 // Simple array concatenator from https://stackoverflow.com/questions/16738371/merge-two-arrays-together
 public final class ArrayConcatenator {
 	public static int[] concatArray(int[] arrOne, int[] arrTwo) {
-		int[] arrThree = new int[arrTwo.length + arrOne.length];
-		int index = arrTwo.length;
+		
+		int index = 0;
+		
+		HashSet<Integer> set = new HashSet<Integer>();
 
 		for (int i = 0; i < arrTwo.length; i++) {
-			arrThree[i] = arrTwo[i];
+			set.add(arrTwo[i]);
 		}
 		for (int i = 0; i < arrOne.length; i++) {
-			arrThree[i + index] = arrOne[i];
+			set.add(arrOne[i]);
 		}
-
-		//		System.out.println("1: " + arrOne.length + ", 2: " + arrTwo.length + ", 3: " + arrThree.length);
+		
+		int[] arrThree = new int[set.size()];
+		
+		for (int item : set) {
+			arrThree[index++] = item;
+		}
 
 		return arrThree;
 	}
