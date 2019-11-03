@@ -39,7 +39,7 @@ public class ExpressionCountTest {
 	}
 
 	@Test
-	public void testVisitTokenDetailAST() {
+	public void testVisitTokenDetailAST1() {
 
 		expChk.beginTree(ast);
 		doReturn(TokenTypes.EXPR).when(ast).getType();
@@ -47,6 +47,26 @@ public class ExpressionCountTest {
 		expChk.visitToken(ast);
 
 		assertEquals(1, expChk.getCount());
+	}
+	
+	@Test
+	public void testVisitTokenDetailAST2() {
+
+		expChk.beginTree(ast);
+		
+		doReturn(TokenTypes.EXPR).when(ast).getType();
+		for (int i = 0; i < 20; i++) { // do 20 expressions
+			expChk.visitToken(ast);
+		}
+
+		assertEquals(20, expChk.getCount());
+	}
+	
+	@Test
+	public void testVisitTokenDetailAST3() {
+		expChk.beginTree(ast);
+
+		assertEquals(0, expChk.getCount());
 	}
 
 }

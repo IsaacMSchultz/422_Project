@@ -55,12 +55,12 @@ public class LinesOfCommentsTest {
 
 		assertEquals(0, test.getCount());
 
-		doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType(); // operand
+		doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType();
 		test.visitToken(ast);
 
 		assertEquals(1, test.getCount());
 
-		doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType(); // operator
+		doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType();
 		test.visitToken(ast);
 
 		assertEquals(2, test.getCount());
