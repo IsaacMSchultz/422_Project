@@ -4,9 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
+
+import StructuralMetrics.HalsteadVolume;
+
 public class HalsteadVolumeBlackBoxTest {
 
-	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\HalsteadVolumeCases";
+	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\HalsteadVolume\\HalsteadVolumeCases.java";
 	@Test
 	public void test() {
 		HalsteadVolume check = new HalsteadVolume();
@@ -19,7 +23,7 @@ public class HalsteadVolumeBlackBoxTest {
 			e.printStackTrace();
 		}
 		
-		assertEquals(60.22857502, check.halsteadVolume());
+		assertEquals(72.90827, check.getHalsteadVolume(), 0.1);
 	}
 
 }

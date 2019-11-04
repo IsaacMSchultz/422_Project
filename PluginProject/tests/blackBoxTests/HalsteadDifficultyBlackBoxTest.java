@@ -4,27 +4,30 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
+
+import StructuralMetrics.HalsteadDifficulty;
+
 public class HalsteadDifficultyBlackBoxTest {
 
-	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\MaintainabilityIndexCases";
+	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\HalsteadDifficulty";
 	
-	//•	Halstead Difficulty is half of the unique operators 
+	//ï¿½	Halstead Difficulty is half of the unique operators 
 	//multiplied by the total number of operands, 
 	//divided by the number of distinct operators 
 	
 	@Test
 	public void test() {
-		HalsteadVolume check = new HalsteadVolume();
+		HalsteadDifficulty check = new HalsteadDifficulty();
 
 		TestCheckEngine t = new TestCheckEngine(filePath, check);
 		try {
 			t.runTree(); //try to execute the check on the whole tree
 		} catch (CheckstyleException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		assertEquals(10.8, check.halsteadDifficulty(), 0.5);
+		assertEquals(10.8, check.getHalsteadDifficulty(), 0.1);
 	}
 
 }
