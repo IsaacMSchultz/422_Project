@@ -1,13 +1,3 @@
-package StructuralMetrics;
-import java.math.BigInteger;
-import java.util.ArrayDeque;
-import java.util.Deque;
-
-import com.puppycrawl.tools.checkstyle.FileStatefulCheck;
-import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
-import com.puppycrawl.tools.checkstyle.api.DetailAST;
-import com.puppycrawl.tools.checkstyle.api.TokenTypes;
-
 /**
  * Checks cyclomatic complexity against a specified limit. The complexity is
  * measured by the number of "if", "while", "do", "for", "?:", "catch",
@@ -22,9 +12,19 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * <p>
  * <b>switchBlockAsSingleDecisionPoint</b> - controls whether to treat the whole
  * switch block as a single decision point. Default value is <b>false</b>
- *
- *
  */
+
+package StructuralMetrics;
+
+import java.math.BigInteger;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+import com.puppycrawl.tools.checkstyle.FileStatefulCheck;
+import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
+import com.puppycrawl.tools.checkstyle.api.DetailAST;
+import com.puppycrawl.tools.checkstyle.api.TokenTypes;
+
 @FileStatefulCheck
 public class CyclomaticComplexityCounter extends AbstractCheck {
 
@@ -56,7 +56,7 @@ public class CyclomaticComplexityCounter extends AbstractCheck {
 		cyclomaticComplexity = 0;
 	}
 
-	public int getCycles() {
+	public int getCount() {
 		return cyclomaticComplexity;
 	}
 

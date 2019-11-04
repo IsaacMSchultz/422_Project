@@ -1,66 +1,64 @@
 package StructuralMetrics;
 
+import java.util.HashSet;
+
 import com.puppycrawl.tools.checkstyle.api.*;
-import java.util.*;
 
-public class OperatorCountCheck extends AbstractCheck{
+public class OperatorCountCheck extends AbstractCheck {
+	
+	int[] toks = { TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN, TokenTypes.BNOT, TokenTypes.BOR,
+			TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN, TokenTypes.BXOR, TokenTypes.BXOR_ASSIGN,
+			TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DEC, TokenTypes.DIV, TokenTypes.DIV_ASSIGN, TokenTypes.DOT,
+			TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.INC, TokenTypes.INDEX_OP, TokenTypes.LAND,
+			TokenTypes.LE, TokenTypes.LITERAL_INSTANCEOF, TokenTypes.LNOT, TokenTypes.LOR, TokenTypes.LT,
+			TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD, TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL,
+			TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.POST_DEC, TokenTypes.POST_INC, TokenTypes.QUESTION,
+			TokenTypes.SL, TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR,
+			TokenTypes.STAR_ASSIGN, TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS };
+	
+	int operatorCount = 0;
+	HashSet<String> uniqueOperators = new HashSet<String>(); // Keep a hashset of each operator
 
-	private static final String CATCH_MSG = "Operator Count: ";
-	private static final String UNIQUE_COUNT = "Unique operators: ";
-	
-	private int operatorCount = 0;
-	private HashSet uniqueOperators = new HashSet();
-	
-	public int getOperatorCount() {
-		return this.operatorCount;
+	@Override
+	public void beginTree(DetailAST rootAST) {
+		operatorCount = 0; // Reset to 0 when we start a new tree.
+		uniqueOperators = new HashSet<String>();
 	}
-	
-	public int getUniqueOperatorCount() {
-		if(!this.uniqueOperators.isEmpty()) {
-			return this.uniqueOperators.size();
+
+	public void visitToken(DetailAST aAST) {
+		operatorCount++;
+		uniqueOperators.add(aAST.getText()); // Assuming the text of the operand is what makes it unique!
+	}
+
+	@Override
+	public void finishTree(DetailAST rootAST) {
+		try {
+			log(0, "There are {0} unique operators that appear {1} times.", uniqueOperators.size(), operatorCount);
+		} catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
 		}
-		else return 0;
 	}
-	
+
+	public int getCount() {
+		return operatorCount;
+	}
+
+	public int getUniqueCount() {
+		return uniqueOperators.size();
+	}
+
 	@Override
 	public int[] getDefaultTokens() {
-		
-		return new int[] {TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC, TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS,TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN, TokenTypes.BNOT, TokenTypes.BOR, TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN, TokenTypes.BXOR, TokenTypes.BXOR_ASSIGN, TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DIV, TokenTypes.DIV_ASSIGN, TokenTypes.DOT, TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.LAND, TokenTypes.LE, TokenTypes.LOR, TokenTypes.LT, TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD, TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.SL,TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR,TokenTypes.QUESTION};
-	}
-	
-	public void visitToken(DetailAST aAST) {
-		if(inExpression(aAST)) {
-			operatorCount++;
-			if(!uniqueOperators.contains(aAST.toString())){
-				uniqueOperators.add(aAST.toString());
-			}
-		}
+		return toks;
 	}
 
 	@Override
 	public int[] getAcceptableTokens() {
-		return new int[] {TokenTypes.DEC, TokenTypes.INC, TokenTypes.LNOT, TokenTypes.POST_DEC, TokenTypes.POST_INC, TokenTypes.UNARY_MINUS, TokenTypes.UNARY_PLUS,TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN, TokenTypes.BNOT, TokenTypes.BOR, TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN, TokenTypes.BXOR, TokenTypes.BXOR_ASSIGN, TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DIV, TokenTypes.DIV_ASSIGN, TokenTypes.DOT, TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.LAND, TokenTypes.LE, TokenTypes.LOR, TokenTypes.LT, TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD, TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.SL,TokenTypes.SL_ASSIGN, TokenTypes.SR, TokenTypes.SR_ASSIGN, TokenTypes.STAR,TokenTypes.QUESTION};
+		return getDefaultTokens();
 	}
 
 	@Override
 	public int[] getRequiredTokens() {
-		return new int[0];
+		return getDefaultTokens();
 	}
-	
-	private boolean inExpression(DetailAST aAST) {
-        return aAST.getParent().getType() == TokenTypes.EXPR;
-    }
-	
-	@Override
-	public void beginTree(DetailAST rootAST) {
-		operatorCount = 0;
-		this.uniqueOperators = new HashSet();
-	}
-	
-	@Override
-	public void finishTree(DetailAST rootAST) {
-		log(rootAST, CATCH_MSG + operatorCount);
-		log(rootAST, UNIQUE_COUNT, + getUniqueOperatorCount());
-	}
-
 }

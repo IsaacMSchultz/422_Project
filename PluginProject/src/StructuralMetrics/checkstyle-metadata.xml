@@ -4,8 +4,8 @@
     <rule-group-metadata name="Plugin Project" priority="1600">
         <description>%StructuralMetrics.desc</description>
 
-        <rule-metadata name="Comment Count" internal-name="CommentCount" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.CommentCount" />
+        <rule-metadata name="Comment Count" internal-name="NumberOfCommentsCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.NumberOfCommentsCheck" />
             <description>%Comments.desc</description>
             <property-metadata name="max" datatype="Integer" default-value="5">
                 <description>The maximum number of allowed comments.</description>
@@ -70,9 +70,9 @@
             <description>Displays the maintainability index of a YEET</description>
         </rule-metadata>
 
-        <rule-metadata name="MaxNumLoops" internal-name="MaxNumLoops" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.MaxNumLoopsCheck" />
-            <description>%MaxNumLoopsCheck.desc</description>
+        <rule-metadata name="NumberOfLoopsCheck" internal-name="NumberOfLoopsCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.NumberOfLoopsCheckCheck" />
+            <description>%NumberOfLoopsCheckCheck.desc</description>
             <property-metadata name="max" datatype="Integer" default-value="1">
                 <description>The maximum number of loop statements.</description>
             </property-metadata>
@@ -83,13 +83,13 @@
             <description>%NumberOfCasts.desc</description>
         </rule-metadata>
 
-        <rule-metadata name="OperandCounter" internal-name="OperandCounter" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.OperandCounter" />
+        <rule-metadata name="OperandCountCheck" internal-name="OperandCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperandCountCheck" />
             <description>TEST</description>
         </rule-metadata>
 
-        <rule-metadata name="OperatorCounter" internal-name="OperatorCounter" parent="TreeWalker">
-            <alternative-name internal-name="StructuralMetrics.OperatorCounter" />
+        <rule-metadata name="OperatorCountCheck" internal-name="OperatorCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperatorCountCheck" />
             <description>TEST2</description>
         </rule-metadata>
 
