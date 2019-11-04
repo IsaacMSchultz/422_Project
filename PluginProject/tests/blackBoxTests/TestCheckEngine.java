@@ -47,7 +47,6 @@ public class TestCheckEngine {
 		} catch (IOException e2) {
 			System.out.println("IOException!");
 			e2.printStackTrace();
-			;
 		}
 	}
 
@@ -60,17 +59,23 @@ public class TestCheckEngine {
 	public void setCheck(AbstractCheck checkToTest) {
 		check = checkToTest;
 	}
+	
+	//setter for fileContents
+	public void setFileContents(FileContents fc) {
+		check.setFileContents(fc);
+	}
 
 	// Using the base filePath, this function creates a detailASTree by parsing the file passed in fileName
 	public DetailAST buildAST(String fileName) throws IOException, CheckstyleException {
 		File f = new File(fileName);
+		FileText ft = new FileText(f, "UTF-8");
+		FileContents fc = new FileContents(ft);
+		setFileContents(fc);
 		DetailAST root;
 
 		if (check.isCommentNodesRequired()) {
 			root = JavaParser.parseFile(f, Options.WITH_COMMENTS);
 		} else {
-			FileText ft = new FileText(f, "UTF-8");
-			FileContents fc = new FileContents(ft);
 			root = JavaParser.parse(fc);
 		}
 		return root;

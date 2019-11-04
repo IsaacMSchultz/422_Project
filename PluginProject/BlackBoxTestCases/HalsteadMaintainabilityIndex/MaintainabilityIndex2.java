@@ -27,5 +27,6 @@ public class MaintainabilityCases2 {
 		} else if (first > second) {
 			first = fifth + sixth + seventh;
 		}
+		
 	}
 }
