@@ -39,7 +39,7 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(5, c.getUniqueOperandCount()); //determine if execution created the correct value
+		assertEquals(5, c.getUniqueOperandCount()); // Counts unique oprands by name, so even if they are different types (class vs constructor) they are counted as one unique operand
 	}
 
 	@Test

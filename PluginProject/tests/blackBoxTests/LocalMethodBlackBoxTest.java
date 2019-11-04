@@ -54,7 +54,7 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getCount()); //we know that it does not cover this case
+		assertEquals(2, c.getCount()); // this. and super. not covered correctly
 	}
 
 	@Test
@@ -69,6 +69,6 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(4, c.getCount());//we know that it does not cover this case
+		assertEquals(4, c.getCount()); // this. and super. not covered correctly
 	}
 }
