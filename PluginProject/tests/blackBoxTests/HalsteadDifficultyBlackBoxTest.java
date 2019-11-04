@@ -14,7 +14,7 @@ public class HalsteadDifficultyBlackBoxTest {
 	
 	@Test
 	public void test() {
-		HalsteadVolume check = new HalsteadVolume();
+		HalsteadDifficulty check = new HalsteadDifficulty();
 
 		TestCheckEngine t = new TestCheckEngine(filePath, check);
 		try {
