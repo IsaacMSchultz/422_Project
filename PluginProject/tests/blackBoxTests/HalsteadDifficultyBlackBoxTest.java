@@ -10,8 +10,7 @@ import StructuralMetrics.HalsteadDifficulty;
 
 public class HalsteadDifficultyBlackBoxTest {
 
-	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\HalsteadDifficulty";
-	
+	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\HalsteadMaintainabilityIndex\\MaintainabilityIndex1.java";
 	//�	Halstead Difficulty is half of the unique operators 
 	//multiplied by the total number of operands, 
 	//divided by the number of distinct operators 
@@ -27,7 +26,9 @@ public class HalsteadDifficultyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(10.8, check.getHalsteadDifficulty(), 0.1);
+		// halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands)
+		// halsteadDifficulty = (6 / 2) * ( 38 / 11) = 
+		assertEquals(10.36, check.getHalsteadDifficulty(), 0.1); //does not calculate correctly, off by a small margin because we do not properyly
 	}
 
 }

@@ -56,20 +56,4 @@ public class ExternalMethodBlackBoxTest {
 
 		assertEquals(0, c.getCount()); //determine if execution created the correct value
 	}
-
-	@Test
-	public void test4() {
-		ExternalMethodCheck c = new ExternalMethodCheck();
-		TestCheckEngine t = new TestCheckEngine(filePath + "4.java", c); //create a tester with filepath, and the check c
-
-		try {
-			t.runTree(); //try to execute the check on the whole tree
-		} catch (CheckstyleException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		assertEquals(4, c.getCount()); //determine if execution created the correct value
-	}
-
 }
