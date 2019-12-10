@@ -40,7 +40,12 @@ public class LinesOfCommentsCheck extends AbstractCheck {
     public void finishTree(DetailAST ast) {
     	
     	// Start and ending blocks count as a line even with no content
-    	log(ast.getLineNo(), "Lines of Comments: " + (singleComment + multiComment));
+        try {
+            log(ast.getLineNo(), "Lines of Comments: " + (singleComment + multiComment));
+        } catch (NullPointerException e) {
+            System.out.println("Can't run log unless called from treewalker!");
+        }
+
         //log(ast.getLineNo(), "Single Comments: " + singleComment);
         //log(ast.getLineNo(), "Block Comments: " + multiComment);
     }

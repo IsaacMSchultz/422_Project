@@ -17,26 +17,29 @@ import static org.mockito.Mockito.doReturn;
 @PrepareForTest(DetailAST.class)
 public class LinesOfCommentsTest {
 	int[] expectedTokens = { TokenTypes.SINGLE_LINE_COMMENT, TokenTypes.BLOCK_COMMENT_BEGIN };
+	int[] expectedAcceptableTokens = {TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF};
+	int[] expectedDefaultTokens = {TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
+	int[] expectedRequiredTokens = new int[0];
 
 	@Test
 	public void testGetDefaultTokens() {
 		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 
-		assertArrayEquals(expectedTokens, test.getDefaultTokens());
+		assertArrayEquals(expectedDefaultTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
 		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 
-		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
+		assertArrayEquals(expectedAcceptableTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
 		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 
-		assertArrayEquals(expectedTokens, test.getRequiredTokens());
+		assertArrayEquals(expectedRequiredTokens, test.getRequiredTokens());
 	}
 
 	@Test
