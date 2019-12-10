@@ -1,6 +1,7 @@
 package Deliverable3Tests.blackBoxTests;
 
 import StructuralMetrics.LocalMethodCheck;
+import TeamRebecca.LocalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class LocalMethodBlackBoxTest {
 
 	@Test
 	public void test1() {
-		LocalMethodCheck c = new LocalMethodCheck();
+		LocalMethodsCheck c = new LocalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -27,7 +28,7 @@ public class LocalMethodBlackBoxTest {
 
 	@Test
 	public void test2() {
-		LocalMethodCheck c = new LocalMethodCheck();
+		LocalMethodsCheck c = new LocalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -42,7 +43,7 @@ public class LocalMethodBlackBoxTest {
 
 	@Test
 	public void test3() {
-		LocalMethodCheck c = new LocalMethodCheck();
+		LocalMethodsCheck c = new LocalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "3.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -57,7 +58,7 @@ public class LocalMethodBlackBoxTest {
 
 	@Test
 	public void test4() {
-		LocalMethodCheck c = new LocalMethodCheck();
+		LocalMethodsCheck c = new LocalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "4.java", c); //create a tester with filepath, and the check c
 
 		try {
