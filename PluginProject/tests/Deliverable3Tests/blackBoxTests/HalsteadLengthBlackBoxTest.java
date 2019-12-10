@@ -1,6 +1,6 @@
 package Deliverable3Tests.blackBoxTests;
 
-import StructuralMetrics.HalsteadLength;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class HalsteadLengthBlackBoxTest {
 
 	@Test
 	public void test1() {
-		HalsteadLength c = new HalsteadLength(); 
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -22,12 +22,12 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(102, c.getOperandCount()); //BUG: does not catch "this.that" as two operands
+		assertEquals(102, c.getOperandsCount()); //BUG: does not catch "this.that" as two operands
 	}
 
 	@Test
 	public void test2() {
-		HalsteadLength c = new HalsteadLength(); 
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -37,12 +37,12 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(70, c.getOperatorCount()); //BUG: does not count {} or () as operators when it should
+		assertEquals(70, c.getOperatorsCount()); //BUG: does not count {} or () as operators when it should
 	}
 	
 	@Test
 	public void test3() {
-		HalsteadLength c = new HalsteadLength(); 
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -52,12 +52,12 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getOperandCount()); //determine if execution created the correct value
+		assertEquals(2, c.getOperandsCount()); //determine if execution created the correct value
 	}
 
 	@Test
 	public void test4() {
-		HalsteadLength c = new HalsteadLength(); 
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -67,6 +67,6 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getOperatorCount()); //determine if execution created the correct value
+		assertEquals(0, c.getOperatorsCount()); //determine if execution created the correct value
 	}
 }

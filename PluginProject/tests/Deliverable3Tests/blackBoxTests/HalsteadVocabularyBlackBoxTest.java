@@ -1,6 +1,6 @@
 package Deliverable3Tests.blackBoxTests;
 
-import StructuralMetrics.HalsteadVocabulary;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class HalsteadVocabularyBlackBoxTest {
 
 	@Test
 	public void test1() {
-		HalsteadVocabulary c = new HalsteadVocabulary(); 
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -22,12 +22,12 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(15, c.getUniqueOperatorCount()); //doesnt catch parenthesis being operators
+		assertEquals(15, c.getUniqueOperators()); //doesnt catch parenthesis being operators
 	}
 
 	@Test
 	public void test2() {
-		HalsteadVocabulary c = new HalsteadVocabulary();
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -37,12 +37,12 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(5, c.getUniqueOperandCount()); // Counts unique oprands by name, so even if they are different types (class vs constructor) they are counted as one unique operand
+		assertEquals(5, c.getUniqueOperands()); // Counts unique oprands by name, so even if they are different types (class vs constructor) they are counted as one unique operand
 	}
 
 	@Test
 	public void test3() {
-		HalsteadVocabulary c = new HalsteadVocabulary();
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -52,12 +52,12 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(1, c.getUniqueOperandCount());
+		assertEquals(1, c.getUniqueOperands());
 	}
 
 	@Test
 	public void test4() {
-		HalsteadVocabulary c = new HalsteadVocabulary();
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -67,6 +67,6 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getUniqueOperatorCount());
+		assertEquals(0, c.getUniqueOperators());
 	}
 }

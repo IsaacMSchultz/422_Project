@@ -1,6 +1,6 @@
 package Deliverable3Tests.whiteBoxTests;
 
-import StructuralMetrics.HalsteadDifficulty;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class HalsteadDifficultyTest {
 
 	@Test
 	public void testGetDefaultTokens() {
-		HalsteadDifficulty test = new HalsteadDifficulty();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 
 		List<Integer> toks = Arrays.stream(test.getDefaultTokens()).boxed().collect(Collectors.toList());
 		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
@@ -49,7 +49,7 @@ public class HalsteadDifficultyTest {
 
 	@Test
 	public void testGetAcceptableTokens() {
-		HalsteadDifficulty test = new HalsteadDifficulty();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 		
 		List<Integer> toks = Arrays.stream(test.getAcceptableTokens()).boxed().collect(Collectors.toList());
 		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
@@ -60,7 +60,7 @@ public class HalsteadDifficultyTest {
 
 	@Test
 	public void testGetRequiredTokens() {
-		HalsteadDifficulty test = new HalsteadDifficulty();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 		List<Integer> toks = Arrays.stream(test.getRequiredTokens()).boxed().collect(Collectors.toList());
 		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
 
@@ -70,33 +70,60 @@ public class HalsteadDifficultyTest {
 	
 	@Test
 	public void testVisit() {
-		HalsteadDifficulty test = new HalsteadDifficulty();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(2).when(test).getLOC(); // need to mock the lines of code cause its run each time.
+
+		DetailAST ast = PowerMockito.mock(DetailAST.class); //parent
+		DetailAST objBlock = PowerMockito.mock(DetailAST.class); //child
+		DetailAST child = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GreatGrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+
+		DetailAST textAST = PowerMockito.mock(DetailAST.class);
+
+
+		//additional mocking to deal with Dan's Treewalker
+		doReturn(objBlock).when(ast).findFirstToken(anyInt()); // mock ObjBlock creation
+		doReturn(child).when(objBlock).getFirstChild(); // Mock Child creation
+		doReturn(textAST).when(child).findFirstToken(anyInt()); //mock getting text from child
+		doReturn(GrandChild).when(child).getFirstChild(); //mock the great great great granchild
+		doReturn(GreatGrandChild).when(GrandChild).getFirstChild(); //mock the great great great granchild
+
+		doReturn(1).when(child).getChildCount(); //mock 1 child
+		doReturn(1).when(GrandChild).getChildCount(); //stop the loop when reaching here
+		doReturn(0).when(GreatGrandChild).getChildCount(); //stop the loop when reaching here
+
 
 		test.beginTree(ast); // begin the tree
 
-		doReturn(TokenTypes.NUM_DOUBLE).when(ast).getType(); // operand
+		doReturn(TokenTypes.VARIABLE_DEF).when(child).getType(); // operand (with implied operator)
+		doReturn(TokenTypes.NUM_DOUBLE).when(GreatGrandChild).getType(); //operand
+		doReturn(false).when(objBlock).branchContains(TokenTypes.NUM_DOUBLE); // not an operator
+		doReturn("double").when(textAST).getText(); //mock the name that the treewalker needs
 		test.visitToken(ast);
 
-		doReturn(TokenTypes.LNOT).when(ast).getType(); // operator
+		doReturn(TokenTypes.ASSIGN).when(ast).getType(); // operator
+		doReturn(TokenTypes.ASSIGN).when(GreatGrandChild).getType(); // operator
+		doReturn(true).when(objBlock).branchContains(TokenTypes.ASSIGN); // need to mock some other attributes for Dan's treewalker
+		doReturn("assign").when(textAST).getText(); //mock the name that the treewalker needs
 		test.visitToken(ast);
 
 		test.finishTree(ast);
 
 		assertEquals(1.0, test.getUniqueOperators(), 0.1);
-		assertEquals(1.0 , test.getUniqueOperands(), 0.1);
-		assertEquals(1.0, test.getOperands(), 0.1);
+		assertEquals(2.0 , test.getUniqueOperands(), 0.1);
+		assertEquals(1.0, test.getOperandsCount(), 0.1);
 	}
 
 	@Mock
-	HalsteadDifficulty tester = mock(HalsteadDifficulty.class);
+	HalsteadMetricsCheck tester = mock(HalsteadMetricsCheck.class);
 
 	@Test
 	public void testGetHalsteadDifficulty1() {
-		HalsteadDifficulty test = spy(new HalsteadDifficulty());
+		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
 		DetailAST ast = new DetailAST();
 
-		doReturn(1.0).when(test).getOperands(); // operand
+		doReturn(1.0).when(test).getOperandsCount(); // operand
 		doReturn(1.0).when(test).getUniqueOperators(); // operator
 		doReturn(1.0).when(test).getUniqueOperands(); // operator
 		test.beginTree(ast); // begin the tree
@@ -110,10 +137,10 @@ public class HalsteadDifficultyTest {
 	
 	@Test
 	public void testGetHalsteadDifficulty2() {
-		HalsteadDifficulty test = spy(new HalsteadDifficulty());
+		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
 		DetailAST ast = new DetailAST();
 
-		doReturn(20.0).when(test).getOperands(); // operand
+		doReturn(20.0).when(test).getOperandsCount(); // operand
 		doReturn(1.0).when(test).getUniqueOperators(); // operator
 		doReturn(1.0).when(test).getUniqueOperands(); // operator
 		test.beginTree(ast); // begin the tree
@@ -127,10 +154,10 @@ public class HalsteadDifficultyTest {
 	
 	@Test
 	public void testGetHalsteadDifficulty3() {
-		HalsteadDifficulty test = spy(new HalsteadDifficulty());
+		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
 		DetailAST ast = new DetailAST();
 
-		doReturn(20.0).when(test).getOperands(); // operand
+		doReturn(20.0).when(test).getOperandsCount(); // operand
 		doReturn(20.0).when(test).getUniqueOperators(); // operator
 		doReturn(1.0).when(test).getUniqueOperands(); // operator
 		test.beginTree(ast); // begin the tree
@@ -144,10 +171,10 @@ public class HalsteadDifficultyTest {
 	
 	@Test
 	public void testGetHalsteadDifficulty4() {
-		HalsteadDifficulty test = spy(new HalsteadDifficulty());
+		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
 		DetailAST ast = new DetailAST();
 
-		doReturn(37.0).when(test).getOperands(); // operand
+		doReturn(37.0).when(test).getOperandsCount(); // operand
 		doReturn(15.0).when(test).getUniqueOperators(); // operator
 		doReturn(11.0).when(test).getUniqueOperands(); // operator
 		test.beginTree(ast); // begin the tree

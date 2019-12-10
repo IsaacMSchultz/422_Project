@@ -1,6 +1,6 @@
 package Deliverable3Tests.blackBoxTests;
 
-import StructuralMetrics.HalsteadEffort;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class HalsteadEffortBlackBoxTest {
  
 	@Test
 	public void test() {
-		HalsteadEffort check = new HalsteadEffort();
+		HalsteadMetricsCheck check = new HalsteadMetricsCheck();
 
 		TestCheckEngine t = new TestCheckEngine(filePath, check);
 		try {

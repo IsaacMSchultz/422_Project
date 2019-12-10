@@ -1,6 +1,6 @@
 package Deliverable3Tests.blackBoxTests;
 
-import StructuralMetrics.OperandCountCheck;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class OperandCountBlackBoxTest {
 
 	@Test
 	public void test1() {
-		OperandCountCheck c = new OperandCountCheck(); 
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -22,12 +22,12 @@ public class OperandCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(116, c.getCount()); //determine if execution created the correct value
+		assertEquals(116, c.getOperandsCount()); //determine if execution created the correct value
 	}
 
 	@Test
 	public void test2() {
-		OperandCountCheck c = new OperandCountCheck(); 
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -37,12 +37,12 @@ public class OperandCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(45, c.getUniqueCount()); //determine if execution created the correct value
+		assertEquals(45, c.getUniqueOperands()); //determine if execution created the correct value
 	}
 	
 	@Test
 	public void test3() {
-		OperandCountCheck c = new OperandCountCheck(); 
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -52,12 +52,12 @@ public class OperandCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getCount()); //counts 2 from class name and method def
+		assertEquals(2, c.getOperandsCount()); //counts 2 from class name and method def
 	}
 
 	@Test
 	public void test4() {
-		OperandCountCheck c = new OperandCountCheck(); 
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -67,6 +67,6 @@ public class OperandCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getUniqueCount()); //Found a bug! Since operand names are the same they are only counted as one unique operand
+		assertEquals(2, c.getUniqueOperands()); //Found a bug! Since operand names are the same they are only counted as one unique operand
 	}
 }

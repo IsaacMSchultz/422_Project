@@ -17,6 +17,7 @@ public class HalsteadMetricsCheck extends AbstractCheck {
     public int getOperandsCount() {return operandsCount;}
     public int getUniqueOperators() {return uniqueOperators;}
     public int getUniqueOperands() {return uniqueOperands;}
+    public int getCyclomaticComplexity() {return cycTotal;}
 
     // Sum of total operators and operands
     private int halsteadLength;
@@ -112,35 +113,44 @@ public class HalsteadMetricsCheck extends AbstractCheck {
     public void finishTree(DetailAST ast) {
 
         // Sum of total operators and operands
-        halsteadLength = operatorsCount + operandsCount;
+        halsteadLength = getOperatorsCount() + getOperandsCount();
 
         // Unique number of operators and operands
-        halsteadVocabulary = uniqueOperators + uniqueOperands;
+        halsteadVocabulary = getUniqueOperators() + getUniqueOperands();
 
         // Program length (N) times log_2 halsteadVocabulary
-        halsteadVolume = halsteadLength * (Math.log(halsteadVocabulary) / Math.log(2));
+        halsteadVolume = getHalsteadLength() * (Math.log(getHalsteadVocabulary()) / Math.log(2));
 
         // D = (uniqueOperators / 2) * (operandsCount / uniqueOperands)
-        halsteadDifficulty = (((double) uniqueOperators / 2)
-                * (double) (operandsCount / (double) uniqueOperands));
+        halsteadDifficulty = (((double) getUniqueOperators() / 2)
+                * (double) (getOperandsCount() / (double) getUniqueOperands()));
 
         // halsteadVolume * halsteadDifficulty
-        halsteadEffort = halsteadDifficulty * halsteadVolume;
+        halsteadEffort = getHalsteadDifficulty() * getHalsteadVolume();
 
         // 171 - 52 * log_2(halsteadVolume) - 0.23 * (cycTotal) - 16.2 *
         // log_2(getLines().length)
         // Not doing comments lol f adding more
-        maintainabilityIndex = (171 - (5.2 * (Math.log(halsteadVolume) / Math.log(2)))) - (0.23 * cycTotal)
-                - (16.2 * (Math.log(getLines().length) / Math.log(2)));
+        maintainabilityIndex = (171 - (5.2 * (Math.log(getHalsteadVolume()) / Math.log(2)))) - (0.23 * getCyclomaticComplexity())
+                - (16.2 * (Math.log(getLOC()) / Math.log(2)));
 
-        log(ast.getLineNo(), "Number of Operators: " + operatorsCount);
-        log(ast.getLineNo(), "Number of Operands: " + operandsCount);
-        log(ast.getLineNo(), "Halstead Length: " + halsteadLength);
-        log(ast.getLineNo(), "Halstead Vocabulary: " + halsteadVocabulary);
-        log(ast.getLineNo(), "Halstead Difficulty: " + halsteadDifficulty);
-        log(ast.getLineNo(), "Halstead Volume: " + halsteadVolume);
-        log(ast.getLineNo(), "Halstead Effort: " + halsteadEffort);
-        log(ast.getLineNo(), "Maintainability Index: " + maintainabilityIndex);
+        try {
+            log(ast.getLineNo(), "Number of Operators: " + operatorsCount);
+            log(ast.getLineNo(), "Number of Operands: " + operandsCount);
+            log(ast.getLineNo(), "Halstead Length: " + halsteadLength);
+            log(ast.getLineNo(), "Halstead Vocabulary: " + halsteadVocabulary);
+            log(ast.getLineNo(), "Halstead Difficulty: " + halsteadDifficulty);
+            log(ast.getLineNo(), "Halstead Volume: " + halsteadVolume);
+            log(ast.getLineNo(), "Halstead Effort: " + halsteadEffort);
+            log(ast.getLineNo(), "Maintainability Index: " + maintainabilityIndex);
+        } catch (NullPointerException e) {
+            System.out.println("Can't run log unless called from treewalker!");
+        }
+    }
+
+    // Dan using weird functions that CANNOT BE MOCKED!!!!
+    public int getLOC() {
+        return getLines().length;
     }
 
     @Override
@@ -148,11 +158,7 @@ public class HalsteadMetricsCheck extends AbstractCheck {
 
         DetailAST objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
 
-        for (int n : operatorTokens()) {
-            if (objBlock.branchContains(n)) {
-                uniqueOperators++;
-            }
-        }
+        /*removed for simplcity*/
 
         // Global operands
         DetailAST child = objBlock.getFirstChild();
@@ -197,7 +203,7 @@ public class HalsteadMetricsCheck extends AbstractCheck {
                 TokenTypes.IDENT};
     }
 
-    private int countOperators(DetailAST ast) {
+    public int countOperators(DetailAST ast) {
         if (ast.getChildCount() > 0) {
             int count = 0;
 
@@ -226,7 +232,7 @@ public class HalsteadMetricsCheck extends AbstractCheck {
         }
     }
 
-    private int countOperands(DetailAST ast) {
+    public int countOperands(DetailAST ast) {
         if (ast.getChildCount() > 0) {
             int count = 0;
             int temp = 0;

@@ -1,6 +1,6 @@
 package Deliverable3Tests.blackBoxTests;
 
-import StructuralMetrics.HalsteadVolume;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class HalsteadVolumeBlackBoxTest {
 	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\HalsteadVolume\\HalsteadVolumeCases.java";
 	@Test
 	public void test() {
-		HalsteadVolume check = new HalsteadVolume();
+		HalsteadMetricsCheck check = new HalsteadMetricsCheck();
 		
 		TestCheckEngine t = new TestCheckEngine(filePath, check);
 		try {
