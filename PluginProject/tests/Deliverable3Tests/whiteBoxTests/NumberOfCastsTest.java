@@ -52,6 +52,10 @@ public class NumberOfCastsTest {
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.TYPECAST).when(ast).getType(); // operand
+		doReturn(1).when(ast).getChildCount();
+		doReturn(1).when(ast).getChildCount(TokenTypes.TYPECAST);
+		doReturn(null).when(ast).getFirstChild();
+		doReturn(ast).when(ast).findFirstToken(TokenTypes.OBJBLOCK);
 		test.visitToken(ast);
 
 		assertEquals(1, test.getCasts());
