@@ -19,26 +19,29 @@ import static org.mockito.Mockito.doReturn;
 public class NumberOfCastsTest {
 
 	int[] expectedTokens = { TokenTypes.TYPECAST };
+	int[] acceptableTokens = { TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
+	int[] requiredTokens = new int[0];
+	int[] defaultTokens = { TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
 
 	@Test
 	public void testGetDefaultTokens() {
 		CastsCheck test = new CastsCheck();
 
-		assertArrayEquals(expectedTokens, test.getDefaultTokens());
+		assertArrayEquals(defaultTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
 		CastsCheck test = new CastsCheck();
 
-		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
+		assertArrayEquals(acceptableTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
 		CastsCheck test = new CastsCheck();
 
-		assertArrayEquals(expectedTokens, test.getRequiredTokens());
+		assertArrayEquals(requiredTokens, test.getRequiredTokens());
 	}
 
 	@Test
