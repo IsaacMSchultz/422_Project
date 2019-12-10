@@ -6,6 +6,10 @@ public class ExpressionsCheck extends AbstractCheck {
 	private int expressions = 0;
 	private String logMsg = "Number of Expressions: ";
 
+	public int getExpressions(){
+		return this.expressions;
+	}
+
 	@Override
 	public int[] getRequiredTokens() {
 		 return new int[0];
