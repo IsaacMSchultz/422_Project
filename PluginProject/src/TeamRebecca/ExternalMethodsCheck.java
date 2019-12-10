@@ -4,6 +4,9 @@ import com.puppycrawl.tools.checkstyle.api.*;
 
 public class ExternalMethodsCheck extends AbstractCheck {
 	private int externalMethods = 0;
+	public int getExternalMethods(){
+		return this.externalMethods;
+	}
 
 	@Override
 	public int[] getRequiredTokens() {

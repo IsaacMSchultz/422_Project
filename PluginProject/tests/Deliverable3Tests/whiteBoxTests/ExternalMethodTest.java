@@ -5,6 +5,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.ExternalMethodCheck;
+import TeamRebecca.ExternalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.doReturn;
 public class ExternalMethodTest {
 	
 
-	ExternalMethodCheck extChk = new ExternalMethodCheck();
+	ExternalMethodsCheck extChk = new ExternalMethodsCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 	@Test
@@ -47,7 +48,7 @@ public class ExternalMethodTest {
 		//not sure how to return a token type inside of a method. 
 		extChk.visitToken(ast);
 		//still zero because ast.findfirsttoken inside visit token evaluates to null
-		assertEquals(0, extChk.getCount());
+		assertEquals(0, extChk.getExternalMethods());
 	}
 	
 	@Test
@@ -63,12 +64,12 @@ public class ExternalMethodTest {
 
 		extChk.visitToken(ast);
 
-		assertEquals(1, extChk.getCount()); //should be an external method call
+		assertEquals(1, extChk.getExternalMethods()); //should be an external method call
 	}
 
 	@Test
 	public void testBeginTreeDetailAST() {
-		assertEquals(0, extChk.getCount());
+		assertEquals(0, extChk.getExternalMethods());
 	}
 
 }
