@@ -1,6 +1,7 @@
 package Deliverable3Tests.blackBoxTests;
 
 import StructuralMetrics.LocalMethodCheck;
+import TeamRebecca.LocalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class LocalMethodBlackBoxTest {
 
 	@Test
 	public void test1() {
-		LocalMethodCheck c = new LocalMethodCheck();
+		LocalMethodsCheck c = new LocalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -22,12 +23,12 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(3, c.getCount()); //determine if execution created the correct value
+		assertEquals(3, c.getLocalMethods()); //determine if execution created the correct value
 	}
 
 	@Test
 	public void test2() {
-		LocalMethodCheck c = new LocalMethodCheck();
+		LocalMethodsCheck c = new LocalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -37,12 +38,12 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getCount()); //determine if execution created the correct value
+		assertEquals(0, c.getLocalMethods()); //determine if execution created the correct value
 	}
 
 	@Test
 	public void test3() {
-		LocalMethodCheck c = new LocalMethodCheck();
+		LocalMethodsCheck c = new LocalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "3.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -52,12 +53,12 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getCount()); // this. and super. not covered correctly
+		assertEquals(2, c.getLocalMethods()); // this. and super. not covered correctly
 	}
 
 	@Test
 	public void test4() {
-		LocalMethodCheck c = new LocalMethodCheck();
+		LocalMethodsCheck c = new LocalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "4.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -67,6 +68,6 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(4, c.getCount()); // this. and super. not covered correctly
+		assertEquals(4, c.getLocalMethods()); // this. and super. not covered correctly
 	}
 }

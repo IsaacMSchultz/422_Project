@@ -5,6 +5,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.LocalMethodCheck;
+import TeamRebecca.LocalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.doReturn;
 @PrepareForTest({ DetailAST.class })
 public class LocalMethodTest {
 
-	LocalMethodCheck locChk = new LocalMethodCheck();
+	LocalMethodsCheck locChk = new LocalMethodsCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 	@Test
@@ -46,7 +47,7 @@ public class LocalMethodTest {
 
 		locChk.visitToken(ast);
 
-		assertEquals(1, locChk.getCount());
+		assertEquals(1, locChk.getLocalMethods());
 	}
 	
 	@Test
@@ -62,12 +63,12 @@ public class LocalMethodTest {
 
 		locChk.visitToken(ast);
 
-		assertEquals(0, locChk.getCount()); //should be an external method call
+		assertEquals(0, locChk.getLocalMethods()); //should be an external method call
 	}
 
 	@Test
 	public void testBeginTreeDetailAST() { //no tokens
-		assertEquals(0, locChk.getCount());
+		assertEquals(0, locChk.getLocalMethods());
 	}
 
 }
