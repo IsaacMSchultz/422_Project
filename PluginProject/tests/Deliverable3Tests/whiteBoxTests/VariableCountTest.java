@@ -5,6 +5,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.VariableCountCheck;
+import TeamRebecca.VariablesCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 @PrepareForTest({ DetailAST.class })
 public class VariableCountTest {
 
-	VariableCountCheck varChk = new VariableCountCheck();
+	VariablesCheck varChk = new VariablesCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 	@Test
@@ -42,22 +43,17 @@ public class VariableCountTest {
 	public void testVisitTokenDetailAST() {
 		varChk.visitToken(ast);
 
-		assertEquals(1, varChk.getCount());
+		assertEquals(1, varChk.getVariablesCount());
 	}
 
 	@Test
 	public void testBeginTreeDetailAST() {
-		assertEquals(0, varChk.getCount());
-	}
-
-	@Test
-	public void testGetActualCount() {
-		assertEquals(0, varChk.getActualCount());
+		assertEquals(0, varChk.getVariablesCount());
 	}
 
 	@Test
 	public void testGetVariableCount() {
-		assertEquals(0, varChk.getVariableCount());
+		assertEquals(0, varChk.getVariablesCount());
 	}
 
 }

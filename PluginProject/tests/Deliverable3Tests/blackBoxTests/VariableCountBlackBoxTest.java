@@ -1,6 +1,7 @@
 package Deliverable3Tests.blackBoxTests;
 
 import StructuralMetrics.VariableCountCheck;
+import TeamRebecca.VariablesCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class VariableCountBlackBoxTest {
 
 	@Test
 	public void test1() {
-		VariableCountCheck c = new VariableCountCheck(); 
+		VariablesCheck c = new VariablesCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -22,7 +23,7 @@ public class VariableCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(9, c.getCount()); //determine if execution created the correct value
+		assertEquals(9, c.getVariablesCount()); //determine if execution created the correct value
 	}
 
 	@Test
