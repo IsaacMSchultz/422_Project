@@ -158,10 +158,15 @@ public class HalsteadMetricsCheck extends AbstractCheck {
 
         DetailAST objBlock = ast.findFirstToken(TokenTypes.OBJBLOCK);
 
-        /*removed for simplcity*/
+        for (int n : operatorTokens()) {
+            if (objBlock.branchContains(n)) {
+                uniqueOperators++;
+            }
+        }
 
         // Global operands
         DetailAST child = objBlock.getFirstChild();
+        int childId = child.getType();
 
         while (child != null) {
             if (child.getType() == TokenTypes.VARIABLE_DEF) {
@@ -204,6 +209,7 @@ public class HalsteadMetricsCheck extends AbstractCheck {
     }
 
     public int countOperators(DetailAST ast) {
+        int Id = ast.getType();
         if (ast.getChildCount() > 0) {
             int count = 0;
 
@@ -233,6 +239,7 @@ public class HalsteadMetricsCheck extends AbstractCheck {
     }
 
     public int countOperands(DetailAST ast) {
+        int Id = ast.getType();
         if (ast.getChildCount() > 0) {
             int count = 0;
             int temp = 0;

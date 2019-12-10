@@ -81,13 +81,14 @@ public class HalsteadDifficultyTest {
 
 		DetailAST textAST = PowerMockito.mock(DetailAST.class);
 
-
 		//additional mocking to deal with Dan's Treewalker
 		doReturn(objBlock).when(ast).findFirstToken(anyInt()); // mock ObjBlock creation
 		doReturn(child).when(objBlock).getFirstChild(); // Mock Child creation
-		doReturn(textAST).when(child).findFirstToken(anyInt()); //mock getting text from child
 		doReturn(GrandChild).when(child).getFirstChild(); //mock the great great great granchild
 		doReturn(GreatGrandChild).when(GrandChild).getFirstChild(); //mock the great great great granchild
+
+		doReturn(textAST).when(child).findFirstToken(TokenTypes.IDENT); //mock getting text from child
+		doReturn(GrandChild).when(child).findFirstToken(TokenTypes.SLIST); //mock getting operators from method definition
 
 		doReturn(1).when(child).getChildCount(); //mock 1 child
 		doReturn(1).when(GrandChild).getChildCount(); //stop the loop when reaching here
@@ -96,23 +97,32 @@ public class HalsteadDifficultyTest {
 
 		test.beginTree(ast); // begin the tree
 
+
 		doReturn(TokenTypes.VARIABLE_DEF).when(child).getType(); // operand (with implied operator)
 		doReturn(TokenTypes.NUM_DOUBLE).when(GreatGrandChild).getType(); //operand
+		doReturn(0).when(GrandChild).getChildCount(TokenTypes.NUM_DOUBLE); //stop the loop when reaching here
 		doReturn(false).when(objBlock).branchContains(TokenTypes.NUM_DOUBLE); // not an operator
 		doReturn("double").when(textAST).getText(); //mock the name that the treewalker needs
 		test.visitToken(ast);
 
-		doReturn(TokenTypes.ASSIGN).when(ast).getType(); // operator
-		doReturn(TokenTypes.ASSIGN).when(GreatGrandChild).getType(); // operator
+		doReturn(TokenTypes.METHOD_DEF).when(child).getType(); // operator
+		doReturn(TokenTypes.ASSIGN).when(GrandChild).getType(); // operator
+		doReturn(0).when(GrandChild).getChildCount(TokenTypes.ASSIGN); //stop the loop when reaching here
 		doReturn(true).when(objBlock).branchContains(TokenTypes.ASSIGN); // need to mock some other attributes for Dan's treewalker
-		doReturn("assign").when(textAST).getText(); //mock the name that the treewalker needs
+//		doReturn("assign").when(textAST).getText(); //mock the name that the treewalker needs
 		test.visitToken(ast);
 
 		test.finishTree(ast);
 
-		assertEquals(1.0, test.getUniqueOperators(), 0.1);
+		int ops = test.getOperatorsCount();
+		int ands = test.getOperandsCount();
+		int uops = test.getUniqueOperators();
+		int uands =  test.getUniqueOperands();
+
+		assertEquals(2.0, test.getOperandsCount(), 0.1);
 		assertEquals(2.0 , test.getUniqueOperands(), 0.1);
-		assertEquals(1.0, test.getOperandsCount(), 0.1);
+		assertEquals(1.0, test.getOperatorsCount(), 0.1);
+		assertEquals(1.0, test.getUniqueOperators(), 0.1);
 	}
 
 	@Mock
