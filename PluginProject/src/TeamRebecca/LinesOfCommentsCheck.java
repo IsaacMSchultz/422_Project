@@ -5,6 +5,10 @@ import com.puppycrawl.tools.checkstyle.api.*;
 public class LinesOfCommentsCheck extends AbstractCheck {
     private int singleComment = 0;
     private int multiComment = 0;
+
+    public int getTotalCommentLines(){
+        return this.multiComment + this.singleComment;
+    }
  
     @Override
     public int[] getRequiredTokens() {

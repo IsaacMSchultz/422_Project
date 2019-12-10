@@ -8,6 +8,10 @@ public class TotalCommentsCheck extends AbstractCheck {
 	
 	private int commentLines = 0;
 
+	public int getCommentLines(){
+		return this.commentLines;
+	}
+
 	@Override
 	public int[] getRequiredTokens() {
 		return new int[0];

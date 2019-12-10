@@ -20,38 +20,38 @@ public class LinesOfCommentsTest {
 
 	@Test
 	public void testGetDefaultTokens() {
-		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
 
 	@Test
 	public void testCountCommentsCheck1() { //test no comments
-		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
 
-		assertEquals(0, test.getCount());
+		assertEquals(0, test.getTotalCommentLines());
 	}
 	
 	@Test
 	public void testCountCommentsCheck2() { //test single line comment
-		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -59,12 +59,12 @@ public class LinesOfCommentsTest {
 		doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType();
 		test.visitToken(ast);
 
-		assertEquals(1, test.getCount());
+		assertEquals(1, test.getTotalCommentLines());
 	}
 
 	@Test
 	public void testCountCommentsCheck3() { //test block comment
-		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -72,12 +72,12 @@ public class LinesOfCommentsTest {
 		doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType();
 		test.visitToken(ast);
 
-		assertEquals(1, test.getCount());
+		assertEquals(1, test.getTotalCommentLines());
 	}
 	
 	@Test
 	public void testCountCommentsCheck4() { //test a whole bunch of commends
-		LinesOfCommentsCheck test = new LinesOfCommentsCheck();
+		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -92,6 +92,6 @@ public class LinesOfCommentsTest {
 			test.visitToken(ast);
 		}
 
-		assertEquals(40, test.getCount());
+		assertEquals(40, test.getTotalCommentLines());
 	}
 }

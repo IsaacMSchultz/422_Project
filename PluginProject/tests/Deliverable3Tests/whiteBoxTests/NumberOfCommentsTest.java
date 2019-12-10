@@ -1,6 +1,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.NumberOfCommentsCheck;
+import TeamRebecca.TotalCommentsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -20,16 +21,16 @@ public class NumberOfCommentsTest {
 
 	@Test
 	public void testBeginTree() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast);
-		assertEquals(0, test.getCount());
+		assertEquals(0, test.getCommentLines());
 	}
 
 	@Test
 	public void testGetDefaultTokens() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
@@ -54,7 +55,7 @@ public class NumberOfCommentsTest {
 	// AAA = Arrange, Act, Assert
 	@Test
 	public void testCountCommentsCount() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -65,6 +66,6 @@ public class NumberOfCommentsTest {
 		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
 		test.visitToken(ast);
 
-		assertEquals(2, test.getCount());
+		assertEquals(2, test.getCommentLines());
 	}
 }
