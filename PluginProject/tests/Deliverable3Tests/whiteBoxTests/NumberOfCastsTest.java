@@ -1,6 +1,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.NumberOfCastsCheck;
+import TeamRebecca.CastsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -21,28 +22,28 @@ public class NumberOfCastsTest {
 
 	@Test
 	public void testGetDefaultTokens() {
-		NumberOfCastsCheck test = new NumberOfCastsCheck();
+		CastsCheck test = new CastsCheck();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		NumberOfCastsCheck test = new NumberOfCastsCheck();
+		CastsCheck test = new CastsCheck();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		NumberOfCastsCheck test = new NumberOfCastsCheck();
+		CastsCheck test = new CastsCheck();
 
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
 
 	@Test
 	public void testGetCasts1() { //test 1 cast
-		NumberOfCastsCheck test = new NumberOfCastsCheck();
+		CastsCheck test = new CastsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -50,12 +51,12 @@ public class NumberOfCastsTest {
 		doReturn(TokenTypes.TYPECAST).when(ast).getType(); // operand
 		test.visitToken(ast);
 
-		assertEquals(1, test.getCount());
+		assertEquals(1, test.getCasts());
 	}
 
 	@Test
 	public void testGetCasts2() { //test tons of casts
-		NumberOfCastsCheck test = new NumberOfCastsCheck();
+		CastsCheck test = new CastsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -65,6 +66,6 @@ public class NumberOfCastsTest {
 			test.visitToken(ast);
 		}
 
-		assertEquals(20, test.getCount());
+		assertEquals(20, test.getCasts());
 	}
 }
