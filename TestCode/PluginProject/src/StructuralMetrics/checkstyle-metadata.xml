@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE checkstyle-metadata PUBLIC "-//eclipse-cs//DTD Check Metadata 1.1//EN" "http://eclipse-cs.sourceforge.net/dtds/checkstyle-metadata_1_1.dtd">
+<checkstyle-metadata>
+    <rule-group-metadata name="Plugin Project" priority="1600">
+        <description>%StructuralMetrics.desc</description>
+
+        <rule-metadata name="Comment Count" internal-name="NumberOfCommentsCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.NumberOfCommentsCheck" />
+            <description>%Comments.desc</description>
+            <property-metadata name="max" datatype="Integer" default-value="5">
+                <description>The maximum number of allowed comments.</description>
+            </property-metadata>
+        </rule-metadata>
+
+        <rule-metadata name="CyclomaticComplexityCounter" internal-name="CyclomaticComplexityCounter" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.CyclomaticComplexityCounter" />
+            <description>%ACyclomaticComplexity.desc</description>
+        </rule-metadata>
+
+        <rule-metadata name="ExpressionCountCheck" internal-name="ExpressionCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.ExpressionCountCheck" />
+            <description>%ExpressionCountCheck.desc</description>
+        </rule-metadata>
+
+        <rule-metadata name="ExternalMethodCheck" internal-name="ExternalMethodCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.ExternalMethodCheck" />
+            <description>%ExternalMethodCheck.desc</description>
+        </rule-metadata>
+
+        <rule-metadata name="HalsteadDifficulty" internal-name="HalsteadDifficulty" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.HalsteadDifficulty" />
+            <description>Displays the difficulty of understanding the code</description>
+        </rule-metadata>
+
+        <rule-metadata name="HalsteadEffort" internal-name="HalsteadEffort" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.HalsteadEffort" />
+            <description>Displays the effort needed to understand the code</description>
+        </rule-metadata>
+
+        <rule-metadata name="HalsteadLength" internal-name="HalsteadLength" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.HalsteadLength" />
+            <description>Shows the halstead length</description>
+        </rule-metadata>
+
+        <rule-metadata name="HalsteadVocabulary" internal-name="HalsteadVocabulary" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.HalsteadVocabulary" />
+            <description>Shows the halstead vocabulary</description>
+        </rule-metadata>
+
+        <rule-metadata name="HalsteadVolume" internal-name="HalsteadVolume" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.HalsteadVolume" />
+            <description>Shows the halstead volume</description>
+        </rule-metadata>
+
+        <rule-metadata name="LinesOfComments" internal-name="LinesOfComments" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.LinesOfCommentsCheck" />
+            <description>%LinesOfCommentsCheck.desc</description>
+            <property-metadata name="max" datatype="Integer" default-value="5">
+                <description>The maximum number of comment lines.</description>
+            </property-metadata>
+        </rule-metadata>
+
+        <rule-metadata name="LocalMethodCheck" internal-name="LocalMethodCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.LocalMethodCheck" />
+            <description>%LocalMethodCheck.desc</description>
+        </rule-metadata>
+
+        <rule-metadata name="MaintainabilityIndex" internal-name="MaintainabilityIndex" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.MaintainabilityIndex" />
+            <description>Displays the maintainability index of a YEET</description>
+        </rule-metadata>
+
+        <rule-metadata name="NumberOfLoopsCheck" internal-name="NumberOfLoopsCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.NumberOfLoopsCheckCheck" />
+            <description>%NumberOfLoopsCheckCheck.desc</description>
+            <property-metadata name="max" datatype="Integer" default-value="1">
+                <description>The maximum number of loop statements.</description>
+            </property-metadata>
+        </rule-metadata>
+
+        <rule-metadata name="NumberOfCastsCheck" internal-name="NumberOfCastsCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.NumberOfCastsCheck" />
+            <description>%NumberOfCasts.desc</description>
+        </rule-metadata>
+
+        <rule-metadata name="OperandCountCheck" internal-name="OperandCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperandCountCheck" />
+            <description>TEST</description>
+        </rule-metadata>
+
+        <rule-metadata name="OperatorCountCheck" internal-name="OperatorCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.OperatorCountCheck" />
+            <description>TEST2</description>
+        </rule-metadata>
+
+        <rule-metadata name="VariableCountCheck" internal-name="VariableCountCheck" parent="TreeWalker">
+            <alternative-name internal-name="StructuralMetrics.VariableCountCheck" />
+            <description>%VariableCountCheck.desc</description>
+        </rule-metadata>
+    </rule-group-metadata>
+</checkstyle-metadata>
