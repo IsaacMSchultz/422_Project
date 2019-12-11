@@ -69,28 +69,41 @@ public class LinesOfCommentsTest {
 	public void testCountCommentsCheck3() { //test block comment
 		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		DetailAST token = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType();
+		doReturn(0).when(ast).getLineNo();
+		doReturn(token).when(ast).findFirstToken(TokenTypes.BLOCK_COMMENT_END);
+		doReturn(3).when(token).getLineNo();
+		doReturn(null).when(ast).getFirstChild();
+		doReturn(1).when(ast).getChildCount();
 		test.visitToken(ast);
 
-		assertEquals(1, test.getTotalCommentLines());
+		assertEquals(4, test.getTotalCommentLines());
 	}
 	
 	@Test
 	public void testCountCommentsCheck4() { //test a whole bunch of commends
 		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		DetailAST token = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
-		
+		doReturn(1).when(ast).getChildCount();
 		doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType();
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
 
+
 		doReturn(TokenTypes.BLOCK_COMMENT_BEGIN).when(ast).getType();
+		doReturn(0).when(ast).getLineNo();
+		doReturn(token).when(ast).findFirstToken(TokenTypes.BLOCK_COMMENT_END);
+		doReturn(0).when(token).getLineNo();
+		doReturn(null).when(ast).getFirstChild();
+
 		for (int i = 0; i < 20; i++) { // do 20 operators
 			test.visitToken(ast);
 		}
