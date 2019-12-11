@@ -5,6 +5,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.ExpressionCountCheck;
+import TeamRebecca.ExpressionsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -21,17 +22,19 @@ import static org.mockito.Mockito.doReturn;
 @PrepareForTest({ DetailAST.class })
 public class ExpressionCountTest {
 
-	ExpressionCountCheck expChk = new ExpressionCountCheck();
+	ExpressionsCheck expChk = new ExpressionsCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+	int[] expectedTokens = { TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
 
 	@Test
 	public void testGetDefaultTokens() {
-		assertArrayEquals(new int[] { TokenTypes.EXPR }, expChk.getDefaultTokens());
+		assertArrayEquals(expectedTokens, expChk.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		assertArrayEquals(new int[] { TokenTypes.EXPR }, expChk.getAcceptableTokens());
+		assertArrayEquals(expectedTokens, expChk.getAcceptableTokens());
 	}
 
 	@Test
@@ -44,30 +47,36 @@ public class ExpressionCountTest {
 
 		expChk.beginTree(ast);
 		doReturn(TokenTypes.EXPR).when(ast).getType();
+		doReturn(1).when(ast).getChildCount();
+		doReturn(1).when(ast).getChildCount(TokenTypes.EXPR);
+		doReturn(null).when(ast).getFirstChild();
 
 		expChk.visitToken(ast);
 
-		assertEquals(1, expChk.getCount());
+		assertEquals(1, expChk.getExpressions());
 	}
 	
 	@Test
 	public void testVisitTokenDetailAST2() {
 
 		expChk.beginTree(ast);
+		doReturn(1).when(ast).getChildCount();
+		doReturn(1).when(ast).getChildCount(TokenTypes.EXPR);
+		doReturn(null).when(ast).getFirstChild();
 		
 		doReturn(TokenTypes.EXPR).when(ast).getType();
 		for (int i = 0; i < 20; i++) { // do 20 expressions
 			expChk.visitToken(ast);
 		}
 
-		assertEquals(20, expChk.getCount());
+		assertEquals(20, expChk.getExpressions());
 	}
 	
 	@Test
 	public void testVisitTokenDetailAST3() {
 		expChk.beginTree(ast);
 
-		assertEquals(0, expChk.getCount());
+		assertEquals(0, expChk.getExpressions());
 	}
 
 }

@@ -6,6 +6,10 @@ public class ExpressionsCheck extends AbstractCheck {
 	private int expressions = 0;
 	private String logMsg = "Number of Expressions: ";
 
+	public int getExpressions(){
+		return this.expressions;
+	}
+
 	@Override
 	public int[] getRequiredTokens() {
 		 return new int[0];
@@ -28,7 +32,12 @@ public class ExpressionsCheck extends AbstractCheck {
 
 	@Override
 	public void finishTree(DetailAST ast) {
-		log(ast.getLineNo(), logMsg + expressions);
+        try {
+            log(ast.getLineNo(), logMsg + expressions);
+        } catch (NullPointerException e) {
+            System.out.println("Can't run log unless called from treewalker!");
+        }
+
 	}
 
 	@Override
