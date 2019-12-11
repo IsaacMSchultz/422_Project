@@ -1,6 +1,6 @@
 package Deliverable3Tests.whiteBoxTests;
 
-import StructuralMetrics.HalsteadEffort;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class HalsteadEffortTest {
 
 	@Test
 	public void testGetDefaultTokens() {
-		HalsteadEffort test = new HalsteadEffort();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 
 		List<Integer> toks = Arrays.stream(test.getDefaultTokens()).boxed().collect(Collectors.toList());
 		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
@@ -49,7 +49,7 @@ public class HalsteadEffortTest {
 
 	@Test
 	public void testGetAcceptableTokens() {
-		HalsteadEffort test = new HalsteadEffort();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 		
 		List<Integer> toks = Arrays.stream(test.getAcceptableTokens()).boxed().collect(Collectors.toList());
 		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
@@ -60,7 +60,7 @@ public class HalsteadEffortTest {
 
 	@Test
 	public void testGetRequiredTokens() {
-		HalsteadEffort test = new HalsteadEffort();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 		List<Integer> toks = Arrays.stream(test.getRequiredTokens()).boxed().collect(Collectors.toList());
 		HashSet<Integer> actualTokens = new HashSet<Integer>(toks);
 
@@ -70,7 +70,7 @@ public class HalsteadEffortTest {
 	
 	@Test
 	public void testVisit() {
-		HalsteadEffort test = new HalsteadEffort();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -98,7 +98,7 @@ public class HalsteadEffortTest {
 
 	@Test
 	public void testGetHalsteadEffort01() {
-		HalsteadEffort test = spy(new HalsteadEffort());
+		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
 		DetailAST ast = new DetailAST();
 
 		doReturn(1.0).when(test).getHalsteadDifficulty();
@@ -114,7 +114,7 @@ public class HalsteadEffortTest {
 	
 	@Test
 	public void testGetHalsteadEffort02() {
-		HalsteadEffort test = spy(new HalsteadEffort());
+		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
 		DetailAST ast = new DetailAST();
 
 		doReturn(135.0).when(test).getHalsteadDifficulty();
@@ -134,7 +134,7 @@ public class HalsteadEffortTest {
 
 	@Test
 	public void testGetHalsteadEffort1() {
-		HalsteadEffort test = new HalsteadEffort();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -154,7 +154,7 @@ public class HalsteadEffortTest {
 
 	@Test
 	public void testGetHalsteadEffort2() {
-		HalsteadEffort test = new HalsteadEffort();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -177,7 +177,7 @@ public class HalsteadEffortTest {
 
 	@Test
 	public void testGetHalsteadEffort3() {
-		HalsteadEffort test = new HalsteadEffort();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
@@ -201,7 +201,7 @@ public class HalsteadEffortTest {
 
 	@Test
 	public void testGetHalsteadEffort4() { //try a ton of different operators and operands
-		HalsteadEffort test = new HalsteadEffort();
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree

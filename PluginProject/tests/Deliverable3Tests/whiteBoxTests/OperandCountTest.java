@@ -42,7 +42,7 @@ public class OperandCountTest {
 	}
 
 	@Test
-	public void testGetOperandCount1() { //tests with a single token
+	public void testgetOperandsCount1() { //tests with a single token
 		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -57,7 +57,7 @@ public class OperandCountTest {
 	}
 
 	@Test
-	public void testGetOperandCount2() { //tests unique vs count
+	public void testgetOperandsCount2() { //tests unique vs count
 		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
@@ -74,7 +74,7 @@ public class OperandCountTest {
 	}
 
 	@Test
-	public void testGetOperandCount3() { //this test tries every possible operand type we have included
+	public void testgetOperandsCount3() { //this test tries every possible operand type we have included
 		OperandCountCheck test = new OperandCountCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
