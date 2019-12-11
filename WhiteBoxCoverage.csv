@@ -1,0 +1,21 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,OperandCountCheck,25,69,0,0,4,15,1,8,1,8
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,HalsteadEffort,14,145,2,4,1,33,2,12,0,11
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,VariableCountCheck,23,39,0,0,6,10,2,8,2,8
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,NumberOfCommentsCheck,68,33,0,0,29,10,10,7,10,7
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,CharacterSheet,37,0,6,0,14,0,10,0,7,0
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,CyclomaticComplexityCounter,251,0,8,0,49,0,19,0,15,0
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,HalsteadDifficulty,14,155,0,6,1,32,0,15,0,12
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,MaintainabilityIndex,210,0,8,0,43,0,19,0,15,0
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,ExpressionCountCheck,19,37,0,0,4,10,1,7,1,7
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,HalsteadVolume,14,167,2,4,1,35,2,13,0,12
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,LinesOfCommentsCheck,24,62,1,2,7,14,4,8,3,7
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,NumberOfCastsCheck,18,30,0,0,4,9,1,7,1,7
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,NumberOfLoopsCheck,19,75,1,3,4,18,3,10,2,8
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,ExternalMethodCheck,19,41,0,2,4,11,1,8,1,7
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,HalsteadLength,14,133,0,6,1,27,0,14,0,11
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,GameMasterMultiTool,370,0,40,0,95,0,27,0,7,0
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,OperatorCountCheck,25,233,0,0,4,23,1,8,1,8
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,LocalMethodCheck,19,41,0,2,4,11,1,8,1,7
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,ArrayConcatenator,3,59,0,6,1,10,1,4,1,1
+"whiteBoxTests (1) (Nov 3, 2019 5:02:07 PM)/PluginProject/src",StructuralMetrics,HalsteadVocabulary,14,137,0,6,1,29,0,14,0,11

@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="PitTestable" type="PIT" factoryName="PIT Runner" REPORT_DIR="$PROJECT_DIR$/target/report" SOURCE_DIRS="$PROJECT_DIR$/src" TARGET_CLASSES="TeamRebecca.*" TARGET_TESTS="Deliverable3Tests.PitTestable.*" otherParams="--outputFormats XML,HTML">
+    <module name="PluginProject" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -1,0 +1,13 @@
+# Halstead test coverage:
+
+Deliverable3Tests.whiteBoxTests.HalsteadDifficultyTest,
+Deliverable3Tests.whiteBoxTests.HalsteadEffortTest,
+Deliverable3Tests.whiteBoxTests.HalsteadLengthTest,
+Deliverable3Tests.whiteBoxTests.HalsteadVocabularyTest,
+Deliverable3Tests.whiteBoxTests.HalsteadVolumeTest,
+Deliverable3Tests.whiteBoxTests.OperandCountTest,
+Deliverable3Tests.whiteBoxTests.OperatorCountTest
+
+
+
+Afterwards

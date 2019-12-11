@@ -1,0 +1,21 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,HalsteadDifficulty,8,161,0,6,1,32,1,14,1,11
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,ExternalMethodCheck,14,46,0,2,3,12,2,7,2,6
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,LocalMethodCheck,14,46,0,2,3,12,2,7,2,6
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,VariableCountCheck,20,42,0,0,5,11,4,6,4,6
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,HalsteadVocabulary,8,143,0,6,1,29,1,13,1,10
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,NumberOfCastsCheck,7,41,0,0,2,11,1,7,1,7
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,CyclomaticComplexityCounter,35,216,2,6,4,45,3,16,1,14
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,GameMasterMultiTool,370,0,40,0,95,0,27,0,7,0
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,LinesOfCommentsCheck,19,67,1,2,4,17,3,9,2,8
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,NumberOfLoopsCheck,23,71,1,3,4,18,3,10,2,8
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,MaintainabilityIndex,20,190,0,8,5,38,2,17,2,13
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,HalsteadEffort,20,139,2,4,4,30,4,10,2,9
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,HalsteadLength,8,139,0,6,1,27,1,13,1,10
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,NumberOfCommentsCheck,55,46,0,0,26,13,9,8,9,8
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,ArrayConcatenator,3,59,0,6,1,10,1,4,1,1
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,HalsteadVolume,8,173,2,4,2,34,3,12,1,11
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,ExpressionCountCheck,14,42,0,0,3,11,2,6,2,6
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,OperatorCountCheck,7,251,0,0,2,25,1,8,1,8
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,OperandCountCheck,7,87,0,0,2,17,1,8,1,8
+"blackBoxTests (1) (Nov 3, 2019 5:55:48 PM)/PluginProject/src",StructuralMetrics,CharacterSheet,37,0,6,0,14,0,10,0,7,0
