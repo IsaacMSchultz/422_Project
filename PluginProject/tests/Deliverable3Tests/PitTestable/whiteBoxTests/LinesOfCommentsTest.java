@@ -9,8 +9,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(PowerMockRunner.class)
@@ -19,6 +18,7 @@ public class LinesOfCommentsTest {
 	int[] expectedTokens = { TokenTypes.SINGLE_LINE_COMMENT, TokenTypes.BLOCK_COMMENT_BEGIN };
 	int[] expectedAcceptableTokens = {TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF};
 	int[] expectedDefaultTokens = {TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
+	int[] expectedDefaultTokens2 = {TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
 	int[] expectedRequiredTokens = new int[0];
 
 	@Test
@@ -40,6 +40,16 @@ public class LinesOfCommentsTest {
 		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
 
 		assertArrayEquals(expectedRequiredTokens, test.getRequiredTokens());
+	}
+
+	@Test
+	public void testBeginTree() { // test beginning tree
+		TeamRebecca.LinesOfCommentsCheck test = new TeamRebecca.LinesOfCommentsCheck();
+
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		test.beginTree(ast);
+
+		assertNotEquals(3, test.getTotalCommentLines());
 	}
 
 	@Test

@@ -44,51 +44,170 @@ public class VariableCountTest {
 		assertArrayEquals(new int[0], varChk.getRequiredTokens());
 	}
 
-//	@Test
-//	public void testVisitTokenDetailAST() {
-//		varChk.visitToken(ast);
-//		doReturn(ast).when(ast).findFirstToken(TokenTypes.OBJBLOCK);
-//		doReturn(1).when(ast).getChildCount();
-//		doReturn(1).when(ast).getChildCount(TokenTypes.VARIABLE_DEF);
-//		doReturn(null).when(ast).getFirstChild();
-//
-//		assertEquals(1, varChk.getCount());
-//
-//		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
-//		doReturn(2).when(test).getLOC(); // need to mock the lines of code cause its run each time.
-//
-//		DetailAST ast = PowerMockito.mock(DetailAST.class); //parent
-//		DetailAST objBlock = PowerMockito.mock(DetailAST.class); //child
-//		DetailAST child = PowerMockito.mock(DetailAST.class); //grandchild
-//		DetailAST GrandChild = PowerMockito.mock(DetailAST.class); //grandchild
-//		DetailAST GreatGrandChild = PowerMockito.mock(DetailAST.class); //grandchild
-//
-//		DetailAST textAST = PowerMockito.mock(DetailAST.class);
-//
-//		//additional mocking to deal with Dan's Treewalker
-//		doReturn(objBlock).when(ast).findFirstToken(anyInt()); // mock ObjBlock creation
-//		doReturn(child).when(objBlock).getFirstChild(); // Mock Child creation
-//		doReturn(GrandChild).when(child).getFirstChild(); //mock the great great great granchild
-//		doReturn(GreatGrandChild).when(GrandChild).getFirstChild(); //mock the great great great granchild
-//
-//		doReturn(textAST).when(child).findFirstToken(TokenTypes.IDENT); //mock getting text from child
-//		doReturn(GrandChild).when(child).findFirstToken(TokenTypes.SLIST); //mock getting operators from method definition
-//
-//		doReturn(1).when(child).getChildCount(); //mock 1 child
-//		doReturn(1).when(GrandChild).getChildCount(); //stop the loop when reaching here
-//		doReturn(0).when(GreatGrandChild).getChildCount(); //stop the loop when reaching here
-//
-//
-//		test.beginTree(ast); // begin the tree
-//
-//
-//		doReturn(TokenTypes.VARIABLE_DEF).when(child).getType(); // operand (with implied operator)
-//		doReturn(TokenTypes.NUM_DOUBLE).when(GreatGrandChild).getType(); //operand
-//		doReturn(1).when(GrandChild).getChildCount(TokenTypes.NUM_DOUBLE); //stop the loop when reaching here
-//		doReturn(false).when(objBlock).branchContains(TokenTypes.NUM_DOUBLE); // not an operator
-//		doReturn("double").when(textAST).getText(); //mock the name that the treewalker needs
-//		test.visitToken(ast);
-//	}
+	@Test
+	public void testVisitTokenDetailAST() {
+
+		DetailAST ast = PowerMockito.mock(DetailAST.class); //parent
+		DetailAST objBlock = PowerMockito.mock(DetailAST.class); //child
+		DetailAST child = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GreatGrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+
+		DetailAST textAST = PowerMockito.mock(DetailAST.class);
+
+		//additional mocking to deal with Dan's Treewalker
+		doReturn(objBlock).when(ast).findFirstToken(anyInt()); // mock ObjBlock creation
+		doReturn(child).when(objBlock).getFirstChild(); // Mock Child creation
+		doReturn(GrandChild).when(child).getFirstChild(); //mock the great great great granchild
+		doReturn(GreatGrandChild).when(GrandChild).getFirstChild(); //mock the great great great granchild
+
+		doReturn(textAST).when(child).findFirstToken(TokenTypes.IDENT); //mock getting text from child
+		doReturn(GrandChild).when(child).findFirstToken(TokenTypes.SLIST); //mock getting operators from method definition
+
+		doReturn(1).when(child).getChildCount(); //mock 1 child
+		doReturn(1).when(GrandChild).getChildCount(); //stop the loop when reaching here
+		doReturn(1).when(objBlock).getChildCount(); //stop the loop when reaching here
+		doReturn(0).when(GreatGrandChild).getChildCount(); //stop the loop when reaching here
+
+
+		varChk.beginTree(ast); // begin the tree
+
+
+		doReturn(TokenTypes.VARIABLE_DEF).when(child).getType(); // operand (with implied operator)
+		doReturn(TokenTypes.VARIABLE_DEF).when(objBlock).getType(); //operand
+		doReturn(1).when(objBlock).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		varChk.visitToken(ast);
+
+		assertEquals(1, varChk.getCount());
+	}
+
+	@Test
+	public void testVisitTokenDetailAST1() {
+
+		DetailAST ast = PowerMockito.mock(DetailAST.class); //parent
+		DetailAST objBlock = PowerMockito.mock(DetailAST.class); //child
+		DetailAST child = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GreatGrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+
+		DetailAST textAST = PowerMockito.mock(DetailAST.class);
+
+		//additional mocking to deal with Dan's Treewalker
+		doReturn(objBlock).when(ast).findFirstToken(anyInt()); // mock ObjBlock creation
+		doReturn(child).when(objBlock).getFirstChild(); // Mock Child creation
+		doReturn(GrandChild).when(child).getFirstChild(); //mock the great great great granchild
+		doReturn(GreatGrandChild).when(GrandChild).getFirstChild(); //mock the great great great granchild
+
+		doReturn(textAST).when(child).findFirstToken(TokenTypes.IDENT); //mock getting text from child
+		doReturn(GrandChild).when(child).findFirstToken(TokenTypes.SLIST); //mock getting operators from method definition
+
+		doReturn(1).when(objBlock).getChildCount(); //stop the loop when reaching here
+		doReturn(1).when(child).getChildCount(); //mock 1 child
+		doReturn(1).when(GrandChild).getChildCount(); //stop the loop when reaching here
+		doReturn(0).when(GreatGrandChild).getChildCount(); //stop the loop when reaching here
+
+
+		varChk.beginTree(ast); // begin the tree
+
+
+		doReturn(TokenTypes.VARIABLE_DEF).when(child).getType(); // operand (with implied operator)
+		doReturn(TokenTypes.VARIABLE_DEF).when(objBlock).getType(); //operand
+		doReturn(1).when(objBlock).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		doReturn(1).when(child).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		varChk.visitToken(ast);
+
+		assertEquals(2, varChk.getCount());
+	}
+
+	@Test
+	public void testVisitTokenDetailAST2() {
+
+		DetailAST ast = PowerMockito.mock(DetailAST.class); //parent
+		DetailAST objBlock = PowerMockito.mock(DetailAST.class); //child
+		DetailAST child = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GreatGrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+
+		DetailAST textAST = PowerMockito.mock(DetailAST.class);
+
+		//additional mocking to deal with Dan's Treewalker
+		doReturn(objBlock).when(ast).findFirstToken(anyInt()); // mock ObjBlock creation
+		doReturn(child).when(objBlock).getFirstChild(); // Mock Child creation
+		doReturn(GrandChild).when(child).getFirstChild(); //mock the great great great granchild
+		doReturn(GreatGrandChild).when(GrandChild).getFirstChild(); //mock the great great great granchild
+
+		doReturn(textAST).when(child).findFirstToken(TokenTypes.IDENT); //mock getting text from child
+		doReturn(GrandChild).when(child).findFirstToken(TokenTypes.SLIST); //mock getting operators from method definition
+
+		doReturn(1).when(objBlock).getChildCount(); //stop the loop when reaching here
+		doReturn(1).when(child).getChildCount(); //mock 1 child
+		doReturn(1).when(GrandChild).getChildCount(); //stop the loop when reaching here
+		doReturn(1).when(GreatGrandChild).getChildCount(); //stop the loop when reaching here
+
+
+		varChk.beginTree(ast); // begin the tree
+
+
+		doReturn(TokenTypes.VARIABLE_DEF).when(child).getType(); // operand (with implied operator)
+		doReturn(TokenTypes.VARIABLE_DEF).when(objBlock).getType(); //operand
+		doReturn(1).when(objBlock).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		doReturn(5).when(child).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		doReturn(1).when(GrandChild).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		doReturn(1).when(GreatGrandChild).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		varChk.visitToken(ast);
+
+		assertEquals(8, varChk.getCount());
+	}
+
+	@Test
+	public void testVisitTokenDetailASTSibling() {
+
+		DetailAST ast = PowerMockito.mock(DetailAST.class); //parent
+		DetailAST objBlock = PowerMockito.mock(DetailAST.class); //child
+		DetailAST child = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+		DetailAST GreatGrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+
+		DetailAST brother = PowerMockito.mock(DetailAST.class);
+		DetailAST sister = PowerMockito.mock(DetailAST.class);
+
+		DetailAST textAST = PowerMockito.mock(DetailAST.class);
+
+		//additional mocking to deal with Dan's Treewalker
+		doReturn(objBlock).when(ast).findFirstToken(anyInt()); // mock ObjBlock creation
+		doReturn(child).when(objBlock).getFirstChild(); // Mock Child creation
+		doReturn(GrandChild).when(child).getFirstChild(); //mock the great great great granchild
+		doReturn(GreatGrandChild).when(GrandChild).getFirstChild(); //mock the great great great granchild
+
+		doReturn(brother).when(child).getNextSibling(); //mock the great great great granchild
+		doReturn(sister).when(GrandChild).getNextSibling(); //mock the great great great granchild
+
+		doReturn(textAST).when(child).findFirstToken(TokenTypes.IDENT); //mock getting text from child
+		doReturn(GrandChild).when(child).findFirstToken(TokenTypes.SLIST); //mock getting operators from method definition
+
+		doReturn(1).when(objBlock).getChildCount(); //stop the loop when reaching here
+		doReturn(1).when(child).getChildCount(); //mock 1 child
+		doReturn(1).when(GrandChild).getChildCount(); //stop the loop when reaching here
+		doReturn(1).when(GreatGrandChild).getChildCount(); //stop the loop when reaching here
+		doReturn(1).when(brother).getChildCount(); //stop the loop when reaching here
+		doReturn(1).when(sister).getChildCount(); //stop the loop when reaching here
+
+
+		varChk.beginTree(ast); // begin the tree
+
+
+		doReturn(TokenTypes.VARIABLE_DEF).when(child).getType(); // operand (with implied operator)
+		doReturn(TokenTypes.VARIABLE_DEF).when(objBlock).getType(); //operand
+		doReturn(1).when(objBlock).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		doReturn(5).when(child).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		doReturn(1).when(GrandChild).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		doReturn(1).when(GreatGrandChild).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		doReturn(1).when(brother).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		doReturn(1).when(sister).getChildCount(TokenTypes.VARIABLE_DEF); //stop the loop when reaching here
+		varChk.visitToken(ast);
+
+		assertEquals(10, varChk.getCount());
+	}
 
 	@Test
 	public void testBeginTreeDetailAST() {

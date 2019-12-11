@@ -10,8 +10,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(PowerMockRunner.class)
@@ -27,8 +26,10 @@ public class NumberOfCommentsTest {
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast);
+
 		assertEquals(0, test.getCommentLines());
 	}
+
 
 	@Test
 	public void testGetDefaultTokens() {
@@ -70,5 +71,29 @@ public class NumberOfCommentsTest {
 		test.visitToken(ast);
 
 		assertEquals(2, test.getCommentLines());
+	}
+
+	@Test
+	public void testCountCommentsCount2() {
+		TotalCommentsCheck test = new TotalCommentsCheck();
+		DetailAST ast = PowerMockito.mock(DetailAST.class);
+
+		test.beginTree(ast); // begin the tree
+
+		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
+		doReturn(ast).when(ast).findFirstToken(TokenTypes.COMMENT_CONTENT);
+		test.visitToken(ast);
+
+		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
+		test.visitToken(ast);
+
+		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
+		doReturn(ast).when(ast).findFirstToken(TokenTypes.COMMENT_CONTENT);
+		test.visitToken(ast);
+
+		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
+		test.visitToken(ast);
+
+	     assertEquals(4, test.getCommentLines());
 	}
 }
