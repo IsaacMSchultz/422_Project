@@ -60,6 +60,8 @@ public class LinesOfCommentsTest {
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.SINGLE_LINE_COMMENT).when(ast).getType();
+		doReturn(1).when(ast).getChildCount();
+		doReturn(null).when(ast).getFirstChild();
 		test.visitToken(ast);
 
 		assertEquals(1, test.getTotalCommentLines());
