@@ -4,7 +4,6 @@
 */
 package Deliverable3Tests.whiteBoxTests;
 
-import StructuralMetrics.VariableCountCheck;
 import TeamRebecca.VariablesCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;

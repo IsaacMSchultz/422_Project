@@ -1,6 +1,6 @@
 package Deliverable3Tests.whiteBoxTests;
 
-import StructuralMetrics.OperandCountCheck;
+
 import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;

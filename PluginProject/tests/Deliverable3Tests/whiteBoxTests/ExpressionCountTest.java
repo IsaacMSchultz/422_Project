@@ -4,7 +4,7 @@
 */
 package Deliverable3Tests.whiteBoxTests;
 
-import StructuralMetrics.ExpressionCountCheck;
+
 import TeamRebecca.ExpressionsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;

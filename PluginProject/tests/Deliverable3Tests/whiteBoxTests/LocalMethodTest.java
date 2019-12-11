@@ -4,7 +4,7 @@
 */
 package Deliverable3Tests.whiteBoxTests;
 
-import StructuralMetrics.LocalMethodCheck;
+
 import TeamRebecca.LocalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;

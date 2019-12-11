@@ -1,6 +1,6 @@
 package Deliverable3Tests.whiteBoxTests;
 
-import StructuralMetrics.NumberOfLoopsCheck;
+
 import TeamRebecca.LoopsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
