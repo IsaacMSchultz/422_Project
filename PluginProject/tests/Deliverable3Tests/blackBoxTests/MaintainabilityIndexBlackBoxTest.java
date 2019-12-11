@@ -1,6 +1,6 @@
 package Deliverable3Tests.blackBoxTests;
 
-import StructuralMetrics.MaintainabilityIndex;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class MaintainabilityIndexBlackBoxTest {
 
 	@Test
 	public void test() {
-		MaintainabilityIndex check = new MaintainabilityIndex();
+		HalsteadMetricsCheck check = new HalsteadMetricsCheck();
 
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", check);
 		try {
@@ -21,12 +21,12 @@ public class MaintainabilityIndexBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(114.37, check.getMaintainabilityIndex(), 0.8); // high error since LOC changes sometimes because of linux/windows file endings
+		assertEquals(64.37, check.getMaintainabilityIndex(), 0.8); // high error since LOC changes sometimes because of linux/windows file endings
 	}
 
 	@Test
 	public void test2() {
-		MaintainabilityIndex check = new MaintainabilityIndex();
+		HalsteadMetricsCheck check = new HalsteadMetricsCheck();
 
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", check);
 		try {
@@ -35,7 +35,10 @@ public class MaintainabilityIndexBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(97.48, check.getMaintainabilityIndex(), 0.8); // high error since LOC changes sometimes because of linux/windows file endings
+//		assertEquals(32, check.getLOC());
+//		assertEquals(3, check.getCyclomaticComplexity());
+//		assertEquals(1, check.getHalsteadLength());
+		assertEquals(47.02, check.getMaintainabilityIndex(), 0.8); // high error since LOC changes sometimes because of linux/windows file endings
 
 	}
 

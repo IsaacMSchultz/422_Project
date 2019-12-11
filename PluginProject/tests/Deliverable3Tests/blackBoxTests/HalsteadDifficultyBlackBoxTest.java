@@ -26,7 +26,7 @@ public class HalsteadDifficultyBlackBoxTest {
 
 		// halsteadDifficulty = (uniqueOperators / 2) * (operands / uniqueOperands)
 		// halsteadDifficulty = (6 / 2) * ( 38 / 11) = 
-		assertEquals(10.36, check.getHalsteadDifficulty(), 0.1); //does not calculate correctly, off by a small margin because we do not properyly
+		assertEquals(10.36, check.getHalsteadDifficulty(), 0.1); // Does not calculate correctly since their operators and operands are wrong!
 	}
 
 }

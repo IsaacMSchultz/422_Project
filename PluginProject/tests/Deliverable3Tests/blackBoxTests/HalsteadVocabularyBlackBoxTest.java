@@ -67,6 +67,6 @@ public class HalsteadVocabularyBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getUniqueOperators());
+		assertEquals(1, c.getUniqueOperators());
 	}
 }

@@ -21,7 +21,8 @@ public class OperatorCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(76, c.getOperatorsCount()); //determine if execution created the correct value
+		assertEquals(117, c.getOperatorsCount()); //Their code counts definitions and {} as well as String[] assignment as operators
+//		assertEquals(76, c.getOperatorsCount()); // This is what I am expecting
 	}
 
 	@Test

@@ -24,6 +24,6 @@ public class HalsteadEffortBlackBoxTest {
 		}
 		
 		
-		assertEquals(2795.9, check.getHalsteadEffort(), 0.5);
+		assertEquals(2795.9, check.getHalsteadEffort(), 0.5); //wrong vbecause other metrics are wrong
 	}
 }

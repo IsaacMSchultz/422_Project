@@ -52,7 +52,7 @@ public class HalsteadLengthBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getOperandsCount()); //determine if execution created the correct value
+		assertEquals(0, c.getOperandsCount()); //determine if execution created the correct value
 	}
 
 	@Test
