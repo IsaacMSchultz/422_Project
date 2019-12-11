@@ -39,4 +39,19 @@ public class ExpressionCountBlackBoxTest {
 
 		assertEquals(0, c.getExpressions()); //determine if execution created the correct value
 	}
+
+	@Test
+	public void test3() {
+		ExpressionsCheck c = new ExpressionsCheck();
+		TestCheckEngine t = new TestCheckEngine(filePath + "3.java", c); //create a tester with filepath, and the check c
+
+		try {
+			t.runTree(); //try to execute the check on the whole tree
+		} catch (CheckstyleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertEquals(8, c.getExpressions()); //determine if execution created the correct value
+	}
 }
