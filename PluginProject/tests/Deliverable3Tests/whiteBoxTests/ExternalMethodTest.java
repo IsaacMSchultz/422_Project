@@ -25,15 +25,17 @@ public class ExternalMethodTest {
 
 	ExternalMethodsCheck extChk = new ExternalMethodsCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
+	DetailAST child = PowerMockito.mock(DetailAST.class);
+	int[] expectedTokens = { TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
 
 	@Test
 	public void testGetDefaultTokens() {
-		assertArrayEquals(new int[] { TokenTypes.METHOD_CALL }, extChk.getDefaultTokens());
+		assertArrayEquals(expectedTokens, extChk.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		assertArrayEquals(new int[] { TokenTypes.METHOD_CALL }, extChk.getAcceptableTokens());
+		assertArrayEquals(expectedTokens, extChk.getAcceptableTokens());
 	}
 
 	@Test
@@ -45,10 +47,17 @@ public class ExternalMethodTest {
 	public void testVisitTokenDetailAST1() {
 		extChk.beginTree(ast);
 		doReturn(TokenTypes.METHOD_CALL).when(ast).getType();
-		//not sure how to return a token type inside of a method. 
+		doReturn(1).when(ast).getChildCount();
+		doReturn(0).when(child).getChildCount();
+		doReturn(child).when(ast).getFirstChild();
+		doReturn(null).when(child).getFirstChild();
+		doReturn(null).when(ast).getNextSibling();
+		doReturn(null).when(child).getNextSibling();
+		doReturn(ast).when(ast).findFirstToken(TokenTypes.DOT);
+		doReturn(false).when(ast).branchContains(TokenTypes.LITERAL_THIS);
+
 		extChk.visitToken(ast);
-		//still zero because ast.findfirsttoken inside visit token evaluates to null
-		assertEquals(0, extChk.getExternalMethods());
+		assertEquals(1, extChk.getExternalMethods());
 	}
 	
 	@Test
