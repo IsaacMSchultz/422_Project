@@ -5,6 +5,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.ExternalMethodCheck;
+import TeamRebecca.ExternalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.doReturn;
 public class ExternalMethodTest {
 	
 
-	ExternalMethodCheck extChk = new ExternalMethodCheck();
+	ExternalMethodsCheck extChk = new ExternalMethodsCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 	@Test

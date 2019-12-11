@@ -28,7 +28,12 @@ public class ExpressionsCheck extends AbstractCheck {
 
 	@Override
 	public void finishTree(DetailAST ast) {
-		log(ast.getLineNo(), logMsg + expressions);
+		try{
+			log(ast.getLineNo(), logMsg + expressions);
+		}
+		catch(NullPointerException err) {
+			System.out.println("Can't run log unless called from treewalker");
+		}
 	}
 
 	@Override

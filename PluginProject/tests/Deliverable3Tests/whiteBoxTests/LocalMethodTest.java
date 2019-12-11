@@ -5,6 +5,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.LocalMethodCheck;
+import TeamRebecca.LocalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.doReturn;
 @PrepareForTest({ DetailAST.class })
 public class LocalMethodTest {
 
-	LocalMethodCheck locChk = new LocalMethodCheck();
+	LocalMethodsCheck locChk = new LocalMethodsCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 	@Test

@@ -32,7 +32,12 @@ public class LoopsCheck extends AbstractCheck {
 		// Edit what you want the warning area to display
 		
 		String catchMsg = "Number of Loops: ";
-		log(ast.getLineNo(), catchMsg + loops);
+		try {
+			log(ast.getLineNo(), catchMsg + loops);
+		}
+		catch(NullPointerException err) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.NumberOfLoopsCheck;
+import TeamRebecca.LoopsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class NumberOfLoopsTest {
 
 	@Test
 	public void testGetDefaultTokens() {
-		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		LoopsCheck test = new LoopsCheck();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}

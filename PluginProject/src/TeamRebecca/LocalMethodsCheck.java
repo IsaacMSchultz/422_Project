@@ -30,7 +30,12 @@ public class LocalMethodsCheck extends AbstractCheck {
 	@Override
 	public void finishTree(DetailAST ast) {
 		String catchMsg = "Number of local method references: ";
-		log(ast.getLineNo(), catchMsg + localMethods);
+		try {
+			log(ast.getLineNo(), catchMsg + localMethods);
+		}
+		catch(NullPointerException err) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
 	}
 
 	@Override
