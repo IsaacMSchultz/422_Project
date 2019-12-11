@@ -28,7 +28,7 @@ public class VariableCountBlackBoxTest {
 
 	@Test
 	public void test2() {
-		VariableCountCheck c = new VariableCountCheck();
+		VariablesCheck c = new VariablesCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -38,12 +38,12 @@ public class VariableCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getCount()); //determine if execution created the correct value
+		assertEquals(0, c.getVariablesCount()); //determine if execution created the correct value
 	}
 
 	@Test
 	public void test3() {
-		VariableCountCheck c = new VariableCountCheck();
+		VariablesCheck c = new VariablesCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "3.java", c); //create a tester with filepath, and the check c
 		
 		try {
@@ -53,6 +53,6 @@ public class VariableCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(3, c.getCount()); //determine if execution created the correct value
+		assertEquals(3, c.getVariablesCount()); //determine if execution created the correct value
 	}
 }

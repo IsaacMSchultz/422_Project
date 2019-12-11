@@ -6,7 +6,7 @@ Deliverable3Tests.whiteBoxTests.HalsteadLengthTest,
 Deliverable3Tests.whiteBoxTests.HalsteadVocabularyTest,
 Deliverable3Tests.whiteBoxTests.HalsteadVolumeTest,
 Deliverable3Tests.whiteBoxTests.OperandCountTest,
-Deliverable3Tests.whiteBoxTests.OperatorCountTest,
+Deliverable3Tests.whiteBoxTests.OperatorCountTest
 
 
 
