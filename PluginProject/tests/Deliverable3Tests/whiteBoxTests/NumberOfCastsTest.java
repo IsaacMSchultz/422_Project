@@ -19,22 +19,19 @@ import static org.mockito.Mockito.doReturn;
 public class NumberOfCastsTest {
 
 	int[] expectedTokens = { TokenTypes.TYPECAST };
-	int[] acceptableTokens = { TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
+	int[] otherTokens = { TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
 	int[] requiredTokens = new int[0];
-	int[] defaultTokens = { TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
 
 	@Test
 	public void testGetDefaultTokens() {
 		CastsCheck test = new CastsCheck();
-
-		assertArrayEquals(defaultTokens, test.getDefaultTokens());
+		assertArrayEquals(otherTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
 		CastsCheck test = new CastsCheck();
-
-		assertArrayEquals(acceptableTokens, test.getAcceptableTokens());
+		assertArrayEquals(otherTokens, test.getAcceptableTokens());
 	}
 
 	@Test
@@ -65,6 +62,10 @@ public class NumberOfCastsTest {
 	public void testGetCasts2() { //test tons of casts
 		CastsCheck test = new CastsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
+		doReturn(ast).when(ast).findFirstToken(TokenTypes.OBJBLOCK);
+		doReturn(1).when(ast).getChildCount();
+		doReturn(1).when(ast).getChildCount(TokenTypes.TYPECAST);
+		doReturn(null).when(ast).getFirstChild();
 
 		test.beginTree(ast); // begin the tree
 
