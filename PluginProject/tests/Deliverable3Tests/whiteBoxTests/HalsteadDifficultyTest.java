@@ -100,17 +100,17 @@ public class HalsteadDifficultyTest {
 
 		doReturn(TokenTypes.VARIABLE_DEF).when(child).getType(); // operand (with implied operator)
 		doReturn(TokenTypes.NUM_DOUBLE).when(GreatGrandChild).getType(); //operand
-		doReturn(0).when(GrandChild).getChildCount(TokenTypes.NUM_DOUBLE); //stop the loop when reaching here
+		doReturn(1).when(GrandChild).getChildCount(TokenTypes.NUM_DOUBLE); //stop the loop when reaching here
 		doReturn(false).when(objBlock).branchContains(TokenTypes.NUM_DOUBLE); // not an operator
 		doReturn("double").when(textAST).getText(); //mock the name that the treewalker needs
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.METHOD_DEF).when(child).getType(); // operator
 		doReturn(TokenTypes.ASSIGN).when(GrandChild).getType(); // operator
-		doReturn(0).when(GrandChild).getChildCount(TokenTypes.ASSIGN); //stop the loop when reaching here
+		doReturn(1).when(GrandChild).getChildCount(TokenTypes.ASSIGN); //stop the loop when reaching here
 		doReturn(true).when(objBlock).branchContains(TokenTypes.ASSIGN); // need to mock some other attributes for Dan's treewalker
 //		doReturn("assign").when(textAST).getText(); //mock the name that the treewalker needs
-		test.visitToken(ast);
+		test.visitToken(ast); // This should re-count the grand-child for operands too since it is not re-assigned.
 
 		test.finishTree(ast);
 
@@ -119,10 +119,10 @@ public class HalsteadDifficultyTest {
 		int uops = test.getUniqueOperators();
 		int uands =  test.getUniqueOperands();
 
-		assertEquals(2.0, test.getOperandsCount(), 0.1);
-		assertEquals(2.0 , test.getUniqueOperands(), 0.1);
+		assertEquals(3.0, test.getOperandsCount(), 0.1);
 		assertEquals(1.0, test.getOperatorsCount(), 0.1);
 		assertEquals(1.0, test.getUniqueOperators(), 0.1);
+		assertEquals(2.0 , test.getUniqueOperands(), 0.1); // Only increases the number of unique operands when has a child of type IDENT. Which means it only counts variables as operands.
 	}
 
 	@Mock
