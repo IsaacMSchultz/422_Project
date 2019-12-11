@@ -1,6 +1,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.NumberOfLoopsCheck;
+import TeamRebecca.LoopsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -20,51 +21,51 @@ public class NumberOfLoopsTest {
 
 	@Test
 	public void testGetDefaultTokens() {
-		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		LoopsCheck test = new LoopsCheck();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		LoopsCheck test = new LoopsCheck();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		LoopsCheck test = new LoopsCheck();
 
 		assertArrayEquals(expectedTokens, test.getRequiredTokens());
 	}
 
 	@Test
 	public void testLoop1() { //test no loops
-		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		LoopsCheck test = new LoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
 		test.finishTree(ast);
 
-		assertEquals(0, test.getLoopCount());
+		assertEquals(0, test.getLoops());
 	}
 
 	@Test
 	public void testLoop2() { //test FOR loop
-		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		LoopsCheck test = new LoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		doReturn(TokenTypes.LITERAL_FOR).when(ast).getType();
 		test.visitToken(ast);
 		test.finishTree(ast);
 
-		assertEquals(1, test.getLoopCount());
+		assertEquals(1, test.getLoops());
 	}
 
 	@Test
 	public void testLoop3() { //test WHILE loop
-		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		LoopsCheck test = new LoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		doReturn(TokenTypes.LITERAL_WHILE).when(ast).getType();
@@ -72,12 +73,12 @@ public class NumberOfLoopsTest {
 		
 		test.finishTree(ast);
 
-		assertEquals(1, test.getLoopCount());
+		assertEquals(1, test.getLoops());
 	}
 	
 	@Test
 	public void testLoop4() { //test DO loop
-		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		LoopsCheck test = new LoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		doReturn(TokenTypes.LITERAL_DO).when(ast).getType();
@@ -85,12 +86,12 @@ public class NumberOfLoopsTest {
 		
 		test.finishTree(ast);
 
-		assertEquals(1, test.getLoopCount());
+		assertEquals(1, test.getLoops());
 	}
 	
 	@Test
 	public void testLoop5() { //test tons of all the kinds of loops
-		NumberOfLoopsCheck test = new NumberOfLoopsCheck();
+		LoopsCheck test = new LoopsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		doReturn(TokenTypes.LITERAL_DO).when(ast).getType();
@@ -110,6 +111,6 @@ public class NumberOfLoopsTest {
 
 		test.finishTree(ast);
 		
-		assertEquals(60, test.getLoopCount());
+		assertEquals(60, test.getLoops());
 	}
 }

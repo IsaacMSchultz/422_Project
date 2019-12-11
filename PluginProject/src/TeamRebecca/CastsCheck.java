@@ -6,6 +6,9 @@ import com.puppycrawl.tools.checkstyle.api.*;
 
 public class CastsCheck extends AbstractCheck {
 	private int casts = 0;
+	public int getCasts(){
+		return this.casts;
+	}
 
 	@Override
 	public int[] getRequiredTokens() {
@@ -30,7 +33,12 @@ public class CastsCheck extends AbstractCheck {
 	@Override
 	public void finishTree(DetailAST ast) {
 		String catchMsg = "Number of casts: ";
-		log(ast.getLineNo(), catchMsg + casts);
+		try {
+			log(ast.getLineNo(), catchMsg + casts);
+		} catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
+
 	}
 
 	@Override
