@@ -7,6 +7,10 @@ import com.puppycrawl.tools.checkstyle.api.*;
 public class CastsCheck extends AbstractCheck {
 	private int casts = 0;
 
+	public int getCasts(){
+		return casts;
+	}
+
 	@Override
 	public int[] getRequiredTokens() {
 		return new int[0];

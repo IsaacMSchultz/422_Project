@@ -7,6 +7,10 @@ import com.puppycrawl.tools.checkstyle.api.*;
 public class LoopsCheck extends AbstractCheck {
 	private int loops = 0;
 
+	public int getLoopCount(){
+		return loops;
+	}
+
 	@Override
 	public int[] getRequiredTokens() {
 		return new int[0];

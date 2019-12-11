@@ -1,6 +1,7 @@
 package Deliverable3Tests.blackBoxTests;
 
 import StructuralMetrics.NumberOfCastsCheck;
+import TeamRebecca.CastsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class NumberOfCastsBlackBoxTest {
 
 	@Test
 	public void test1() {
-		NumberOfCastsCheck c = new NumberOfCastsCheck();
+		CastsCheck c = new CastsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -22,12 +23,12 @@ public class NumberOfCastsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getCount()); //determine if execution created the correct value
+		assertEquals(2, c.getCasts()); //determine if execution created the correct value
 	}
 
 	@Test
 	public void test2() {
-		NumberOfCastsCheck c = new NumberOfCastsCheck();
+		CastsCheck c = new CastsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -37,12 +38,12 @@ public class NumberOfCastsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getCount()); //determine if execution created the correct value
+		assertEquals(0, c.getCasts()); //determine if execution created the correct value
 	}
 
 	@Test
 	public void test3() {
-		NumberOfCastsCheck c = new NumberOfCastsCheck();
+		CastsCheck c = new CastsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "3.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -52,6 +53,6 @@ public class NumberOfCastsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(3, c.getCount()); //determine if execution created the correct value
+		assertEquals(3, c.getCasts()); //determine if execution created the correct value
 	}
 }

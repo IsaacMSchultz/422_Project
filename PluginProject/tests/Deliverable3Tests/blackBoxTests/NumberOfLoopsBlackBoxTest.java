@@ -1,6 +1,7 @@
 package Deliverable3Tests.blackBoxTests;
 
 import StructuralMetrics.NumberOfLoopsCheck;
+import TeamRebecca.LoopsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class NumberOfLoopsBlackBoxTest {
 
 	@Test
 	public void test1() {
-		NumberOfLoopsCheck c = new NumberOfLoopsCheck();
+		LoopsCheck c = new LoopsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -29,7 +30,7 @@ public class NumberOfLoopsBlackBoxTest {
 
 	@Test
 	public void test2() {
-		NumberOfLoopsCheck c = new NumberOfLoopsCheck();
+		LoopsCheck c = new LoopsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -44,7 +45,7 @@ public class NumberOfLoopsBlackBoxTest {
 
 	@Test
 	public void test3() {
-		NumberOfLoopsCheck c = new NumberOfLoopsCheck();
+		LoopsCheck c = new LoopsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "3.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -59,7 +60,7 @@ public class NumberOfLoopsBlackBoxTest {
 
 	@Test
 	public void test4() {
-		NumberOfLoopsCheck c = new NumberOfLoopsCheck();
+		LoopsCheck c = new LoopsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "4.java", c); //create a tester with filepath, and the check c
 
 		try {

@@ -7,6 +7,10 @@ import com.puppycrawl.tools.checkstyle.api.*;
 public class LocalMethodsCheck extends AbstractCheck {
 	private int localMethods = 0;
 
+	public int getCount(){
+		return localMethods;
+	}
+
 	@Override
 	public int[] getRequiredTokens() {
 		return new int[0];
