@@ -3,9 +3,9 @@
 // 40 unique operators 
 
 
-class OperatorCountCheck1 {
+class OperatorCountCheck1 { //                                                                                      1
     
-    OperatorCountCheck1() {
+    public void OperatorCountCheck1() { //                                                                          4
        int equals = 5; //1											// 1
        int bitwiseAnd = 5 & 5; //3
        int bitwiseAndAssign = bitwiseAnd &= 5; // 5
@@ -15,8 +15,8 @@ class OperatorCountCheck1 {
        int bitwiseOrAssign = bitwiseAnd |= 5; //13
        int bitwiseXor = 5 ^ 5; //15
        int bitwiseXorAssign = bitwiseAnd ^= 5; //17
-       String[] commaTest = new String[] {"One", "Two"}; // 19		// 10
-        for(String colonTest : testArray) {} //20
+       String[] commaTest = new String[] {"One", "Two"}; // 19		// 10                                           12
+        for(String colonTest : testArray) {} //20                                                                   18
        equals--; //21
        equals++; //22
        double divide = 5/5; //24
@@ -25,11 +25,11 @@ class OperatorCountCheck1 {
        boolean equalsTest = 5 == 5; //29
        boolean greaterThanOrEqual = 5 >= 5; //31
        boolean greaterThan = 5 > 5; //33
-       String indexTest = commaTest[0]; //35						// 20
+       String indexTest = commaTest[0]; //35						// 20                                           20
        boolean condAnd = equalsTest && greaterThan; //37
        boolean lessThan = 5 < 5; //39
        boolean lessThanOrEqual = 5 <= 5; // 41
-       boolean instance_of = (equalsTest instanceof greaterThan); //43
+       boolean instance_of = (equalsTest instanceof greaterThan); //43                                              22
        boolean logicalNot = !greaterThan; //45
        boolean condOr = greaterThan || equalsTest; // 47
        int minus = 5 - 5; //49
@@ -46,5 +46,5 @@ class OperatorCountCheck1 {
        int shiftRight2 = bitwiseAnd >> 5; // 72
        int multiply = 5 * 5; //74
        int multiplyAssing = multiply *= 5;// 76
-    }
-}
+    } //                                                                                                            23
+} //                                                                                                                24

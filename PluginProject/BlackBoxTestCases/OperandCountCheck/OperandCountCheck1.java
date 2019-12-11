@@ -9,7 +9,7 @@
 
 class OperandCountCheck1 { //1
     
-    OperandCountCheck1() { //2
+    public void OperandCountCheck1() { //2
        int equals = 5; //4										//1
        int bitwiseAnd = 5 & 5; //7
        int bitwiseAndAssign = bitwiseAnd &= 5; //10

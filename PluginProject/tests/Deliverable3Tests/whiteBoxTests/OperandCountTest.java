@@ -1,6 +1,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.OperandCountCheck;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -11,98 +12,70 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(DetailAST.class)
 public class OperandCountTest {
 
-	int[] expectedTokens = { TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT,
-			TokenTypes.NUM_LONG };
+    int[] expectedTokens = {TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT,
+            TokenTypes.NUM_LONG};
 
-	@Test
-	public void testGetDefaultTokens() {
-		OperandCountCheck test = new OperandCountCheck();
+    @Test
+    public void testVisit() {
+        HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+        doReturn(2).when(test).getLOC(); // need to mock the lines of code cause its run each time.
+		DetailAST ast1 = PowerMockito.mock(DetailAST.class); //parent
 
-		assertArrayEquals(expectedTokens, test.getDefaultTokens());
-	}
+		test.beginTree(ast1); // begin the tree
 
-	@Test
-	public void testGetAcceptableTokens() {
-		OperandCountCheck test = new OperandCountCheck();
+		for (int type : expectedTokens) {
 
-		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
-	}
+			DetailAST ast = PowerMockito.mock(DetailAST.class); //parent
+			DetailAST objBlock = PowerMockito.mock(DetailAST.class); //child
+			DetailAST child = PowerMockito.mock(DetailAST.class); //grandchild
+			DetailAST GrandChild = PowerMockito.mock(DetailAST.class); //grandchild
+			DetailAST GreatGrandChild = PowerMockito.mock(DetailAST.class); //grandchild
 
-	@Test
-	public void testGetRequiredTokens() {
-		OperandCountCheck test = new OperandCountCheck();
+			DetailAST textAST = PowerMockito.mock(DetailAST.class);
 
-		assertArrayEquals(expectedTokens, test.getRequiredTokens());
-	}
+			//additional mocking to deal with Dan's Treewalker
+			doReturn(objBlock).when(ast).findFirstToken(anyInt()); // mock ObjBlock creation
+			doReturn(child).when(objBlock).getFirstChild(); // Mock Child creation
+			doReturn(GrandChild).when(child).getFirstChild(); //mock the great great great granchild
+			doReturn(GreatGrandChild).when(GrandChild).getFirstChild(); //mock the great great great granchild
 
-	@Test
-	public void testGetOperandCount1() { //tests with a single token
-		OperandCountCheck test = new OperandCountCheck();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
+			doReturn(textAST).when(child).findFirstToken(TokenTypes.IDENT); //mock getting text from child
+			doReturn(GrandChild).when(child).findFirstToken(TokenTypes.SLIST); //mock getting operators from method definition
 
-		test.beginTree(ast); // begin the tree
+			doReturn(1).when(child).getChildCount(); //mock 1 child
+			doReturn(1).when(GrandChild).getChildCount(); //stop the loop when reaching here
+			doReturn(0).when(GreatGrandChild).getChildCount(); //stop the loop when reaching here
 
-		doReturn(expectedTokens[0]).when(ast).getType(); // operand
-		doReturn("operand").when(ast).getText();
-		test.visitToken(ast);
-
-		assertEquals(1, test.getCount());
-		assertEquals(1, test.getUniqueCount());
-	}
-
-	@Test
-	public void testGetOperandCount2() { //tests unique vs count
-		OperandCountCheck test = new OperandCountCheck();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
-
-		test.beginTree(ast); // begin the tree
-
-		doReturn(expectedTokens[0]).when(ast).getType(); // operand
-		doReturn("operand").when(ast).getText();
-		for (int i = 0; i < 20; i++) { // do 20 operands
+			doReturn(TokenTypes.VARIABLE_DEF).when(child).getType(); // operand (with implied operator)
+			doReturn(type).when(GreatGrandChild).getType(); //operand
+			doReturn(1).when(GrandChild).getChildCount(type); //stop the loop when reaching here
+			doReturn(false).when(objBlock).branchContains(type); // not an operator
+			doReturn("operand" + type).when(textAST).getText(); //mock the name that the treewalker needs
+			doReturn("operandName" + type).when(GreatGrandChild).getText(); //mock the name that the treewalker needs
 			test.visitToken(ast);
 		}
 
-		assertEquals(20, test.getCount());
-		assertEquals(1, test.getUniqueCount());
-	}
+        // each var_def is considered a unique operator implicitly.
+        // Total unique: 6 since IDENT count as an additional unique according to their code.
+		// numbers such as int and double are not counted as unique operands
+        // Total operands are counted as 10
 
-	@Test
-	public void testGetOperandCount3() { //this test tries every possible operand type we have included
-		OperandCountCheck test = new OperandCountCheck();
-		DetailAST ast = PowerMockito.mock(DetailAST.class);
+        test.finishTree(ast1);
 
-		test.beginTree(ast); // begin the tree
-		
-		// Now lets get some more unique operators and operands in there.
+        int ops = test.getOperatorsCount();
+        int ands = test.getOperandsCount();
+        int uops = test.getUniqueOperators();
+        int uands = test.getUniqueOperands();
 
-		doReturn(expectedTokens[0]).when(ast).getType(); // operand 1
-		doReturn("operand1").when(ast).getText();
-		for (int i = 0; i < 20; i++) { // do 20 operands
-			test.visitToken(ast);
-		}
-
-		doReturn(expectedTokens[1]).when(ast).getType(); // operator 2
-		doReturn("operand2").when(ast).getText();
-		for (int i = 0; i < 20; i++) { // do 20 operators
-			test.visitToken(ast);
-		}
-
-		doReturn(expectedTokens[2]).when(ast).getType(); // operand 3
-		doReturn("operand3").when(ast).getText();
-		test.visitToken(ast);
-
-		doReturn(expectedTokens[3]).when(ast).getType(); // operand 4
-		doReturn("operand4").when(ast).getText();
-		test.visitToken(ast);
-
-		assertEquals(42, test.getCount());
-		assertEquals(4, test.getUniqueCount());
-	}
+        assertEquals(10, test.getOperandsCount());
+        assertEquals(6, test.getUniqueOperands()); // Only increases the number of unique operands when has a child of type IDENT. Which means it only counts variables as operands.
+    }
 }

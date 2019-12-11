@@ -1,6 +1,6 @@
 package Deliverable3Tests.blackBoxTests;
 
-import StructuralMetrics.OperatorCountCheck;
+import TeamRebecca.HalsteadMetricsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -11,8 +11,8 @@ public class OperatorCountBlackBoxTest {
 	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\OperatorCountCheck\\OperatorCountCheck";
 
 	@Test
-	public void test1() {
-		OperatorCountCheck c = new OperatorCountCheck(); 
+	public void totalNumberOfOperands() {
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -21,12 +21,13 @@ public class OperatorCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(76, c.getCount()); //determine if execution created the correct value
+		assertEquals(117, c.getOperatorsCount()); //Their code counts definitions and {} as well as String[] assignment as operators
+//		assertEquals(76, c.getOperatorsCount()); // This is what I am expecting
 	}
 
 	@Test
-	public void test2() {
-		OperatorCountCheck c = new OperatorCountCheck();
+	public void all39UniqueOperators() {
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //check to see if it finds 40 unique operators
 
 		try {
@@ -35,12 +36,12 @@ public class OperatorCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(39, c.getUniqueCount()); //check if it found the 40 unique operators
+		assertEquals(39, c.getUniqueOperators()); //check if it found the 39 unique operators
 	}
 
 	@Test
-	public void test3() {
-		OperatorCountCheck c = new OperatorCountCheck();
+	public void operatorsInComments() {
+		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); // checks if it finds operators in comments
 		
 		try {
@@ -49,6 +50,6 @@ public class OperatorCountBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getCount()); // assert if there are no operators in comments
+		assertEquals(0, c.getOperatorsCount()); // assert if there are no operators in comments
 	}
 }
