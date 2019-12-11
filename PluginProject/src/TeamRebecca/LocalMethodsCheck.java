@@ -7,8 +7,8 @@ import com.puppycrawl.tools.checkstyle.api.*;
 public class LocalMethodsCheck extends AbstractCheck {
 	private int localMethods = 0;
 
-	public int getLocalMethods(){
-		return this.localMethods;
+	public int getCount(){
+		return localMethods;
 	}
 
 	@Override

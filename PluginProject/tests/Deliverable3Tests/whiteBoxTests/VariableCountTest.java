@@ -49,17 +49,17 @@ public class VariableCountTest {
 		doReturn(1).when(ast).getChildCount(TokenTypes.VARIABLE_DEF);
 		doReturn(null).when(ast).getFirstChild();
 
-		assertEquals(1, varChk.getVariablesCount());
+		assertEquals(1, varChk.getCount());
 	}
 
 	@Test
 	public void testBeginTreeDetailAST() {
-		assertEquals(0, varChk.getVariablesCount());
+		assertEquals(0, varChk.getCount());
 	}
 
 	@Test
 	public void testGetVariableCount() {
-		assertEquals(0, varChk.getVariablesCount());
+		assertEquals(0, varChk.getCount());
 	}
 
 }

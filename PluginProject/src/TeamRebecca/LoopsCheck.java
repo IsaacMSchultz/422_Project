@@ -7,8 +7,8 @@ import com.puppycrawl.tools.checkstyle.api.*;
 public class LoopsCheck extends AbstractCheck {
 	private int loops = 0;
 
-	public int getLoops(){
-		return this.loops;
+	public int getLoopCount(){
+		return loops;
 	}
 
 	@Override

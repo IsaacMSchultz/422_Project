@@ -47,7 +47,7 @@ public class LocalMethodTest {
 
 		locChk.visitToken(ast);
 
-		assertEquals(1, locChk.getLocalMethods());
+		assertEquals(1, locChk.getCount());
 	}
 	
 	@Test
@@ -63,12 +63,12 @@ public class LocalMethodTest {
 
 		locChk.visitToken(ast);
 
-		assertEquals(0, locChk.getLocalMethods()); //should be an external method call
+		assertEquals(0, locChk.getCount()); //should be an external method call
 	}
 
 	@Test
 	public void testBeginTreeDetailAST() { //no tokens
-		assertEquals(0, locChk.getLocalMethods());
+		assertEquals(0, locChk.getCount());
 	}
 
 }

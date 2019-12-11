@@ -1,6 +1,5 @@
 package Deliverable3Tests.blackBoxTests;
 
-
 import TeamRebecca.CastsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;

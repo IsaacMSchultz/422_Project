@@ -1,12 +1,12 @@
 package Deliverable3Tests.blackBoxTests;
 
-
 import TeamRebecca.LocalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+//updated
 public class LocalMethodBlackBoxTest {
 
 	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\LocalMethodCheck\\localMethodCheck";
@@ -23,7 +23,7 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(3, c.getLocalMethods()); //determine if execution created the correct value
+		assertEquals(3, c.getCount()); //determine if execution created the correct value
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(0, c.getLocalMethods()); //determine if execution created the correct value
+		assertEquals(0, c.getCount()); //determine if execution created the correct value
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(2, c.getLocalMethods()); // this. and super. not covered correctly
+		assertEquals(2, c.getCount()); // this. and super. not covered correctly
 	}
 
 	@Test
@@ -68,6 +68,6 @@ public class LocalMethodBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(4, c.getLocalMethods()); // this. and super. not covered correctly
+		assertEquals(4, c.getCount()); // this. and super. not covered correctly
 	}
 }

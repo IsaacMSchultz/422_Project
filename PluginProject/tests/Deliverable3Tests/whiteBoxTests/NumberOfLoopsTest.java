@@ -48,7 +48,7 @@ public class NumberOfLoopsTest {
 		test.beginTree(ast); // begin the tree
 		test.finishTree(ast);
 
-		assertEquals(0, test.getLoops());
+		assertEquals(0, test.getLoopCount());
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class NumberOfLoopsTest {
 		test.visitToken(ast);
 		test.finishTree(ast);
 
-		assertEquals(1, test.getLoops());
+		assertEquals(1, test.getLoopCount());
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class NumberOfLoopsTest {
 		
 		test.finishTree(ast);
 
-		assertEquals(1, test.getLoops());
+		assertEquals(1, test.getLoopCount());
 	}
 	
 	@Test
@@ -86,7 +86,7 @@ public class NumberOfLoopsTest {
 		
 		test.finishTree(ast);
 
-		assertEquals(1, test.getLoops());
+		assertEquals(1, test.getLoopCount());
 	}
 	
 	@Test
@@ -111,6 +111,6 @@ public class NumberOfLoopsTest {
 
 		test.finishTree(ast);
 		
-		assertEquals(60, test.getLoops());
+		assertEquals(60, test.getLoopCount());
 	}
 }

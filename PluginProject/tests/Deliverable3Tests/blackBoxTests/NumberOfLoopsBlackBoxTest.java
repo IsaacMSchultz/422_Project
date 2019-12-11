@@ -1,6 +1,5 @@
 package Deliverable3Tests.blackBoxTests;
 
-
 import TeamRebecca.LoopsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
@@ -25,7 +24,7 @@ public class NumberOfLoopsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(3, c.getLoops()); //determine if execution created the correct value
+		assertEquals(3, c.getLoopCount()); //determine if execution created the correct value
 	}
 
 	@Test
@@ -40,7 +39,7 @@ public class NumberOfLoopsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(1, c.getLoops()); //determine if execution created the correct value
+		assertEquals(1, c.getLoopCount()); //determine if execution created the correct value
 	}
 
 	@Test
@@ -55,7 +54,7 @@ public class NumberOfLoopsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(1, c.getLoops()); //determine if execution created the correct value
+		assertEquals(1, c.getLoopCount()); //determine if execution created the correct value
 	}
 
 	@Test
@@ -70,6 +69,6 @@ public class NumberOfLoopsBlackBoxTest {
 			e.printStackTrace();
 		}
 
-		assertEquals(1, c.getLoops()); //determine if execution created the correct value
+		assertEquals(1, c.getLoopCount()); //determine if execution created the correct value
 	}
 }

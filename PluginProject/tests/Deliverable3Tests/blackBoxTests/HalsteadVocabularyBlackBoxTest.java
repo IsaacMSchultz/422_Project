@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class HalsteadVocabularyBlackBoxTest {
-	
+
 	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\HalsteadVocabulary\\HalsteadVocabulary";
 
 	@Test
@@ -59,7 +59,7 @@ public class HalsteadVocabularyBlackBoxTest {
 	public void test4() {
 		HalsteadMetricsCheck c = new HalsteadMetricsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
-		
+
 		try {
 			t.runTree(); //try to execute the check on the whole tree
 		} catch (CheckstyleException e) {

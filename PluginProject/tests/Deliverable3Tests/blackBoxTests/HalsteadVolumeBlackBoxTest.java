@@ -12,7 +12,7 @@ public class HalsteadVolumeBlackBoxTest {
 	@Test
 	public void test() {
 		HalsteadMetricsCheck check = new HalsteadMetricsCheck();
-		
+
 		TestCheckEngine t = new TestCheckEngine(filePath, check);
 		try {
 			t.runTree(); //try to execute the check on the whole tree
@@ -20,7 +20,7 @@ public class HalsteadVolumeBlackBoxTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		assertEquals(72.90827, check.getHalsteadVolume(), 0.1);
 	}
 

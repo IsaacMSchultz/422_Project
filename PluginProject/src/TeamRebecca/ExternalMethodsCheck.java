@@ -33,10 +33,10 @@ public class ExternalMethodsCheck extends AbstractCheck {
 		String catchMsg = "Number of external method references: ";
 		try {
 			log(ast.getLineNo(), catchMsg + externalMethods);
-		} catch (NullPointerException e) {
-			System.out.println("Can't run log unless called from treewalker!");
 		}
-
+		catch(NullPointerException err) {
+			System.out.println("Can't run log unless called from treewalker");
+		}
 	}
 
 	@Override
@@ -56,21 +56,30 @@ public class ExternalMethodsCheck extends AbstractCheck {
 
 	private void countTokens(DetailAST ast) {
 		// If the class has anything in it first
-		if (ast.getChildCount() > 0) {
-			if (ast.getType() == TokenTypes.METHOD_CALL) {
-				if (!(ast.findFirstToken(TokenTypes.DOT).branchContains(TokenTypes.LITERAL_THIS))) {
-					externalMethods++;
+		try{
+			if (ast.getChildCount() > 0) {
+				if (ast.getType() == TokenTypes.METHOD_CALL) {
+					if (!(ast.findFirstToken(TokenTypes.DOT).branchContains(TokenTypes.LITERAL_THIS))) {
+						externalMethods++;
+					}
+				}
+
+				// Find first child, assuming first method
+				DetailAST child = ast.getFirstChild();
+
+				// Keep checking each method until we have no more
+				while (child != null) {
+					countTokens(child);
+					child = child.getNextSibling();
 				}
 			}
-
-			// Find first child, assuming first method
-			DetailAST child = ast.getFirstChild();
-
-			// Keep checking each method until we have no more
-			while (child != null) {
-				countTokens(child);
-				child = child.getNextSibling();
-			}
 		}
+		catch(NullPointerException err) {
+			System.out.println("Can't run log unless called from treewalker");
+		}
+	}
+
+	public int getCount() {
+		return externalMethods;
 	}
 }

@@ -4,11 +4,12 @@ import com.puppycrawl.tools.checkstyle.api.*;
 
 public class ExpressionsCheck extends AbstractCheck {
 	private int expressions = 0;
-	private String logMsg = "Number of Expressions: ";
 
 	public int getExpressions(){
-		return this.expressions;
+		return expressions;
 	}
+
+	private String logMsg = "Number of Expressions: ";
 
 	@Override
 	public int[] getRequiredTokens() {

@@ -8,8 +8,8 @@ import com.puppycrawl.tools.checkstyle.api.*;
 public class VariablesCheck extends AbstractCheck {
 	private int variablesCount = 0;
 
-	public int getVariablesCount(){
-		return this.variablesCount;
+	public int getCount(){
+		return variablesCount;
 	}
 
 	@Override

@@ -6,8 +6,9 @@ import com.puppycrawl.tools.checkstyle.api.*;
 
 public class CastsCheck extends AbstractCheck {
 	private int casts = 0;
+
 	public int getCasts(){
-		return this.casts;
+		return casts;
 	}
 
 	@Override

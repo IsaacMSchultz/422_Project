@@ -1,6 +1,5 @@
 package Deliverable3Tests.blackBoxTests;
 
-
 import TeamRebecca.TotalCommentsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
@@ -8,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class NumberOfCommentsBlackBoxTest {
-	
+
 	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\NumberOfCommentsCheck\\NumberOfCommentsCheck";
 
 	@Test
@@ -26,11 +25,11 @@ public class NumberOfCommentsBlackBoxTest {
 		assertEquals(7, c.getCommentLines()); //determine if execution created the correct value
     }
 
-    @Test
+	@Test
 	public void test2() {
 		TotalCommentsCheck c = new TotalCommentsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
-		
+
 		try {
 			t.runTree(); //try to execute the check on the whole tree
 		} catch (CheckstyleException e) {

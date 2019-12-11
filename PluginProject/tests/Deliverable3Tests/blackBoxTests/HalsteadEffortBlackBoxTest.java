@@ -10,7 +10,7 @@ public class HalsteadEffortBlackBoxTest {
 	// Halstead Effort is the difficulty multiplied by the volume.
 
 	String filePath = System.getProperty("user.dir") + "\\BlackBoxTestCases\\HalsteadMaintainabilityIndex\\MaintainabilityIndex1.java";
- 
+
 	@Test
 	public void test() {
 		HalsteadMetricsCheck check = new HalsteadMetricsCheck();
@@ -22,8 +22,8 @@ public class HalsteadEffortBlackBoxTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+
 		assertEquals(2795.9, check.getHalsteadEffort(), 0.5); //wrong vbecause other metrics are wrong
 	}
 }
