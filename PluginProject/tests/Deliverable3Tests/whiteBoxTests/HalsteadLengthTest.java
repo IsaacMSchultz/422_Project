@@ -53,4 +53,19 @@ public class HalsteadLengthTest {
 		assertEquals(200, test.getHalsteadLength());
 	}
 
+	@Test
+	public void testGetHalsteadLength03() {
+		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(1).when(test).getLOC(); // lines of code gets run every time.
+		DetailAST ast = new DetailAST();
+
+		doReturn(1).when(test).getOperandsCount(); // operand
+		doReturn(1).when(test).getOperatorsCount(); // operator
+		test.beginTree(ast); // begin the tree
+
+		test.finishTree(ast);
+
+		assertEquals(2, test.getHalsteadLength());
+	}
+
 }
