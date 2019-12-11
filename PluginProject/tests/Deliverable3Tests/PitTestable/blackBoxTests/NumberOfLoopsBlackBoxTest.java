@@ -71,4 +71,19 @@ public class NumberOfLoopsBlackBoxTest {
 
 		assertEquals(1, c.getLoopCount()); //determine if execution created the correct value
 	}
+
+	@Test
+	public void test5() {
+		LoopsCheck c = new LoopsCheck();
+		TestCheckEngine t = new TestCheckEngine(filePath + "5.java", c); //create a tester with filepath, and the check c
+
+		try {
+			t.runTree(); //try to execute the check on the whole tree
+		} catch (CheckstyleException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		assertEquals(3, c.getLoopCount()); //determine if execution created the correct value
+	}
 }
