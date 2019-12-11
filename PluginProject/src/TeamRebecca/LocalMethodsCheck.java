@@ -71,4 +71,8 @@ public class LocalMethodsCheck extends AbstractCheck {
 			}
 		}
 	}
+
+	public int getCount() {
+		return localMethods;
+	}
 }

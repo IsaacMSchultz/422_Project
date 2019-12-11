@@ -65,4 +65,8 @@ public class ExternalMethodsCheck extends AbstractCheck {
 			}
 		}
 	}
+
+	public int getCount() {
+		return externalMethods;
+	}
 }

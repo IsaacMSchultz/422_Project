@@ -66,4 +66,8 @@ public class LoopsCheck extends AbstractCheck {
 			return 0;
 		}
 	}
+
+	public int getLoopCount() {
+		return loops;
+	}
 }

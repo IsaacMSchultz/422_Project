@@ -1,6 +1,7 @@
 package Deliverable3Tests.blackBoxTests;
 
 import StructuralMetrics.ExternalMethodCheck;
+import TeamRebecca.ExternalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class ExternalMethodBlackBoxTest {
 
 	@Test
 	public void test1() {
-		ExternalMethodCheck c = new ExternalMethodCheck();
+		ExternalMethodsCheck c = new ExternalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "1.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -27,7 +28,7 @@ public class ExternalMethodBlackBoxTest {
 
 	@Test
 	public void test2() {
-		ExternalMethodCheck c = new ExternalMethodCheck();
+		ExternalMethodsCheck c = new ExternalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "2.java", c); //create a tester with filepath, and the check c
 
 		try {
@@ -42,7 +43,7 @@ public class ExternalMethodBlackBoxTest {
 
 	@Test
 	public void test3() {
-		ExternalMethodCheck c = new ExternalMethodCheck();
+		ExternalMethodsCheck c = new ExternalMethodsCheck();
 		TestCheckEngine t = new TestCheckEngine(filePath + "3.java", c); //create a tester with filepath, and the check c
 
 		try {

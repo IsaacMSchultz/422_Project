@@ -52,4 +52,8 @@ public class ExpressionsCheck extends AbstractCheck {
 			}
 		}
 	}
+
+	public int getCount() {
+		return expressions;
+	}
 }
