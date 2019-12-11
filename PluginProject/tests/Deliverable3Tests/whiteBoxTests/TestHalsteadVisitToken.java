@@ -15,8 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
@@ -78,5 +77,32 @@ public class TestHalsteadVisitToken {
 		assertEquals(1.0, test.getOperatorsCount(), 0.1);
 		assertEquals(1.0, test.getUniqueOperators(), 0.1);
 		assertEquals(2.0 , test.getUniqueOperands(), 0.1); // Only increases the number of unique operands when has a child of type IDENT. Which means it only counts variables as operands.
+	}
+
+	@Test
+	public void checkTokens() {
+		HalsteadMetricsCheck test = new HalsteadMetricsCheck();
+
+		int[] expected = {TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF};
+		int[] operators = { TokenTypes.ASSIGN, TokenTypes.BAND, TokenTypes.BAND_ASSIGN, TokenTypes.BNOT,
+				TokenTypes.BOR, TokenTypes.BOR_ASSIGN, TokenTypes.BSR, TokenTypes.BSR_ASSIGN, TokenTypes.BXOR,
+				TokenTypes.BXOR_ASSIGN, TokenTypes.COLON, TokenTypes.COMMA, TokenTypes.DEC, TokenTypes.DIV,
+				TokenTypes.DIV_ASSIGN, TokenTypes.DOT, TokenTypes.EQUAL, TokenTypes.GE, TokenTypes.GT, TokenTypes.INC,
+				TokenTypes.INDEX_OP, TokenTypes.LAND, TokenTypes.LE, TokenTypes.LITERAL_INSTANCEOF, TokenTypes.LNOT,
+				TokenTypes.LOR, TokenTypes.LT, TokenTypes.MINUS, TokenTypes.MINUS_ASSIGN, TokenTypes.MOD,
+				TokenTypes.MOD_ASSIGN, TokenTypes.NOT_EQUAL, TokenTypes.PLUS, TokenTypes.PLUS_ASSIGN, TokenTypes.POST_DEC,
+				TokenTypes.POST_INC, TokenTypes.QUESTION, TokenTypes.SL, TokenTypes.SL_ASSIGN, TokenTypes.SR,
+				TokenTypes.SR_ASSIGN, TokenTypes.STAR, TokenTypes.STAR_ASSIGN, TokenTypes.UNARY_MINUS,
+				TokenTypes.UNARY_PLUS };
+		int[] operands = { TokenTypes.IDENT, TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT,
+				TokenTypes.NUM_LONG };
+
+
+		assertArrayEquals(new int[0], test.getRequiredTokens());
+		assertArrayEquals(expected, test.getAcceptableTokens());
+		assertArrayEquals(expected, test.getDefaultTokens());
+
+		assertArrayEquals(operators, test.operatorTokens());
+		assertArrayEquals(operands, test.operandTokens());
 	}
 }
