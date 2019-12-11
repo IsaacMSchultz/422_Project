@@ -8,6 +8,10 @@ public class TotalCommentsCheck extends AbstractCheck {
 	
 	private int commentLines = 0;
 
+	public int getCommentLines(){
+		return this.commentLines;
+	}
+
 	@Override
 	public int[] getRequiredTokens() {
 		return new int[0];
@@ -38,7 +42,12 @@ public class TotalCommentsCheck extends AbstractCheck {
 		
 		// the beginning and end block of comments without any content does not count
 		String catchMsg = "Total Comments: ";
-		log(ast.getLineNo(), catchMsg + commentLines);
+		try {
+			log(ast.getLineNo(), catchMsg + commentLines);
+		} catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
+
 	}
 
 	@Override

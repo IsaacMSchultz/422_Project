@@ -1,6 +1,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.NumberOfCommentsCheck;
+import TeamRebecca.TotalCommentsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -17,35 +18,37 @@ import static org.mockito.Mockito.doReturn;
 @PrepareForTest(DetailAST.class)
 public class NumberOfCommentsTest {
 	int[] expectedTokens = { TokenTypes.COMMENT_CONTENT };
+	int[] requiredTokens = new int[0];
+
 
 	@Test
 	public void testBeginTree() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast);
-		assertEquals(0, test.getCount());
+		assertEquals(0, test.getCommentLines());
 	}
 
 	@Test
 	public void testGetDefaultTokens() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 
 		assertArrayEquals(expectedTokens, test.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 
-		assertArrayEquals(expectedTokens, test.getRequiredTokens());
+		assertArrayEquals(requiredTokens, test.getRequiredTokens());
 	}
 
 	// This is the function that we will be doing all of our tests from, since all
@@ -54,17 +57,18 @@ public class NumberOfCommentsTest {
 	// AAA = Arrange, Act, Assert
 	@Test
 	public void testCountCommentsCount() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 		DetailAST ast = PowerMockito.mock(DetailAST.class);
 
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
+		doReturn(ast).when(ast).findFirstToken(TokenTypes.COMMENT_CONTENT);
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
 		test.visitToken(ast);
 
-		assertEquals(2, test.getCount());
+		assertEquals(2, test.getCommentLines());
 	}
 }
