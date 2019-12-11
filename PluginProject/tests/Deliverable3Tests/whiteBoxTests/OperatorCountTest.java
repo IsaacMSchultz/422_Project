@@ -93,9 +93,8 @@ public class OperatorCountTest {
         int uops = test.getUniqueOperators();
         int uands = test.getUniqueOperands();
 
-
-        assertEquals(90, test.getOperatorsCount()); // This is counting all the operators, just not all the unique ones
         assertEquals(OurOperators.length, test.getUniqueOperators()); // does not catch all the different kinds of operators!
+        assertEquals(90, test.getOperatorsCount()); // This is counting all the operators, just not all the unique ones
     }
 
 	@Test
