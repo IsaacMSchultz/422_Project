@@ -4,6 +4,9 @@ import com.puppycrawl.tools.checkstyle.api.*;
 
 public class ExternalMethodsCheck extends AbstractCheck {
 	private int externalMethods = 0;
+	public int getExternalMethods(){
+		return this.externalMethods;
+	}
 
 	@Override
 	public int[] getRequiredTokens() {
@@ -28,7 +31,12 @@ public class ExternalMethodsCheck extends AbstractCheck {
 	@Override
 	public void finishTree(DetailAST ast) {
 		String catchMsg = "Number of external method references: ";
-		log(ast.getLineNo(), catchMsg + externalMethods);
+		try {
+			log(ast.getLineNo(), catchMsg + externalMethods);
+		} catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
+
 	}
 
 	@Override

@@ -5,6 +5,7 @@
 package Deliverable3Tests.whiteBoxTests;
 
 import StructuralMetrics.ExternalMethodCheck;
+import TeamRebecca.ExternalMethodsCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import org.junit.Test;
@@ -22,17 +23,19 @@ import static org.mockito.Mockito.doReturn;
 public class ExternalMethodTest {
 	
 
-	ExternalMethodCheck extChk = new ExternalMethodCheck();
+	ExternalMethodsCheck extChk = new ExternalMethodsCheck();
 	DetailAST ast = PowerMockito.mock(DetailAST.class);
+	DetailAST child = PowerMockito.mock(DetailAST.class);
+	int[] expectedTokens = { TokenTypes.CLASS_DEF, TokenTypes.INTERFACE_DEF };
 
 	@Test
 	public void testGetDefaultTokens() {
-		assertArrayEquals(new int[] { TokenTypes.METHOD_CALL }, extChk.getDefaultTokens());
+		assertArrayEquals(expectedTokens, extChk.getDefaultTokens());
 	}
 
 	@Test
 	public void testGetAcceptableTokens() {
-		assertArrayEquals(new int[] { TokenTypes.METHOD_CALL }, extChk.getAcceptableTokens());
+		assertArrayEquals(expectedTokens, extChk.getAcceptableTokens());
 	}
 
 	@Test
@@ -44,10 +47,17 @@ public class ExternalMethodTest {
 	public void testVisitTokenDetailAST1() {
 		extChk.beginTree(ast);
 		doReturn(TokenTypes.METHOD_CALL).when(ast).getType();
-		//not sure how to return a token type inside of a method. 
+		doReturn(1).when(ast).getChildCount();
+		doReturn(0).when(child).getChildCount();
+		doReturn(child).when(ast).getFirstChild();
+		doReturn(null).when(child).getFirstChild();
+		doReturn(null).when(ast).getNextSibling();
+		doReturn(null).when(child).getNextSibling();
+		doReturn(ast).when(ast).findFirstToken(TokenTypes.DOT);
+		doReturn(false).when(ast).branchContains(TokenTypes.LITERAL_THIS);
+
 		extChk.visitToken(ast);
-		//still zero because ast.findfirsttoken inside visit token evaluates to null
-		assertEquals(0, extChk.getCount());
+		assertEquals(1, extChk.getExternalMethods());
 	}
 	
 	@Test
@@ -63,12 +73,12 @@ public class ExternalMethodTest {
 
 		extChk.visitToken(ast);
 
-		assertEquals(1, extChk.getCount()); //should be an external method call
+		assertEquals(1, extChk.getExternalMethods()); //should be an external method call
 	}
 
 	@Test
 	public void testBeginTreeDetailAST() {
-		assertEquals(0, extChk.getCount());
+		assertEquals(0, extChk.getExternalMethods());
 	}
 
 }
