@@ -18,6 +18,8 @@ import static org.mockito.Mockito.doReturn;
 @PrepareForTest(DetailAST.class)
 public class NumberOfCommentsTest {
 	int[] expectedTokens = { TokenTypes.COMMENT_CONTENT };
+	int[] requiredTokens = new int[0];
+
 
 	@Test
 	public void testBeginTree() {
@@ -37,16 +39,16 @@ public class NumberOfCommentsTest {
 
 	@Test
 	public void testGetAcceptableTokens() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 
 		assertArrayEquals(expectedTokens, test.getAcceptableTokens());
 	}
 
 	@Test
 	public void testGetRequiredTokens() {
-		NumberOfCommentsCheck test = new NumberOfCommentsCheck();
+		TotalCommentsCheck test = new TotalCommentsCheck();
 
-		assertArrayEquals(expectedTokens, test.getRequiredTokens());
+		assertArrayEquals(requiredTokens, test.getRequiredTokens());
 	}
 
 	// This is the function that we will be doing all of our tests from, since all
@@ -61,6 +63,7 @@ public class NumberOfCommentsTest {
 		test.beginTree(ast); // begin the tree
 
 		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
+		doReturn(ast).when(ast).findFirstToken(TokenTypes.COMMENT_CONTENT);
 		test.visitToken(ast);
 
 		doReturn(TokenTypes.COMMENT_CONTENT).when(ast).getType();
