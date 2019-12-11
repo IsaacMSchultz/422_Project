@@ -36,7 +36,12 @@ public class VariablesCheck extends AbstractCheck {
 	public void finishTree(DetailAST ast) {
 		
 		String catchMsg = "Number of Variables: ";
-		log(ast.getLineNo(), catchMsg + variablesCount);
+		try {
+			log(ast.getLineNo(), catchMsg + variablesCount);
+		} catch (NullPointerException e) {
+			System.out.println("Can't run log unless called from treewalker!");
+		}
+
 	}
 
 	@Override
