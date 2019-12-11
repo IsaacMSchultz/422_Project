@@ -189,7 +189,7 @@ public class HalsteadMetricsCheck extends AbstractCheck {
 
     }
 
-    private int[] operatorTokens() {
+    public int[] operatorTokens() {
         return new int[]{TokenTypes.ASSIGN, TokenTypes.PLUS, TokenTypes.MINUS, TokenTypes.DIV, TokenTypes.STAR,
                 TokenTypes.MOD, TokenTypes.LCURLY, TokenTypes.RCURLY, TokenTypes.SLIST, TokenTypes.RPAREN,
                 TokenTypes.LPAREN, TokenTypes.LITERAL_WHILE, TokenTypes.DO_WHILE, TokenTypes.LITERAL_FOR,
@@ -203,7 +203,7 @@ public class HalsteadMetricsCheck extends AbstractCheck {
                 TokenTypes.INC, TokenTypes.POST_INC, TokenTypes.DEC, TokenTypes.POST_DEC, TokenTypes.LITERAL_DEFAULT};
     }
 
-    private int[] operandTokens() {
+    public int[] operandTokens() {
         return new int[]{TokenTypes.NUM_DOUBLE, TokenTypes.NUM_FLOAT, TokenTypes.NUM_INT, TokenTypes.NUM_LONG,
                 TokenTypes.IDENT};
     }
