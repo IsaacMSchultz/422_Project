@@ -1,6 +1,6 @@
 public class MaintainabilityCases2 {
-	MaintainabilityCases2() {
-		//MI= 171-5.2*log2(64*4) - 0.23 * 4 - 16.2 * 5 + 50 = 97.48
+	public void MaintainabilityCases2() {
+		//MI=(171 - (5.2 * (log(64*4) / log(2)))) - (0.23 * 6) - (16.2 * (log(32) / log(2)))
 
 		int first = 0;
 

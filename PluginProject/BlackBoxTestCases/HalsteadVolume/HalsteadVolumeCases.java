@@ -1,5 +1,5 @@
 public class HalseadVolumeTester {
-	HalseadVolumeTester() {
+	public void HalseadVolumeTester() {
 		// Halstead Volume: The program volume (V) is measured as the Halstead Length
 		// (N1 + N2) times
 		// the 2-base logarithm of the Halstead Vocabulary (n1 + n2): V = N log2 (n)

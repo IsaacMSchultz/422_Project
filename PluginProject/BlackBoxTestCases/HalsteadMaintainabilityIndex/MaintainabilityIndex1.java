@@ -1,7 +1,7 @@
 public class MaintainabilityIndex1 {
-	public MaintainabilityIndex1() {
+	public void MaintainabilityIndex1() {
 
-		// MI= 171-5.2*log2(64*4) - 0.23 * 1 - 16.2 * 4 + 50 = 114.37
+		// MI= 171-5.2*log2(64*4) - 0.23 * 1 - 16.2 * 4 + 50 = 114.37 || (171 - (5.2 * (log(64*4) / log(2)))) - (0.23 * 3) - (16.2 * (log(16) / log(2)))
 		int first = 0; //4
 		int second = first++; //6
 		int third = second - first;//9
