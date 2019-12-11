@@ -25,6 +25,7 @@ public class HalsteadEffortTest {
 	@Test
 	public void testGetHalsteadEffort01() {
 		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(1).when(test).getLOC(); // lines of code gets run every time.
 		DetailAST ast = new DetailAST();
 
 		doReturn(1.0).when(test).getHalsteadDifficulty();
@@ -41,6 +42,7 @@ public class HalsteadEffortTest {
 	@Test
 	public void testGetHalsteadEffort02() {
 		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(1).when(test).getLOC(); // lines of code gets run every time.
 		DetailAST ast = new DetailAST();
 
 		doReturn(135.0).when(test).getHalsteadDifficulty();

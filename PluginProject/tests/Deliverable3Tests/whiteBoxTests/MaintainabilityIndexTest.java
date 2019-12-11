@@ -39,10 +39,8 @@ public class MaintainabilityIndexTest {
 
 		test.finishTree(ast);
 
-		// MaintainabilityIndex = 171 - 5.2 * log2(Volume) - 0.23 * cyclo - 16.2 *
-		// log2(LOC) + 50;
-		// 171 - 5.2 * log2(1235.3213) - 0.23 * 45 - 16.2 * log2(50234) + 50
-		assertEquals(-95.74278, test.getMaintainabilityIndex(), 0.1);
+		// OUR ORIGINAL CALCULATION FOR THIS NUMBER WAS WRONG
+		assertEquals(-145.7427, test.getMaintainabilityIndex(), 0.1);
 	}
 
 	@Test
@@ -57,9 +55,7 @@ public class MaintainabilityIndexTest {
 
 		test.finishTree(ast);
 
-		// MaintainabilityIndex = 171 - 5.2 * log2(Volume) - 0.23 * cyclo - 16.2 *
-		// log2(LOC) + 50;
-		// 171 - 5.2 * log2(9541.564) - 0.23 * 135 - 16.2 * log2(165) + 50
-		assertEquals(1.87152, test.getMaintainabilityIndex(), 0.1);
+		// OUR ORIGINAL CALCULATION FOR THIS NUMBER WAS WRONG
+		assertEquals(-48.1284, test.getMaintainabilityIndex(), 0.1);
 	}
 }

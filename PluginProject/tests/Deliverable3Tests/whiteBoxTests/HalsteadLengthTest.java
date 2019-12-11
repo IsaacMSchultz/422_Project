@@ -26,6 +26,7 @@ public class HalsteadLengthTest {
 	@Test
 	public void testGetHalsteadLength01() {
 		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(1).when(test).getLOC(); // lines of code gets run every time.
 		DetailAST ast = new DetailAST();
 
 		doReturn(1).when(test).getOperandsCount(); // operand
@@ -40,6 +41,7 @@ public class HalsteadLengthTest {
 	@Test
 	public void testGetHalsteadLength02() {
 		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(1).when(test).getLOC(); // lines of code gets run every time.
 		DetailAST ast = new DetailAST();
 
 		doReturn(135).when(test).getOperandsCount(); // operand

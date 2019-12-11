@@ -26,6 +26,7 @@ public class HalsteadVocabularyTest {
 	@Test
 	public void testGetHalsteadVocabulary01() { //test with known values
 		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(1).when(test).getLOC(); // lines of code gets run every time.
 		DetailAST ast = new DetailAST();
 
 		doReturn(99).when(test).getUniqueOperands();
@@ -41,6 +42,7 @@ public class HalsteadVocabularyTest {
 	@Test
 	public void testGetHalsteadVocabulary02() { //test with known values
 		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(1).when(test).getLOC(); // lines of code gets run every time.
 		DetailAST ast = new DetailAST();
 
 		doReturn(9649).when(test).getUniqueOperands();

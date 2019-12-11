@@ -26,6 +26,7 @@ public class HalsteadVolumeTest {
 	@Test
 	public void testGetHalsteadVolume01() { //test with known values
 		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(1).when(test).getLOC(); // lines of code gets run every time.
 		DetailAST ast = new DetailAST();
 
 		doReturn(37).when(test).getHalsteadLength();
@@ -41,6 +42,7 @@ public class HalsteadVolumeTest {
 	@Test
 	public void testGetHalsteadVolume02() { //test with known values
 		HalsteadMetricsCheck test = spy(new HalsteadMetricsCheck());
+		doReturn(1).when(test).getLOC(); // lines of code gets run every time.
 		DetailAST ast = new DetailAST();
 
 		doReturn(99).when(test).getHalsteadLength();
